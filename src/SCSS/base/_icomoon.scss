@@ -26,42 +26,52 @@ $icons_pach: "/assets/icons/icomoon";
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-home:before {
+    content: "\e900";
+}
 .icon-newspaper:before {
     content: "\e904";
 }
-
+.icon-book:before {
+    content: "\e91f";
+}
+.icon-envelop:before {
+    content: "\e945";
+}
 .icon-bubbles:before {
     content: "\e96c";
 }
-
 .icon-spinner9:before {
     content: "\e982";
 }
-
+.icon-search:before {
+    content: "\e986";
+}
+.icon-equalizer:before {
+    content: "\e992";
+}
+.icon-cog:before {
+    content: "\e994";
+}
 .icon-stats-bars2:before {
     content: "\e99d";
 }
-
 .icon-menu:before {
     content: "\e9bd";
 }
-
 .icon-plus:before {
     content: "\ea0a";
 }
-
 .icon-minus:before {
     content: "\ea0b";
 }
-
 .icon-cross:before {
     content: "\ea0f";
 }
-
 .icon-checkmark:before {
     content: "\ea10";
 }
-
 .icon-enter:before {
     content: "\ea13";
 }

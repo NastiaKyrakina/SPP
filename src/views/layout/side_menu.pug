@@ -1,0 +1,5 @@
+.side-menu.row.columns
+    a.menu-item.col(*ngFor="let item of this.sideMenuItems" )
+            span.md-icon(ngClass="icon-{{item.icon}}" )
+            span.title {{item.title}}
+

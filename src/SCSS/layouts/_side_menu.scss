@@ -1,0 +1,62 @@
+.side-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    margin-top: $top_menu_height;
+    background-color: $side_menu_color;
+   // display: none;
+    width: 80vw;
+    min-width: 200px;
+
+    @include mq($from: sm){
+        display: block;
+        width: auto;
+        min-width: auto;
+    }
+}
+
+.menu-item{
+    padding: calc(#{$side_menu_padding}-5px) $side_menu_padding;
+    display: flex;
+    flex-flow: row;
+    text-align: center;
+    cursor: pointer;
+    color: $text_menu;
+    transition: color 200ms linear,
+                border-bottom 200ms ease-in;
+    &:hover{
+        color: #030e24;
+        border-bottom: 3px solid #030e24;
+    }
+
+    .md-icon{
+        margin: 0.5em 0.3em;
+    }
+
+    .title{
+        margin-top: auto;
+        margin-bottom: auto;
+        font-size: 1.3em;
+
+        @include mq($from: sm){
+            display: none;
+        }
+
+        @include mq($from: md){
+            font-size: 1em;
+            display: block;
+        }
+    }
+
+    @include mq($from: sm){
+        flex-flow: column;
+        padding: $side_menu_padding;
+    }
+
+}
+
+.active{
+    color: transparentize($text_menu, 0.4);
+    background-color: darken($side_menu_color, 20%);
+}
