@@ -1,1 +1,5 @@
 .top-panel.row
+    .place-icon
+        .menu-icon((click)="this.clickedOnMenu()")
+            span([ngClass]="menuOpened?'icon-cross':'icon-menu'" )
+

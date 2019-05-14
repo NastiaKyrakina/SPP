@@ -16,4 +16,9 @@ export class AppComponent {
         {title: 'Settings' ,    icon: 'equalizer'}
    ];
 
+    menuOpened = false;
+    clickedOnMenu(): void {
+        this.menuOpened = !this.menuOpened;
+    }
+
 }

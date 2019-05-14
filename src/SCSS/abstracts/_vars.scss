@@ -45,7 +45,7 @@ $top_menu_height: 60px;
 //colors
 //rgb(160,193,236)
 $side_menu_color: rgb(142,152,172);
-$top_menu_color: darken(rgb(114,127,199), 7%);
+$top_menu_color: darken(rgb(114,127,199), 40%);
 $main_color: white;
 $auxil_color: white;
 
@@ -55,3 +55,6 @@ $text_main: black;
 
 //space
 $side_menu_padding: 10px;
+
+//sizes
+$min_sm_width: 200px;
