@@ -8,6 +8,7 @@
     height: $top_menu_height;
     background-color: $top_menu_color;
     color: $text_menu;
+    font-family: $menu_font;
 }
 
 .rigth{
@@ -15,17 +16,24 @@
     align-items: center;
 
     .logo{
-        background: url('/assets/img/logo/logo_transparent.png')
+        background: url('/assets/img/logo/mini-logo.png')
                     no-repeat
-                    center left;
+                    center center;
         background-size: cover;
-        width: 100px;
+        width: 60px;
         height: $top_menu_height;
-
+        margin-left: 10px;
         display: none;
+
         @include mq($from: sm){
             display: block;
         }
+        @include mq($from: md){
+            display: block;
+            background-image: url('/assets/img/logo/logo_transparent.png')
+        }
+
+
     }
 }
 
@@ -78,7 +86,8 @@
         height: 2em;
         border: none;
         padding: 2px;
-        font-family: $main_font;
+        font-family: $menu_font;
+
         @include mq($from: sm){
             display: block;
             min-width: 100px;
@@ -106,6 +115,7 @@
         border-left: 1px solid $top_menu_color;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+        margin-right: 20px;
     }
 
     .close-icon{

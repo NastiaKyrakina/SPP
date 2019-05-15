@@ -57,4 +57,7 @@ $text_main: black;
 $side_menu_padding: 10px;
 
 //sizes
-$min_sm_width: 200px;
+$min_sm_width: 100px;
+$min_sm_width_sm: calc(#{$min_sm_width}*2);
+$sm_width: 100px;
+$sm_width_md: calc(#{$sm_width}/1.6);

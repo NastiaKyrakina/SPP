@@ -6,10 +6,6 @@ h1{
     font-family: $header_font;
 }
 
-h2{
-    font-family: $header2_font;
-}
-
 code,pre{
     font-family: $code_font;
 }
@@ -24,4 +20,19 @@ code,pre{
 
 .md-icon{
     font-size: 1.7em;
+}
+
+
+.content-area{
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-top: $top_menu_height;
+
+    @include mq($from: sm){
+        margin-left: $sm_width_md;
+    }
+    @include mq($from: md){
+        margin-left: $sm_width;
+    }
 }

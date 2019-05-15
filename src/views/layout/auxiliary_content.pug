@@ -1,0 +1,7 @@
+.aux-icon([ngClass]="auxOpen?'icon-minus':'icon-plus'",
+            (click)="openAuxContent()")
+
+.auxiliary([ngClass]="{'open-aux': auxOpen, 'empty-content': !hasContent}")
+    .area(*ngIf="this.hasContent; else emptyMessage")
+    ng-template( #emptyMessage="" )
+        .message Empty area
