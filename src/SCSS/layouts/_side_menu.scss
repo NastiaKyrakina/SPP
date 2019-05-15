@@ -6,17 +6,23 @@
     margin-top: $top_menu_height;
     height: 100vh;
     width: 80vw;
-    min-width: $min_sm_width;
+    min-width: $min_sm_width_sm;
     background-color: $side_menu_color;
     margin-left: -200vw;
     transition: margin 200ms linear;
     opacity: 0;
+    font-family: $menu_font;
 
     @include mq($from: sm){
         margin-left: 0;
         opacity: 1;
-        width: auto;
-        min-width: auto;
+        min-width: $sm_width_md;
+        width: $sm_width_md;
+    }
+
+    @include mq($from: md){
+        min-width: 100px;
+        width: $sm_width;
     }
 }
 

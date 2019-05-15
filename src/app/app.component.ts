@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.pug',
@@ -15,18 +16,25 @@ export class AppComponent {
         {title: 'Lessons' ,     icon: 'book'},
         {title: 'Settings' ,    icon: 'equalizer'}
    ];
+
     // user with long name
     user = {
         name: 'Louis George Maurice Roche Albert Abel Antonio Alexandre',
         img: 'user.png'
     };
 
-    menuOpened = false;
-    searchOpen = false;
+    menuOpened: boolean = false;
+    searchOpen: boolean  = false;
+    hasContent: boolean  = false;
+    auxOpen: boolean  = false;
+
     clickedOnMenu(): void {
         this.menuOpened = !this.menuOpened;
     }
     openSearchBar(): void {
         this.searchOpen = !this.searchOpen;
+    }
+    openAuxContent(): void {
+        this.auxOpen = !this.auxOpen;
     }
 }
