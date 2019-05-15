@@ -5,6 +5,20 @@ import {Component} from '@angular/core';
     templateUrl: './app.component.pug',
     styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
-    title = 'SPP';
+    title = 'Skills++';
+
+    /*dynamic list of side-menu items*/
+    sideMenuItems = [
+        {title: 'Dashboard' ,   icon: 'stats-bars2'},
+        {title: 'Lessons' ,     icon: 'book'},
+        {title: 'Settings' ,    icon: 'equalizer'}
+   ];
+
+    menuOpened = false;
+    clickedOnMenu(): void {
+        this.menuOpened = !this.menuOpened;
+    }
+
 }
