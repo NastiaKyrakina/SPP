@@ -15,10 +15,18 @@ export class AppComponent {
         {title: 'Lessons' ,     icon: 'book'},
         {title: 'Settings' ,    icon: 'equalizer'}
    ];
+    // user with long name
+    user = {
+        name: 'Louis George Maurice Roche Albert Abel Antonio Alexandre',
+        img: 'user.png'
+    };
 
     menuOpened = false;
+    searchOpen = false;
     clickedOnMenu(): void {
         this.menuOpened = !this.menuOpened;
     }
-
+    openSearchBar(): void {
+        this.searchOpen = !this.searchOpen;
+    }
 }

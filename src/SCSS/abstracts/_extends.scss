@@ -1,0 +1,15 @@
+
+.icon-base{
+    cursor: pointer;
+    &:hover{
+        color:  #f6c04e;
+    }
+}
+
+.search-bar-icon{
+    border: none;
+    background: white;
+    color: $top_menu_color;
+    padding: 0 5px 0 10px;
+    height: 2.0em;
+}
