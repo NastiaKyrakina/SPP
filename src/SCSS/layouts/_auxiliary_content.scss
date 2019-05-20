@@ -2,7 +2,8 @@
 
     width: 430px;
     overflow-y:auto;
-    height: 100vh;
+    -ms-overflow-style: auto;
+    height: 91vh;
     padding: 3px;
     display: none;
 }
@@ -11,7 +12,6 @@
     @include mq($from: md){
         display: flex;
     }
-
 }
 
 .empty-content{
@@ -27,9 +27,9 @@
 }
 
 .aux-icon{
-    position: absolute;
+    position: fixed;
     padding: 0.2em 1em;
-    top: 0;
+    top: $top_menu_height;
     right: 20px;
     background-color: $side_menu_color;
     color: #030e24;
@@ -41,5 +41,3 @@
        display: block;
     }
 }
-
-

@@ -1,6 +1,7 @@
-.side-wrapper
-    .side-menu('[ngClass]'="menuOpened&&'open'")
-        a.menu-item.col(*ngFor="let item of this.sideMenuItems" )
-                span.md-icon([ngClass]="'icon-'+item.icon" )
-                span.title {{item.title}}
+.side-wrapper('[ngClass]'="{'open': menuOpened}")
+    .drop((click)="clickedOnMenu()")
+    nav.side-menu
+        a.menu-item.col(*ngFor="let item of sideMenuItems" )
+            span.md-icon([ngClass]="'icon-' + item.icon" )
+            span.title {{item.title}}
 

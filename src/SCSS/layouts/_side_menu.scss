@@ -2,7 +2,6 @@
     position: fixed;
     top: 0;
     left: 0;
-
     margin-top: $top_menu_height;
     height: 100vh;
     width: 80vw;
@@ -12,6 +11,8 @@
     transition: margin 200ms linear;
     opacity: 0;
     font-family: $menu_font;
+    overflow: hidden;
+
 
     @include mq($from: sm){
         margin-left: 0;
@@ -19,16 +20,39 @@
         min-width: $sm_width_md;
         width: $sm_width_md;
     }
-
     @include mq($from: md){
         min-width: 100px;
         width: $sm_width;
     }
 }
+/*for open menu in small screens*/
+.open .side-menu{
+    margin-left: 0;
+    opacity: 1;
+}
 
+.drop {
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.open .drop{
+   @include mq($until: sm) {
+        display: block;
+        background-color: #030e24;
+        opacity: 0.7;
+        overflow: hidden;
+        position: absolute;
+        top: $top_menu_height;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
 
 .menu-item{
     padding: calc(#{$side_menu_padding}-5px) $side_menu_padding;
+    margin-bottom: 3px;
     display: flex;
     flex-flow: row;
     text-align: center;
@@ -39,12 +63,11 @@
     &:hover{
         color: #030e24;
         border-bottom: 3px solid #030e24;
+        margin-bottom: 0;
     }
-
     .md-icon{
         margin: 0.5em 0.3em;
     }
-
     .title{
         margin-top: auto;
         margin-bottom: auto;
@@ -59,18 +82,10 @@
             display: block;
         }
     }
-
     @include mq($from: sm){
         flex-flow: column;
         padding: $side_menu_padding;
     }
-
-}
-
-/*for open menu in small screens*/
-.open{
-    margin-left: 0;
-    opacity: 1;
 }
 
 /*link-style for current page*/

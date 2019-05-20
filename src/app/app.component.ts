@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
+import { User } from '../interface/user';
+import { MenuItems } from '../interface/menuItems';
 
 
 @Component({
@@ -9,24 +11,21 @@ import {Component} from '@angular/core';
 
 export class AppComponent {
     title = 'Skills++';
-
     /*dynamic list of side-menu items*/
-    sideMenuItems = [
+    sideMenuItems: MenuItems = [
         {title: 'Dashboard' ,   icon: 'stats-bars2'},
         {title: 'Lessons' ,     icon: 'book'},
         {title: 'Settings' ,    icon: 'equalizer'}
    ];
-
     // user with long name
-    user = {
+    user: User = {
         name: 'Louis George Maurice Roche Albert Abel Antonio Alexandre',
         img: 'user.png'
     };
-
-    menuOpened: boolean = false;
-    searchOpen: boolean  = false;
-    hasContent: boolean  = false;
-    auxOpen: boolean  = false;
+    menuOpened = false;
+    searchOpen = false;
+    hasContent = true;
+    auxOpen = false;
 
     clickedOnMenu(): void {
         this.menuOpened = !this.menuOpened;
