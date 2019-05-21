@@ -1,11 +1,17 @@
-.top-panel{
+@import "abstracts/abstracts";
+@import "base/typography";
+@import "layouts/breakpoints";
+
+
+.top-pane{
     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: $top_menu_height;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    width: 100vw;
-    height: $top_menu_height;
     background-color: $top_menu_color;
     color: $text_menu;
     font-family: $menu_font;
@@ -16,8 +22,8 @@
     align-items: center;
     .logo{
         background: url('/assets/img/logo/mini-logo.png')
-                    no-repeat
-                    center center;
+        no-repeat
+        center center;
         background-size: cover;
         width: 60px;
         height: $top_menu_height;
@@ -54,7 +60,7 @@
 }
 
 .search-bar{
-    padding: 0 5px;
+    padding: 0 auto;
     background-color: $top_menu_color;
     width: 100%;
     height: $top_menu_height;

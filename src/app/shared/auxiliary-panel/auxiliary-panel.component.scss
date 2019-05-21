@@ -1,6 +1,8 @@
-.auxiliary{
+@import "abstracts/abstracts";
+@import "layouts/breakpoints";
 
-    width: 430px;
+.auxiliary{
+    width: 350px;
     overflow-y:auto;
     -ms-overflow-style: auto;
     height: 91vh;
@@ -26,6 +28,7 @@
 
 }
 
+
 .aux-icon{
     position: fixed;
     padding: 0.2em 1em;
@@ -36,8 +39,14 @@
     border-radius: 0 0 20% 20%;
     cursor: pointer;
     display: none;
-
+    transition: color 200ms ease-in,
+                background-color 200ms ease-in;
     @include mq($from: md){
-       display: block;
+        display: block;
+    }
+
+    &:hover{
+        color: white;
+        background-color: darkorange;
     }
 }

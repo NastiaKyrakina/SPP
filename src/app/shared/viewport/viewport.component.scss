@@ -1,0 +1,28 @@
+@import "abstracts/abstracts";
+@import "layouts/breakpoints";
+
+main{
+    height: 91vh;
+    width: 100%;
+    background-color: #dbe1ca;
+    overflow-y:auto;
+    -ms-overflow-style: auto;
+    @include mq($from: sm){
+        padding: 3%;
+    }
+}
+
+.content-area{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto !important;
+    overflow: hidden;
+    margin-top: $top_menu_height;
+    @include mq($from: sm){
+        margin-left: $sm_width_md;
+    }
+    @include mq($from: md){
+        margin-left: $sm_width;
+    }
+}

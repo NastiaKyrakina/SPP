@@ -1,3 +1,7 @@
+@import "abstracts/abstracts";
+@import "base/typography";
+@import "layouts/breakpoints";
+
 .side-menu{
     position: fixed;
     top: 0;
@@ -12,7 +16,6 @@
     opacity: 0;
     font-family: $menu_font;
     overflow: hidden;
-
 
     @include mq($from: sm){
         margin-left: 0;
@@ -33,11 +36,11 @@
 
 .drop {
     opacity: 0;
-    transition: opacity 200ms ease;
+    transition: opacity 400ms ease;
 }
 
 .open .drop{
-   @include mq($until: sm) {
+    @include mq($until: sm) {
         display: block;
         background-color: #030e24;
         opacity: 0.7;
@@ -51,23 +54,28 @@
 }
 
 .menu-item{
-    padding: calc(#{$side_menu_padding}-5px) $side_menu_padding;
-    margin-bottom: 3px;
+
     display: flex;
     flex-flow: row;
     text-align: center;
     cursor: pointer;
     color: $text_menu;
     transition: color 200ms linear,
-                border-bottom 200ms ease-in;
+                background-color 200ms ease-in-out;
     &:hover{
         color: #030e24;
-        border-bottom: 3px solid #030e24;
-        margin-bottom: 0;
+    }
+
+    a{
+        display: block;
+        padding: 1em $side_menu_padding;
+        @include mq($from: sm){
+            padding: 1em $side_menu_padding;
+        }
     }
     .md-icon{
         margin: 0.5em 0.3em;
-    }
+}
     .title{
         margin-top: auto;
         margin-bottom: auto;
@@ -75,21 +83,19 @@
 
         @include mq($from: sm){
             display: none;
-        }
+    }
 
         @include mq($from: md){
             font-size: 1em;
             display: block;
-        }
     }
+}
     @include mq($from: sm){
         flex-flow: column;
-        padding: $side_menu_padding;
     }
 }
 
 /*link-style for current page*/
 .active{
-    color: transparentize($text_menu, 0.4);
     background-color: darken($side_menu_color, 20%);
 }
