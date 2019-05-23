@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { User } from '../interface/user';
-import { MenuItems } from '../interface/menuItems';
-
 
 @Component({
     selector: 'app-root',
