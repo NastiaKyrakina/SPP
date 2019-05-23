@@ -1,0 +1,6 @@
+span
+    i.icon-calendar
+    small {{timestamp | date: 'MM-dd-yy'}}
+span(*ngIf="!onlyDate" )
+    i.icon-clock
+    small {{timestamp | date: 'shortTime'}}

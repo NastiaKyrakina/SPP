@@ -1,0 +1,19 @@
+$select-botton-color: #dd0035;
+$hover-botton-color:  lighten($select-botton-color, 20%);
+button {
+    font-size: 1.7em;
+    color: #787782;
+    text-shadow: 1px 1px 2px black;
+    transition: color 300ms ease-in;
+
+    &:hover {
+        color: $hover-botton-color;
+    }
+    &:active, &.active,&:hover.active {
+        color: $select-botton-color;
+    }
+}
+
+span{
+    color: grey;
+}

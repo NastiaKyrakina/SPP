@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'app-viewport',
@@ -7,6 +7,8 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewportComponent implements OnInit {
+    @ViewChild('top') topPoint: ElementRef;
+
     constructor() {
     }
 
