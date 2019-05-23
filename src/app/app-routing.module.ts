@@ -3,9 +3,9 @@ import {Routes, RouterModule} from '@angular/router';
 
 
 const routes: Routes = [
-    {path: 'workshops', loadChildren: './workshops/workshops.module#WorkshopsModule'},
     {path: 'quizzes', loadChildren: './quizzes/quizzes.module#QuizzesModule'},
-    {path: '', loadChildren: './dashboard/dashboard.module#DashboardModule'},
+    {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
+    {path: '', loadChildren: './workshops/workshops.module#WorkshopsModule'},
 ];
 
 @NgModule({

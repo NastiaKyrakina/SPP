@@ -1,0 +1,26 @@
+@import "layouts/breakpoints";
+
+.feed{
+    justify-content: center;
+}
+
+.aside-menu{
+    flex: 1;
+    @include mq($until: md){
+        display: none;
+    }
+}
+
+.main-content{
+    flex: 4;
+}
+
+.tags{
+    flex: 1;
+    @include mq($until: md){
+        display: none;
+    }
+    .tag-cloud{
+
+    }
+ }

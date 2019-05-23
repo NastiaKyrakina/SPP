@@ -1,3 +1,10 @@
-.quizze.row
-    .col
-        h3 Hello everyone! It quiz workshop component
+.feed.row
+    .col.aside-menu
+    .col.main-content
+        div(*ngFor='let workshop of workshops' )
+            app-article([workshop]='workshop')
+    .col.tags
+        .tag-cloud
+            app-tag(*ngFor='let tag of tags', [tag] = 'tag')
+
+
