@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-aux-panel',
@@ -8,7 +8,7 @@ import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 })
 export class AuxiliaryPanelComponent implements OnInit {
     auxOpen: boolean;
-    hasContent = false;
+    hasContent = true;
 
     constructor() {
     }

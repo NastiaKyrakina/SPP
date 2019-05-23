@@ -1,6 +1,9 @@
-.aux-icon([ngClass]="auxOpen ? 'icon-minus' : 'icon-plus'",
-(click)="openAuxContent()")
+.aux-icon([ngClass]="auxOpen ? 'icon-minus' : 'icon-plus'", (click)="openAuxContent()")
 .auxiliary([ngClass]="{'open-aux': auxOpen, 'empty-content': !hasContent}")
     .area(*ngIf="hasContent; else emptyMessage")
+        app-tab-group
+            app-tab([title]='"Comment"') Comment
+            app-tab([title]='"Recourse"') Recourse
+            app-tab([title]='"Quizzes"') Quizzes
     ng-template( #emptyMessage="" )
         .message Empty area

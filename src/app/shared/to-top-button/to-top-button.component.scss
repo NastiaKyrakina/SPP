@@ -1,0 +1,15 @@
+button{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    background-color: transparent;
+    color: #878787;
+    font-size: 1.5em;
+    transition: transform 100ms linear;
+    &:hover{
+        top: 0.1em;
+        transform: scale(1.2);
+        color: #ff7700;
+        text-shadow: 1px 1px 2px black;
+    }
+}

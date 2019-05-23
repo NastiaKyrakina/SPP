@@ -1,0 +1,71 @@
+@import "layouts/breakpoints";
+
+.app-user-pic{
+    flex: 1;
+}
+
+p{
+    flex: 5;
+    margin: 0.5em 0.1em 0.5em 1em;
+    word-wrap: break-word;
+    min-width: 40%;
+}
+.comment{
+    position: relative;
+    background-color: white;
+    border-radius: 5px;
+    padding: 1em 0.5em 1.7em 0;
+    margin: 1em 0.5em;
+    @include mq($from: sm){
+        padding: 2em 1em 1em 0;
+    }
+}
+
+.name{
+    color: #878787;
+    text-align: center;
+    padding-left: 0.1em;
+}
+
+.open-mini{
+    position: absolute;
+    top: 0.1em;
+    display: flex;
+    align-items: center;
+
+    @include mq($until: sm){
+        left: 0;
+    }
+    @include mq($from: sm){
+        top: 1em;
+        right: 0;
+    }
+}
+
+.btn-block{
+    padding: 5px 0 2px 0 ;
+    position: absolute;
+    top: -1.6em;
+    background-color: white;
+    border-radius: 5px 5px 0 0;
+    box-shadow: -1px -2px 3px black;
+    @include mq($until: sm){
+        left: 0;
+    }
+    @include mq($from: sm){
+        right: 0;
+    }
+}
+
+button{
+    background-color: transparent;
+    &:hover{
+        transform: scale(1.2);
+    }
+}
+
+app-timestamp{
+    position: absolute;
+    right: 0;
+    bottom: -0.4em;
+}

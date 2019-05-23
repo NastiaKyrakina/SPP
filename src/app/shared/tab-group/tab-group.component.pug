@@ -1,0 +1,7 @@
+.group.row
+    button.col(*ngFor='let tab of tabs', [ngClass]= '{"open": tab.active}',
+        (click) = 'changeTabState(tab)')
+        | {{tab.title}}
+.content
+    ng-content
+

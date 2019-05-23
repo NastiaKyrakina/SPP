@@ -1,5 +1,7 @@
 .row.col
     .content-area
         main
+            div(#top='')
             ng-content(selector='[main]')
+            app-to-top-button([blockForScroll]='topPoint')
         app-aux-panel
