@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import {User} from '../../../interface/user';
+import {User} from '../../../module/user';
 
 @Component({
     selector: 'app-top-pane',
@@ -11,7 +11,9 @@ export class TopPaneComponent implements OnInit {
     @Output() clOnMenuBtn = new EventEmitter<boolean>();
     // user
     user: User = {
-        name: 'Louis George',
+        id: 1,
+        fname: 'Louis',
+        lname: 'George',
         img: 'user.png'
     };
     searchOpen = false;
@@ -26,5 +28,8 @@ export class TopPaneComponent implements OnInit {
     }
     openSearchBar(): void {
         this.searchOpen = !this.searchOpen;
+    }
+    getFullName(user: User): string {
+        return user.fname + ' ' + user.lname;
     }
 }

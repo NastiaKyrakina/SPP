@@ -2,19 +2,19 @@
     .rigth
         .logo
         .icons
-            button.menu-icon((click)="changeMenuState()")
-                i([ngClass]="menuOpened ? 'icon-cross' : 'icon-menu'" )
-            button((click)="openSearchBar()")
+            button.menu-icon((click)='changeMenuState()')
+                i([ngClass]='menuOpened ? "icon-cross" : "icon-menu"' )
+            button((click)='openSearchBar()')
                 i.icon-search
         form.search-bar([ngClass]="{'open-search':searchOpen}" onsubmit='return false')
             button.close-btn
-                i.icon-cross((click)="openSearchBar()")
+                i.icon-cross((click)='openSearchBar()')
             input(type='text' name='search' id='search' placeholder="Search...")
             button.search-btn
                 i.icon-search
     button.user-account
         .name
-            span {{user.name}}
-        img.pic(src='{{"/assets/img/user/"+this.user.img}}')
+            span {{getFullName(user)}}
+        app-user-pic([picture]= 'user.img', [fname]='user.fname', [lname]='user.lname')
 
 
