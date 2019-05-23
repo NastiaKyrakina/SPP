@@ -1,9 +1,10 @@
-.side-wrapper('[ngClass]'="{'open': menuOpened}")
-    .drop((click)="changeMenuState()")
+.side-wrapper('[ngClass]'='{"open": menuOpened}')
+    .drop((click)='changeMenuState()')
     nav.side-menu
         ul
-            li.menu-item.col(*ngFor="let item of sideMenuItems" routerLinkActive="active",
-            [routerLinkActiveOptions] = "{exact:true}")
+            li.menu-item.col(*ngFor='let item of sideMenuItems'
+                routerLinkActive='active',
+            [routerLinkActiveOptions] = '{exact:true}')
                 a([routerLink]='item.href')
-                    span.md-icon([ngClass]="'icon-' + item.icon")
+                    span.md-icon([ngClass]='"icon-" + item.icon')
                     span.title {{item.title}}
