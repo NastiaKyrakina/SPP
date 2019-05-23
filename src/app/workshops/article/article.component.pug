@@ -1,1 +1,14 @@
-article Article Here!
+app-card
+    header
+        a([routerLink]='["workshop", workshop.id]' ).
+            {{workshop.title}}
+    figure
+        img([src]='workshop.img')
+    .desc-block
+         p {{workshop.getShordDescr()}}
+    .tags.row
+        .tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
+            {{tag.key}}
+    footer.row
+        app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+        app-timestamp([timestamp]='workshop.date', [onlyDate]='true')

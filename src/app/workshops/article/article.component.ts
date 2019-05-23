@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {Workshop} from '../../module/Workshop';
 
 @Component({
     selector: 'app-article',
@@ -7,11 +8,18 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
+    @Input() workshop: Workshop;
 
     constructor() {
+
     }
 
     ngOnInit() {
     }
+
+    liked($event: boolean): void {
+        this.workshop.liked($event);
+    }
+
 
 }

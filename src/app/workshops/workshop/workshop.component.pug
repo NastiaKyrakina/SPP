@@ -1,2 +1,18 @@
-| workshop works!
-
+app-card
+    header
+        a().
+            {{workshop.title}}
+    figure
+        img([src]='workshop.img')
+    .desc-block
+        p {{workshop.text}}
+    .tags.row
+        //.tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
+        //    {{tag.key}}
+    footer.row
+        app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+        app-timestamp([timestamp]='workshop.date')
+.comments
+    app-comment-card(*ngFor='let comment of workshop.getComments()', [comment]='comment')
+.comment-form
+    app-comment-form

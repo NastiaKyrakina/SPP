@@ -1,0 +1,35 @@
+@import "abstracts/abstracts";
+@import "base/typography";
+@import "layouts/breakpoints";
+
+figure{
+    margin: 0 0.1em;
+    img{
+        width: 100%;
+        border-radius: 2%;
+    }
+}
+
+app-card footer{
+    justify-content: space-between;
+    background-color: #dbd9ed;
+}
+
+.tags{
+    justify-content: left;
+    flex-flow: row wrap;
+    padding-bottom: 0.1em;
+    .tag{
+        margin: 0.3em;
+        padding: 0.2em;
+        background-color: rgba(100, 149, 237, 0.35);
+        border-radius: 5px;
+        color: #5b5f54;
+        cursor: pointer;
+
+        transition: transform 100ms linear;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}
