@@ -1,6 +1,6 @@
 span
     i.icon-calendar
-    small {{timestamp | date: 'MM-dd-yy'}}
+    small {{timestamp | date: 'mediumDate'}}
 span(*ngIf="!onlyDate" )
     i.icon-clock
     small {{timestamp | date: 'shortTime'}}

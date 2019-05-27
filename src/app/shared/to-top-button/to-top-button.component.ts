@@ -8,6 +8,8 @@ import {Component, OnInit, ChangeDetectionStrategy, ElementRef, Input} from '@an
 })
 export class ToTopButtonComponent implements OnInit {
     @Input() blockForScroll: ElementRef;
+    @Input() scrollPos: number;
+
     constructor() {
     }
 

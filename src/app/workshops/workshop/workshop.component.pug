@@ -1,18 +1,17 @@
-app-card
-    header
-        a().
-            {{workshop.title}}
-    figure
-        img([src]='workshop.img')
-    .desc-block
-        p {{workshop.text}}
-    .tags.row
-        //.tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
-        //    {{tag.key}}
-    footer.row
-        app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
-        app-timestamp([timestamp]='workshop.date')
+.tags.row
+    .tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
+        {{tag.key}}
+.header
+    h1 {{workshop.title}}
+figure
+    img([src]='workshop.img')
+p {{workshop.text}}
+
+.footer.row
+    app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+    app-timestamp([timestamp]='workshop.date')
 .comments
+    h4 Comments
     app-comment-card(*ngFor='let comment of workshop.getComments()', [comment]='comment')
 .comment-form
     app-comment-form

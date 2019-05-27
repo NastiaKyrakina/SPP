@@ -52,6 +52,8 @@ $auxil_color: white;
 $text_menu: white;
 $text_main: black;
 
+$unactivated_color: #878787;
+$activated_color: #ff7700;
 
 //space
 $side_menu_padding: 10px;
@@ -62,4 +64,4 @@ $min_sm_width_sm: calc(#{$min_sm_width}*2);
 $sm_width: 100px;
 $sm_width_md: calc(#{$sm_width}/1.6);
 
-$max_main_width: 1440px;
+$max_main_width: 700px;

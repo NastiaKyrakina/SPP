@@ -1,9 +1,16 @@
-.aux-icon([ngClass]="auxOpen ? 'icon-minus' : 'icon-plus'", (click)="openAuxContent()")
 .auxiliary([ngClass]="{'open-aux': auxOpen, 'empty-content': !hasContent}")
     .area(*ngIf="hasContent; else emptyMessage")
         app-tab-group
-            app-tab([title]='"Comment"') Comment
-            app-tab([title]='"Recourse"') Recourse
-            app-tab([title]='"Quizzes"') Quizzes
+            app-tab([title]='"Comment"')
+                -for(let i=0; i<10; i++)
+                    img.block(src='/assets/img/workshops/cmt.png')
+            app-tab([title]='"Resourse"')
+                img.block(src='/assets/img/workshops/img_277437.png')
+            app-tab([title]='"Quizzes"')
+                img.block(src='/assets/img/workshops/icon_045770_256.png')
     ng-template( #emptyMessage="" )
         .message Empty area
+.aux-icon([ngClass]="auxOpen ? 'icon-minus' : 'icon-plus'", (click)="openAuxContent()")
+
+
+

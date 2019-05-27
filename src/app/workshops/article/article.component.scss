@@ -2,6 +2,20 @@
 @import "base/typography";
 @import "layouts/breakpoints";
 
+:host{
+
+    display: flex;
+
+    flex-flow: column nowrap;
+    background-color: white;
+    margin: 0.4em 0;
+    padding: 2%;
+    border-radius: 2%;
+    @include mq($from: md) {
+        margin: 0 auto 2em auto;
+        box-shadow: 1px 1px 4px black;
+    }
+}
 figure{
     margin: 0 0.1em;
     img{
@@ -10,14 +24,23 @@ figure{
     }
 }
 
-app-card footer{
+app-card .card-footer{
     justify-content: space-between;
-    background-color: #dbd9ed;
+    flex-flow: row wrap;
     border-radius: 30px;
     padding: 0.3em 0.1em;
+    margin-top: auto;
 }
-.desc-block p:after{
-    content: '...';
+
+.desc-block{
+     a{
+        display: inline-block;
+        background-color: #06235c;
+        color: white;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 0 10px;
+    }
 }
 
 .tags{

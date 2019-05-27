@@ -1,5 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+
 import {CardComponent} from './card/card.component';
 import {ViewportComponent} from './viewport/viewport.component';
 import {AuxiliaryPanelComponent} from './auxiliary-panel/auxiliary-panel.component';
@@ -12,6 +14,7 @@ import {TabGroupComponent} from './tab-group/tab-group.component';
 import {TimestampComponent} from './timestamp/timestamp.component';
 import {CommentCardComponent} from './comment-card/comment-card.component';
 import {CommentFormComponent} from './comment-form/comment-form.component';
+
 
 @NgModule({
     declarations: [
@@ -29,6 +32,7 @@ import {CommentFormComponent} from './comment-form/comment-form.component';
         CommentFormComponent],
     imports: [
         CommonModule,
+        FormsModule
     ],
     exports: [CardComponent,
         ViewportComponent,

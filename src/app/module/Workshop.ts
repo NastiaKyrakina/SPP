@@ -1,4 +1,3 @@
-import {User} from '../../module/user';
 import {wrkTags, tags, comments} from '../workshops/workshops-data/additional';
 import {Tag, Comment} from './additional';
 
@@ -21,6 +20,7 @@ export class Workshop {
         this.date = date;
         this.likes = likes;
     }
+
     getTags(): Array<Tag> | null {
         // get id tags for this Workshop
         const tagsId = wrkTags.filter(
@@ -41,7 +41,7 @@ export class Workshop {
     }
 
     getShordDescr(): string {
-        return this.text.slice(0, 255);
+        return this.text.slice(0, 125);
     }
 
     liked(youLikeIt: boolean): void {

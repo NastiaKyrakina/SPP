@@ -2,8 +2,7 @@
 @import "base/typography";
 @import "layouts/breakpoints";
 
-
-.top-pane{
+.top-pane {
     position: fixed;
     top: 0;
     left: 0;
@@ -17,49 +16,51 @@
     font-family: $menu_font;
 }
 
-.rigth{
+.rigth {
     display: flex;
     align-items: center;
-    .logo{
-        background: url('/assets/img/logo/mini-logo.png')
-        no-repeat
-        center center;
+
+    .logo {
+        background: url('/assets/img/logo/mini-logo.png') no-repeat center center;
         background-size: cover;
         width: 60px;
         height: $top_menu_height;
         margin-left: 10px;
         display: none;
 
-        @include mq($from: sm){
+        @include mq($from: sm) {
             display: block;
         }
-        @include mq($from: md){
+        @include mq($from: md) {
             display: block;
             background-image: url('/assets/img/logo/logo_transparent.png')
         }
     }
 }
 
-.icons{
+.icons {
     font-size: 1.8em;
     display: flex;
     align-items: center;
-    .menu-icon{
+
+    .menu-icon {
         @extend .icon-base;
         padding: 0 1em;
         cursor: pointer;
     }
-    .icon-search{
+
+    .icon-search {
         @extend .icon-base;
         margin-left: 15px;
         cursor: pointer;
     }
-    @include mq($from: sm){
+
+    @include mq($from: sm) {
         display: none;
     }
 }
 
-.search-bar{
+.search-bar {
     padding: 0 auto;
     background-color: $top_menu_color;
     width: 100%;
@@ -70,36 +71,37 @@
     align-items: center;
     display: none;
 
-    @include mq($from: sm){
+    @include mq($from: sm) {
         position: static;
         margin-left: 30px;
         width: auto;
         display: flex;
     }
-    input{
+
+    input {
         width: 90%;
         height: 2em;
         border: none;
         padding: 2px;
         font-family: $menu_font;
-        @include mq($from: sm){
+        @include mq($from: sm) {
             display: block;
             min-width: 100px;
             max-width: 300px;
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
         }
-        @include mq($from: lg){
+        @include mq($from: lg) {
             width: 300px;
             max-width: 700px;
             transition: width 400ms ease-in;
-            &:focus{
+            &:focus {
                 width: 600px;
             }
         }
     }
 
-    .search-btn{
+    .search-btn {
         @extend .icon-base;
         @extend .search-bar-icon;
         border-left: 1px solid $top_menu_color;
@@ -107,7 +109,7 @@
         border-bottom-right-radius: 5px;
     }
 
-    .close-btn{
+    .close-btn {
         @extend .icon-base;
         @extend .search-bar-icon;
         border-right: 1px solid $top_menu_color;
@@ -116,17 +118,17 @@
         display: flex;
         align-items: center;
 
-        @include mq($from: sm){
+        @include mq($from: sm) {
             display: none;
         }
     }
 }
 
-.open-search{
+.open-search {
     display: flex;
 }
 
-.user-account{
+.user-account {
     display: flex;
     align-items: center;
     max-width: 300px;
@@ -138,7 +140,7 @@
     color: inherit;
     font: inherit;
 
-    .name{
+    .name {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -147,8 +149,15 @@
         font-size: 0.9em;
 
         display: none;
-        @include mq($from: md){
+        @include mq($from: md) {
             display: block;
         }
     }
+}
+
+.hide-zone.open-search {
+    @include setting_position($left: 0, $right: 0,
+                                $top: $top_menu_height, $bottom: 0);
+    background-color: black;
+    opacity: 0.4;
 }

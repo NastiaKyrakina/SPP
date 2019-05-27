@@ -2,28 +2,31 @@
 @import "base/typography";
 @import "layouts/breakpoints";
 
-.card{
-    background-color: white;
-    margin: 0.4em 0;
-    padding: 2%;
-    border-radius: 2%;
-    max-width: $max_main_width;
-    @include mq($from: md){
-        margin: 0 auto 2em auto;
-        box-shadow: 1px 1px 4px black;
-    }
+
+:host {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
-h2{
+.footer {
+    margin-top: auto;
+}
+
+.content {
+    margin-top: auto;
+}
+
+h2 {
     text-align: center;
     color: #132626;
     font-size: $h2-font-size;
 
     @include mq($from: md) {
         font-size: $h1-font-size;
-
     }
 }
+
 
 
 

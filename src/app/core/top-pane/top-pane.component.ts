@@ -1,5 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import {User} from '../../../module/user';
+import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
+import {currentUser} from '../../../data/data';
+import {User} from '../../module/User';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-top-pane',
@@ -10,12 +12,7 @@ import {User} from '../../../module/user';
 export class TopPaneComponent implements OnInit {
     @Output() clOnMenuBtn = new EventEmitter<boolean>();
     // user
-    user: User = {
-        id: 1,
-        fname: 'Louis',
-        lname: 'George',
-        img: 'user.png'
-    };
+    user = currentUser;
     searchOpen = false;
 
     constructor() {
@@ -23,13 +20,20 @@ export class TopPaneComponent implements OnInit {
 
     ngOnInit() {
     }
-    changeMenuState(evn): void {
-       this.clOnMenuBtn.emit(true);
+
+    changeMenuState(): void {
+        this.clOnMenuBtn.emit(true);
     }
-    openSearchBar(): void {
+
+    changeSrchBarState(): void {
         this.searchOpen = !this.searchOpen;
     }
+
     getFullName(user: User): string {
         return user.fname + ' ' + user.lname;
+    }
+    // will be implement in future
+    startSearch(form: NgForm): void {
+        console.log(form);
     }
 }

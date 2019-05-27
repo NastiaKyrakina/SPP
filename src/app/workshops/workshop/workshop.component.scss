@@ -2,24 +2,41 @@
 @import "base/typography";
 @import "layouts/breakpoints";
 
-figure{
+figure {
     margin: 0 0.1em;
-    img{
+
+    img {
         width: 100%;
         border-radius: 2%;
     }
 }
 
-app-card footer{
+.footer {
     justify-content: space-between;
-    background-color: #dbd9ed;
+    border-radius: 30px;
+    padding: 0.3em 0.1em;
+    margin-top: 1em;
+
 }
 
-.tags{
+p {
+    font-size: 1em;
+    @include mq($from: sm) {
+        text-align: justify;
+        font-size: 1.2em;
+    }
+    @include mq($from: md) {
+        font-size: 1.6em;
+    }
+
+}
+
+.tags {
     justify-content: left;
     flex-flow: row wrap;
     padding-bottom: 0.1em;
-    .tag{
+
+    .tag {
         margin: 0.3em;
         padding: 0.2em;
         background-color: rgba(100, 149, 237, 0.35);
@@ -28,8 +45,16 @@ app-card footer{
         cursor: pointer;
 
         transition: transform 100ms linear;
-        &:hover{
+
+        &:hover {
             transform: scale(1.2);
         }
     }
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #030e24;
+    text-shadow: 1px 1px 2px #06235c;
 }

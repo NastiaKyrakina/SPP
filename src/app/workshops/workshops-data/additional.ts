@@ -4,7 +4,7 @@ export let comments: Array<Comment> = [
     {
         id: 1,
         wrkId: 1,
-        userId: 2,
+        userId: 1,
         text: 'So loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong text',
         date: new Date(),
     },
@@ -46,6 +46,10 @@ export let tags: Array<Tag> = [
         id: 5,
         key: 'Skills'
     },
+    {
+        id: 6,
+        key: 'MEAN'
+    }
 ];
 
 export let wrkTags: Array<WorkshopTag> = [
@@ -63,10 +67,18 @@ export let wrkTags: Array<WorkshopTag> = [
     },
     {
         tagId: 4,
+        wrkId: 1.
+    },
+    {
+        tagId: 6,
         wrkId: 2.
     },
     {
-        tagId: 3,
+        tagId: 5,
+        wrkId: 3.
+    },
+    {
+        tagId: 2,
         wrkId: 3.
     },
 ];

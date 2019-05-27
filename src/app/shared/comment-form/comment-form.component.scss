@@ -4,10 +4,22 @@
 
 button {
     max-width: 100px;
-    background-color: #7f8ea8;
+    background-color: #132626;
+    color: white;
     padding: 0.3em 1em;
     margin: 0 0 0 2em;
     border: 2px double #dbd9ed;
+    border-radius: 2px;
+    transition: background-color 100ms ease-in-out,
+    color 100ms ease-in-out;
+
+    &:hover {
+        background-color: #06235c;
+        color: #ff7700;
+        text-shadow: 1px 1px 2px #ff7700;
+
+    }
+
 }
 
 form {

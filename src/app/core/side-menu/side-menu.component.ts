@@ -1,5 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {MenuItems} from '../interface/menuItems';
+
+import {MenuItems} from '../module/MenuItems';
 
 @Component({
     selector: 'app-side-menu',
@@ -13,8 +14,8 @@ export class SideMenuComponent implements OnInit {
     /*dynamic list of side-menu items*/
     sideMenuItems: MenuItems = [
         {title: 'Dashboard', href: '/dashboard', icon: 'stats-bars2'},
-        {title: 'Lessons',  href: '/', icon: 'book'},
-        {title: 'Quizzes',  href: '/quizzes', icon: 'bubbles'}
+        {title: 'Lessons', href: '/', icon: 'book'},
+        {title: 'Quizzes', href: '/quizzes', icon: 'bubbles'}
     ];
 
     constructor() {
@@ -22,7 +23,8 @@ export class SideMenuComponent implements OnInit {
 
     ngOnInit() {
     }
-    changeMenuState(evn): void {
+
+    changeMenuState(): void {
         this.clOnMenuDrop.emit(true);
     }
 
