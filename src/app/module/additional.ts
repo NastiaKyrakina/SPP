@@ -1,4 +1,3 @@
-
 export interface Like {
     wrkId: number;
     userId: number;

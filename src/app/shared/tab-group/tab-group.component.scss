@@ -2,12 +2,12 @@
 @import "layouts/breakpoints";
 
 
-.group{
+.group {
     padding-top: 1.5em;
     background-color: lighten($top_menu_color, 20%);
 }
 
-button{
+button {
     width: 100%;
     text-align: center;
     background-color: $side_menu_color;
@@ -18,15 +18,18 @@ button{
 
     transition: color 200ms ease-in-out,
                 background-color 200ms ease-in-out;
-    &:hover{
+
+    &:hover {
         color: white;
     }
-    &.open{
-        background-color:#7f96c3;
+
+    &.open {
+        background-color: #7f96c3;
         color: white;
     }
 
 }
-.content{
+
+.content {
     margin: 1em 0;
 }

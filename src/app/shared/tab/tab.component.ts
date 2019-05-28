@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
+
 import {TabGroupComponent} from '../tab-group/tab-group.component';
 
 @Component({

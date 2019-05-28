@@ -5,7 +5,7 @@ export let comments: Array<Comment> = [
         id: 1,
         wrkId: 1,
         userId: 1,
-        text: 'So loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong text',
+        text: 'Stext',
         date: new Date(),
     },
     {

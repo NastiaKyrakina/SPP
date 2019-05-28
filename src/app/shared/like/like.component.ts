@@ -10,6 +10,7 @@ export class LikeComponent implements OnInit {
     @Input() isActive = false;
     @Input() likes: number;
     @Output() likedWorkshop = new EventEmitter<boolean>();
+
     constructor() {
     }
 
@@ -17,7 +18,7 @@ export class LikeComponent implements OnInit {
     }
 
     changeState(): void {
-      this.isActive = !this.isActive;
-      this.likedWorkshop.emit(this.isActive);
+        this.isActive = !this.isActive;
+        this.likedWorkshop.emit(this.isActive);
     }
 }

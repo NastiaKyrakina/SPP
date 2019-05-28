@@ -58,10 +58,8 @@ export class CommentCardComponent implements OnInit {
     }
 
     closeForm(): void {
-        console.log(this.componentRef);
         this.formOpen = false;
         this.componentRef.destroy();
-
     }
 
 }

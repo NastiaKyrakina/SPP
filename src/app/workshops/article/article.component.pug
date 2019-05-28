@@ -1,13 +1,13 @@
 app-card
     .card-header(card-header='')
-        a([routerLink]='["workshop", workshop.id]' )
+        a([routerLink]='["../workshop", workshop.id]' )
             figure
                 img([src]='workshop.img')
                 figcaption {{workshop.title}}
     .desc-block
          p
             | {{workshop.getShordDescr() + '...'}}
-            a([routerLink]='["workshop", workshop.id]') read more
+            a([routerLink]='["../workshop", workshop.id]') read more
     .tags.row
         .tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
             {{tag.key}}

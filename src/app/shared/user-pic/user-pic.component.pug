@@ -1,4 +1,5 @@
 div(*ngIf="picture; else alter" )
     img.pic([src]='"/assets/img/user/"+picture')
 ng-template(#alter='')
-    .pic.initials([ngStyle]="{'background-color': 'green'}" ) {{getInitial()}}
+    // will be implement different color for pic
+    .pic.initials([ngStyle]='{"background-color": "green"}' ) {{getInitial()}}

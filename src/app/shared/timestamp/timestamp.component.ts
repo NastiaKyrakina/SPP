@@ -9,6 +9,7 @@ import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 export class TimestampComponent implements OnInit {
     @Input() timestamp: any;
     @Input() onlyDate: boolean;
+
     constructor() {
     }
 

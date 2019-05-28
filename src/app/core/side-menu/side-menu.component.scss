@@ -2,34 +2,34 @@
 @import "base/typography";
 @import "layouts/breakpoints";
 
-.side-menu{
-    position: fixed;
-    top: 0;
-    left: 0;
+.side-menu {
+    @include setting_position($left: 0, $top: 0);
+
+    font-family: $menu_font;
     margin-top: $top_menu_height;
-    height: 100vh;
+    margin-left: -200vw;
+    height: calc(100vh - #{$top_menu_height});
     width: 80vw;
     min-width: $min_sm_width_sm;
     background-color: $side_menu_color;
-    margin-left: -200vw;
     transition: margin 200ms linear;
     opacity: 0;
-    font-family: $menu_font;
     overflow: hidden;
 
-    @include mq($from: sm){
+    @include mq($from: sm) {
         margin-left: 0;
         opacity: 1;
         min-width: $sm_width_md;
         width: $sm_width_md;
     }
-    @include mq($from: md){
+    @include mq($from: md) {
         min-width: 100px;
         width: $sm_width;
     }
 }
+
 /*for open menu in small screens*/
-.open .side-menu{
+.open .side-menu {
     margin-left: 0;
     opacity: 1;
 }
@@ -39,22 +39,18 @@
     transition: opacity 400ms ease;
 }
 
-.open .drop{
+.open .drop {
     @include mq($until: sm) {
         display: block;
         background-color: #030e24;
         opacity: 0.7;
         overflow: hidden;
-        position: absolute;
-        top: $top_menu_height;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        @include setting_position($left: 0, $top: $top_menu_height,
+                                    $right: 0, $bottom: 0)
     }
 }
 
-.menu-item{
-
+.menu-item {
     display: flex;
     flex-flow: row;
     text-align: center;
@@ -62,40 +58,44 @@
     color: $text_menu;
     transition: color 200ms linear,
                 background-color 200ms ease-in-out;
-    &:hover{
+
+    &:hover {
         color: #030e24;
     }
 
-    a{
+    a {
         display: block;
         padding: 1em $side_menu_padding;
-        @include mq($from: sm){
+        @include mq($from: sm) {
             padding: 1em $side_menu_padding;
         }
     }
-    .md-icon{
+
+    .md-icon {
         margin: 0.5em 0.3em;
-}
-    .title{
+    }
+
+    .title {
         margin-top: auto;
         margin-bottom: auto;
         font-size: 1.3em;
 
-        @include mq($from: sm){
+        @include mq($from: sm) {
             display: none;
-    }
+        }
 
-        @include mq($from: md){
+        @include mq($from: md) {
             font-size: 1em;
             display: block;
+        }
     }
-}
-    @include mq($from: sm){
+
+    @include mq($from: sm) {
         flex-flow: column;
     }
 }
 
 /*link-style for current page*/
-.active{
+.active {
     background-color: darken($side_menu_color, 20%);
 }

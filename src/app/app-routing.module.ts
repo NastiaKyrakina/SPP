@@ -1,11 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-
+import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
     {path: 'quizzes', loadChildren: './quizzes/quizzes.module#QuizzesModule'},
     {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
-    {path: '', loadChildren: './workshops/workshops.module#WorkshopsModule'},
+    {path: 'workshops', loadChildren: './workshops/workshops.module#WorkshopsModule'},
+    {path: '', redirectTo: 'workshops/feed', pathMatch: 'full'},
+    {path: '**', component: NotFoundComponent},
+
 ];
 
 @NgModule({

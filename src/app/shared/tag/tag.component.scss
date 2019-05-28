@@ -1,6 +1,6 @@
 $main-backg: #dbe1ca;
 $text-color: darkslategrey;
-span{
+span {
     display: inline-block;
     background-color: cyan;
     color: $text-color;
@@ -11,7 +11,7 @@ span{
     border: 2px solid darkslategrey;
     transition: background-color 200ms ease-in-out,
                 color 200ms ease-in-out,
-                border-radius  200ms ease-in-out;
+                border-radius 200ms ease-in-out;
     cursor: pointer;
 }
 
@@ -19,13 +19,14 @@ span{
     .tag-#{$i} {
         $color: saturate(adjust-hue($main-backg,
             random(200)+45), 80%);
-        background-color:  $color;
+        background-color: $color;
 
-        &:hover, &.selected{
-            background-color:  darken($color, 30%);
+        &:hover, &.selected {
+            background-color: darken($color, 30%);
             color: lighten($text-color, 30%)
         }
-        &.selected{
+
+        &.selected {
             border-radius: 50px;
             border-color: #fbff08;
 
