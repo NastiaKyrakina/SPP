@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-aux-panel',
@@ -7,14 +8,29 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuxiliaryPanelComponent implements OnInit {
-    auxOpen: boolean;
+    @Input() auxOpen: boolean;
     hasContent = true;
-
-    constructor() {
+    currentPath: string[];
+    constructor(private route: ActivatedRoute,
+                private router: Router) {
+        this.currentPath = this.router.url.split('/').slice(1);
     }
 
     openAuxContent(): void {
         this.auxOpen = !this.auxOpen;
+        console.log(this.router);
+        if (this.auxOpen) {
+            this.router.navigate([
+                this.currentPath.join('/'),
+                {outlets: {
+                    aside: [ 'comments', ],
+                }}]);
+        } else {
+            this.router.navigate([{outlets: {
+                    aside: null,
+                    primary: this.currentPath
+                }}]);
+        }
     }
 
     ngOnInit() {

@@ -3,6 +3,6 @@
         main(#main='', (scroll)='detectScrollPosition()' )
             div(#top='')
             .centered
-                ng-content(selector='[main]')
+                ng-content(select='[main]')
             app-to-top-button([blockForScroll]='topPoint', [scrollPos]='scrollPos')
-        app-aux-panel
+        ng-content(select='[aside]')

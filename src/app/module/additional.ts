@@ -14,6 +14,7 @@ export interface Comment {
 export interface Tag {
     id: number;
     key: string;
+    selected?: boolean;
 }
 
 export interface WorkshopTag {

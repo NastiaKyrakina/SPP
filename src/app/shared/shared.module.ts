@@ -14,6 +14,7 @@ import {TabGroupComponent} from './tab-group/tab-group.component';
 import {TimestampComponent} from './timestamp/timestamp.component';
 import {CommentCardComponent} from './comment-card/comment-card.component';
 import {CommentFormComponent} from './comment-form/comment-form.component';
+import {SharedRoutingModule} from './shared-routing.module';
 
 
 @NgModule({
@@ -32,10 +33,12 @@ import {CommentFormComponent} from './comment-form/comment-form.component';
         CommentFormComponent],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+        SharedRoutingModule
     ],
     exports: [CardComponent,
         ViewportComponent,
+        AuxiliaryPanelComponent,
         UserPicComponent,
         ToTopButtonComponent,
         TagComponent,

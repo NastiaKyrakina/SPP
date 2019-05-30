@@ -1,7 +1,8 @@
 import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
-import {currentUser} from '../../../data/data';
+
 import {User} from '../../module/User';
 import {NgForm} from '@angular/forms';
+import {UsersService} from '../../root-service/users.service';
 
 @Component({
     selector: 'app-top-pane',
@@ -12,13 +13,14 @@ import {NgForm} from '@angular/forms';
 export class TopPaneComponent implements OnInit {
     @Output() clOnMenuBtn = new EventEmitter<boolean>();
     // user
-    user = currentUser;
+    user: User;
     searchOpen = false;
 
-    constructor() {
+    constructor(private userSrv: UsersService) {
     }
 
     ngOnInit() {
+        this.user =  this.userSrv.getCurrentUser();
     }
 
     changeMenuState(): void {

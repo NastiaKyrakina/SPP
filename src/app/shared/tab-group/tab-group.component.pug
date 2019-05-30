@@ -1,7 +1,9 @@
 .group.row
-    button.col(*ngFor='let tab of tabs', [ngClass]= '{"open": tab.active}',
-        (click) = 'changeTabState(tab)')
+    a.col(*ngFor='let tab of tabs',
+            [ngClass]= '{"open": tab.active}',
+            [routerLink] = '[{ outlets: { aside: [tab.href] } }]',
+            (click) = 'changeTabState(tab)')
         | {{tab.title}}
 .content
     ng-content
-
+    ng-content(select="[route]" )

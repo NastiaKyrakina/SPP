@@ -9,6 +9,8 @@ import {TabGroupComponent} from '../tab-group/tab-group.component';
 })
 export class TabComponent implements OnInit {
     @Input() title: string;
+    @Input() href: string;
+
     active = false;
 
     constructor(tabsGr: TabGroupComponent) {

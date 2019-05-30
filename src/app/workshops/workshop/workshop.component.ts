@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Workshop} from '../../module/Workshop';
 import {Comment} from '../../module/additional';
-import {WorkshopService} from "../workshop.service";
+import {WorkshopService} from '../workshop.service';
 
 @Component({
     selector: 'app-workshop',
@@ -16,7 +16,9 @@ export class WorkshopComponent implements OnInit {
     private id: number;
     private subscription: Subscription;
     workshop: Workshop;
+    auxOpen = false;
     constructor(private route: ActivatedRoute,
+                private router: Router,
                 private wrkService: WorkshopService) {
     }
 
@@ -26,6 +28,9 @@ export class WorkshopComponent implements OnInit {
         this.route.data.subscribe((data: {workshop: Workshop}) => {
             this.workshop = data.workshop;
         } );
+        if (this.router.url.split('/').pop()[0] === '(') {
+            this.auxOpen = true;
+        }
     }
 
     liked($event: boolean): void {

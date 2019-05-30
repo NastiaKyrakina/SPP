@@ -1,8 +1,13 @@
-form.row.columns(#myForm="ngForm")
-    textarea([value]='comment && comment.text || ""' rows=5 cols=10 name='comment' class="form-control"  required
-    id=comment placeholder='What do you think about it?' )
+form.row.columns('#commentForm'="ngForm")
+    textarea([value]='comment && comment.text || ""'
+                    rows=5 cols=10
+                    name='comment'
+                    id='comment'
+                    class="form-control"  required
+                    placeholder='What do you think about it?'
+                    ngModel='')
     .row.form-btn
-        button(type='submit', [disabled]="myForm.invalid", (click)='submitForm()')
+        button(type='submit', [disabled]="commentForm.invalid", (click)='submitForm(commentForm)')
             | {{!isEdit ? "Submit" : "Save and close"}}
         ng-container(*ngIf='isEdit')
             button((click)='closeForm()') Close

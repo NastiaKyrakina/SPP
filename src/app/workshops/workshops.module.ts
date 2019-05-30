@@ -6,15 +6,24 @@ import {WorkshopsComponent} from './workshops/workshops.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {ArticleComponent} from './article/article.component';
 import {SharedModule} from '../shared/shared.module';
+import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
+import {WorkshopResourcesComponent} from './workshop-resources/workshop-resources.component';
+import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
 
 @NgModule({
-    declarations: [WorkshopsComponent, WorkshopComponent, ArticleComponent],
+    declarations: [
+        WorkshopsComponent,
+        WorkshopComponent,
+        ArticleComponent,
+        WorkshopCommentsComponent,
+        WorkshopResourcesComponent,
+        WorkshopQuizzesComponent],
     imports: [
         CommonModule,
         SharedModule,
         WorkshopsRoutingModule,
     ],
-    exports: [WorkshopsComponent, ]
+    exports: []
 })
 export class WorkshopsModule {
 }
