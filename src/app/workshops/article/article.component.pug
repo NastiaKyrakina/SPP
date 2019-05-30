@@ -9,8 +9,8 @@ app-card
             | {{workshop.getShordDescr() + '...'}}
             a([routerLink]='["../workshop", workshop.id]') read more
     .tags.row
-        .tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
+        .tag(*ngFor="let tag of tags", [id]='"tag-"+tag.id').
             {{tag.key}}
     .card-footer.row(card-footer='')
-        app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+        app-like([likes]='workshop.likes', [isActive] = 'likeIt',(likedWorkshop)='liked($event)')
         app-timestamp([timestamp]='workshop.date', [onlyDate]='true')

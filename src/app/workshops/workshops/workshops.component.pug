@@ -1,10 +1,15 @@
-.feed.row
-    .col.aside-menu
-    .col.main-content
-        ng-container(*ngFor='let workshop of workshops' )
-            app-article([workshop]='workshop')
-    .col.tags
-        .tag-cloud
-            app-tag(*ngFor='let tag of tags', [tag] = 'tag')
-
-
+app-viewport
+    div(main="")
+        .feed.row
+            .col.aside-menu
+                .menu
+                    button.catg-btn(*ngFor = 'let ctg of ctgList',
+                    (click) = 'selectCategory(ctg)', [ngClass] = '{"selected": ctgSelect === ctg}') {{ctg}}
+            .col.main-content
+                ng-container(*ngFor='let workshop of workshops' )
+                    app-article([workshop]='workshop')
+            .col.tags
+                .tag-cloud
+                    app-tag(*ngFor='let tag of tags',
+                        [tag] = 'tag',
+                        (selectTag)='selectTag($event)')
