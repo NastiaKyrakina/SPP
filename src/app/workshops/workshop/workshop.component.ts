@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Workshop} from '../../module/Workshop';
-import {Comment} from '../../module/additional';
+import {Comment, Tag} from '../../module/additional';
 import {WorkshopService} from '../workshop.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class WorkshopComponent implements OnInit {
     private id: number;
     private subscription: Subscription;
     workshop: Workshop;
+    tags: Array<Tag>;
     auxOpen = false;
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -31,10 +32,11 @@ export class WorkshopComponent implements OnInit {
         if (this.router.url.split('/').pop()[0] === '(') {
             this.auxOpen = true;
         }
+        this.tags = this.wrkService.getWrkTags(this.workshop.id);
     }
 
     liked($event: boolean): void {
-        this.workshop.liked($event);
+        this.wrkService.liked($event, this.workshop.id);
     }
 
 }

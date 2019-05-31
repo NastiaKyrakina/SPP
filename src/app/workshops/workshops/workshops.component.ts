@@ -30,11 +30,12 @@ export class WorkshopsComponent implements OnInit {
         this.route.data.subscribe((data: { workshops: Array<Workshop> }) => {
             this.workshops = data.workshops;
         });
-        this.tags = this.wrkService.getAllTags();
+
+        this.tags = this.wrkService.getTags();
         const currentTags = this.route.snapshot
             .queryParamMap.get('tags');
         if (currentTags) {
-            let currentTagList = currentTags.split(',').sort();
+            const currentTagList = currentTags.split(',').sort();
             let i = 0;
             for (let tag of this.tags) {
                 if (tag.id === +currentTagList[i]) {
@@ -43,7 +44,6 @@ export class WorkshopsComponent implements OnInit {
                 }
             }
         }
-
         this.querySubscription = this.route.queryParamMap.subscribe(
             (queryParam: any) => {
                 let tags = queryParam.get('tags');

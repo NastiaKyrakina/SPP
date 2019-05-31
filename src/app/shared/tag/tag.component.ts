@@ -18,7 +18,7 @@ export class TagComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selected = this.tag.selected ? true : false;
+        this.selected = this.tag.selected;
     }
 
     clickedOnTag(): void {

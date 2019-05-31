@@ -39,15 +39,15 @@ export class CommentFormComponent implements OnInit {
     }
 
     submitForm(commentForm: NgForm): void {
-        let text = commentForm.form.value.comment;
-        let comment = {
-                id: 1,
+        const text = commentForm.form.value.comment;
+       // bug: must add correct data for new comment
+        const comment = {
+                id: 6,
                 wrkId: 1,
                 userId: 1,
                 text,
-                date: new Date(2019, 0, 1, 0, 0, 0, 0),
+                date: new Date(),
             };
-        console.log(comment);
         this.submitedForm.emit(comment);
     }
 }

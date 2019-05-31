@@ -1,7 +1,7 @@
 app-viewport
     div(main="")
         .tags.row
-            .tag(*ngFor="let tag of workshop.getTags()", [id]='"tag-"+tag.id').
+            .tag(*ngFor="let tag of tags", [id]='"tag-"+tag.id').
                 {{tag.key}}
         .header
             h1 {{workshop.title}}
