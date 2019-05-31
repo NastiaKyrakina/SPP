@@ -16,6 +16,7 @@ export class ArticleComponent implements OnInit {
     tags: Array<Tag>;
     currentUser: User;
     likeIt: boolean;
+    desc: string;
 
     constructor(private usersService: UsersService,
                 private wrkService: WorkshopService) {
@@ -23,9 +24,10 @@ export class ArticleComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tags = this.wrkService.getTags(this.workshop.id);
+        this.tags = this.wrkService.getWrkTags(this.workshop.id);
         this.currentUser = this.usersService.getCurrentUser();
         this.likeIt = this.wrkService.isUserLikeIt(this.workshop.id, this.currentUser.id);
+        this.desc = this.wrkService.getShordDescr(this.workshop.id);
     }
 
     liked($event: boolean): void {

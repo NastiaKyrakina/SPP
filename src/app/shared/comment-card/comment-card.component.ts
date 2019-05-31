@@ -12,7 +12,8 @@ import {Comment} from 'src/app/module/additional';
 import {User} from '../../module/User';
 import {users} from '../../../data/data';
 import {CommentFormComponent} from '../comment-form/comment-form.component';
-import {currentUser} from '../../../data/data';
+import {WorkshopService} from '../../workshops/workshop.service';
+import {UsersService} from '../../root-service/users.service';
 
 @Component({
     selector: 'app-comment-card',
@@ -24,21 +25,20 @@ export class CommentCardComponent implements OnInit {
     @Input() comment: Comment;
     @ViewChild('commentForm', {read: ViewContainerRef}) form;
     user: User;
-    current = currentUser;
+    current: User;
     comtMenuOpened = false;
     formOpen = false;
 
     componentRef: ComponentRef<CommentFormComponent>;
 
-    constructor(private resolver: ComponentFactoryResolver) {
+    constructor(private resolver: ComponentFactoryResolver,
+                private wrkService: WorkshopService,
+                private userService: UsersService) {
     }
 
     ngOnInit() {
-        this.user = this.getUser();
-    }
-
-    getUser(): User {
-        return users.filter(user => user.id == this.comment.userId)[0];
+        this.current = this.userService.getCurrentUser();
+        this.user = this.wrkService.getCommentOwner(this.comment.userId);
     }
 
     openMenu(): void {

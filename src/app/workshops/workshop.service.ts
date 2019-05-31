@@ -3,7 +3,8 @@ import {Injectable} from '@angular/core';
 import {Workshop} from '../module/Workshop';
 import {Comment, Tag, WorkshopTag, Like} from '../module/additional';
 import {ActivatedRoute, Router} from '@angular/router';
-import {currentUser} from "../../data/data";
+import {currentUser, users} from "../../data/data";
+import {User} from "../module/User";
 
 let workshops: Array<Workshop> = [
     new Workshop(1, 1, 'Angular Console: What is it and why is it valuable for you?',
@@ -157,12 +158,12 @@ export class WorkshopService {
         comments.unshift(comment);
     }
 
-    getWrkTags(wrkId: number): Array<Tag> {
-        return workshops.filter(workshop => workshop.id === wrkId)[0].tags;
+    getTags(): Array<Tag> {
+       return tags;
     }
 
     isUserLikeIt(wrkId: number, userId: number): boolean {
-        return !!likes.filter(like => userId === like.userId && wrkId === like.wrkId);
+        return !!likes.filter(like => userId === like.userId && wrkId === like.wrkId).length;
     }
 
     filterWorkshops(tagsId: string, ctg?: string): Array<Workshop> {
@@ -186,20 +187,16 @@ export class WorkshopService {
                 if (ctg === 'Favorite' && !this.isUserLikeIt(workshop.userId, currentUser.id)) {
                     matches = false;
                 }
-                console.log('h');
-                console.log(matches);
                 return matches;
             });
         }
         return fWorkshops;
     }
 
-    getTags(wrkId: number): Array<Tag> | null {
-        let wrk = workshops.filter(workshop => workshop.id === wrkId)[0];
-        // get id tags for Workshop
+    getWrkTags(wrkId: number): Array<Tag> | null {
         const tagsId = wrkTags.filter(
-            wrkTag => wrkTag.wrkId === wrk.id).map(
-            wrkId => wrkId.tagId);
+            wrkTag => wrkTag.wrkId === wrkId).map(
+            oWrkTag => oWrkTag.tagId);
         if (!tagsId) {
             return null;
         }
@@ -224,13 +221,24 @@ export class WorkshopService {
     }
 
     liked(youLikeIt: boolean, wrkId: number): void {
-        let wrk = workshops.filter(workshop => workshop.id === wrkId)[0];
+        const wrk = workshops.filter(workshop => workshop.id === wrkId)[0];
+        if (!youLikeIt) {
+            likes = likes.filter(
+                like => !(like.wrkId === wrkId && like.userId ===  currentUser.id));
+        } else {
+            likes.push({userId: currentUser.id, wrkId});
+        }
         wrk.likes += youLikeIt ? 1 : -1;
     }
 
     getWrkComments(wrkId: number): Array<Comment> {
-        let wrk = workshops.filter(workshop => workshop.id === wrkId)[0];
+        const wrk = workshops.filter(workshop => workshop.id === wrkId)[0];
         return comments.filter(comment =>
             comment.wrkId === wrk.id);
+    }
+
+    getCommentOwner(userId: number): User {
+        return users.filter(user =>
+            user.id === userId)[0];
     }
 }

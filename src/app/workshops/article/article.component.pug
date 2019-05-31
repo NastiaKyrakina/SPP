@@ -6,7 +6,7 @@ app-card
                 figcaption {{workshop.title}}
     .desc-block
          p
-            | {{workshop.getShordDescr() + '...'}}
+            | {{desc + '...'}}
             a([routerLink]='["../workshop", workshop.id]') read more
     .tags.row
         .tag(*ngFor="let tag of tags", [id]='"tag-"+tag.id').
