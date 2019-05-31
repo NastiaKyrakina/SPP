@@ -14,7 +14,6 @@ const routes: Routes = [
     {
         path: 'feed',
         component: WorkshopsComponent,
-        canActivate: [AuthGuard],
         resolve: {
             workshops: WorkshopsResolverService,
         }
