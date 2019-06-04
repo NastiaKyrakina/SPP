@@ -1,0 +1,76 @@
+@import "abstracts/abstracts";
+@import "base/typography";
+@import "layouts/breakpoints";
+
+:host{
+
+    display: flex;
+
+    flex-flow: column nowrap;
+    background-color: white;
+    margin: 0.4em 0;
+    padding: 2%;
+    border-radius: 2%;
+    @include mq($from: md) {
+        margin: 0 auto 2em auto;
+        box-shadow: 1px 1px 4px black;
+    }
+}
+figure{
+    margin: 0 0.1em;
+    img{
+        width: 100%;
+        border-radius: 2%;
+    }
+}
+
+app-card .card-footer{
+    justify-content: space-between;
+    flex-flow: row wrap;
+    border-radius: 30px;
+    padding: 0.3em 0.1em;
+    margin-top: auto;
+}
+
+.desc-block{
+     a{
+        display: inline-block;
+        background-color: #06235c;
+        color: white;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 0 10px;
+    }
+}
+
+.tags{
+    justify-content: left;
+    flex-flow: row wrap;
+    padding-bottom: 0.1em;
+    .tag{
+        margin: 0.3em;
+        padding: 0.2em;
+        background-color: rgba(100, 149, 237, 0.35);
+        border-radius: 5px;
+        color: #5b5f54;
+        cursor: pointer;
+
+        transition: transform 100ms linear;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p{
+    font-size: 1.1em;
+    padding: 0.2em 0.4em;
+    @include mq($from: md) {
+        font-size: 1em;
+    }
+}

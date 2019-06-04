@@ -1,5 +1,13 @@
 html{
     font-family: $main_font;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+html::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
 }
 
 h1{
@@ -22,17 +30,10 @@ code,pre{
     font-size: 1.7em;
 }
 
+.del-btn{
+    color: rgba(255, 26, 4, 0.86);
+}
 
-.content-area{
-    position: relative;
-    display: flex;
-    width: 100%;
-    margin-top: $top_menu_height;
-
-    @include mq($from: sm){
-        margin-left: $sm_width_md;
-    }
-    @include mq($from: md){
-        margin-left: $sm_width;
-    }
+.edit-btn{
+    color: rgba(255, 119, 0, 0.86);
 }

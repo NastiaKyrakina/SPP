@@ -1,0 +1,4 @@
+.comments
+    app-comment-card(*ngFor='let comment of comments', [comment]='comment')
+.comment-form
+    app-comment-form((submitedForm)='addComment($event)')

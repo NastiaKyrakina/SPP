@@ -1,0 +1,70 @@
+@import "abstracts/abstracts";
+@import "layouts/breakpoints";
+
+$auxil_width: 350px;
+
+.auxiliary {
+    width: $auxil_width;
+    overflow-y: auto;
+    -ms-overflow-style: auto;
+    height: calc(100vh - #{$top_menu_height});
+    display: none;
+    @include mq($from: md) {
+        display: flex;
+        transition: margin-right 400ms ease-in-out;
+        margin-right: -#{$auxil_width};
+    }
+}
+
+.open-aux {
+    @include mq($from: md) {
+        margin-right: 0;
+    }
+}
+
+.empty-content {
+    align-items: center;
+    justify-content: center;
+}
+
+.message {
+    color: darkgrey;
+    font-size: large;
+}
+
+.area {
+    width: 100%;
+}
+
+.aux-icon {
+    @include setting_position($right: 25px, $top: 10px);
+    padding: 8px;
+    background-color: $side_menu_color;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    transition: color 200ms ease-in,
+    background-color 200ms ease-in,
+    right 400ms ease-in-out;
+    @include mq($from: md) {
+        display: block;
+    }
+
+    &:hover {
+        color: #06235c;
+        background-color: darkorange;
+    }
+}
+
+.aux-icon.icon-minus {
+    right: calc(20px + #{$auxil_width});
+}
+
+.block {
+    width: 100%;
+
+    img {
+        width: 90%;
+    }
+}

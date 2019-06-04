@@ -1,0 +1,8 @@
+.row.col
+    .content-area
+        main(#main='', (scroll)='detectScrollPosition()' )
+            div(#top='')
+            .centered
+                ng-content(select='[main]')
+            app-to-top-button([blockForScroll]='topPoint', [scrollPos]='scrollPos')
+        ng-content(select='[aside]')

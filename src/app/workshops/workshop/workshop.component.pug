@@ -1,0 +1,16 @@
+app-viewport
+    div(main="")
+        .tags.row
+            .tag(*ngFor="let tag of tags", [id]='"tag-"+tag.id').
+                {{tag.key}}
+        .header
+            h1 {{workshop.title}}
+        figure
+            img([src]='workshop.img')
+        p {{workshop.text}}
+
+        .footer.row
+            app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+            app-timestamp([timestamp]='workshop.date')
+    div(aside="")
+        app-aux-panel([auxOpen] = 'auxOpen')

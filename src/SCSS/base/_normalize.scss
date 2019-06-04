@@ -160,6 +160,21 @@ h1 {
         padding: 0 0 0 $indent-amount;
     }
 }
+/**normalize lists */
+nav {
+    a {
+        text-decoration: none;
+        color: inherit;
+        &:visited{
+            color: inherit;
+        }
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+    }
+}
+
 
 /**
  * Add the correct display in IE 9-.
@@ -526,6 +541,32 @@ input {
 /**
  * Correct the padding in Firefox.
  */
+
+button {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: inherit;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+button:hover,
+button:focus {
+    border: none;
+    outline:0;
+
+}
+
+button:active {
+    border: none;
+    outline: 0 !important;
+}
 
 fieldset {
     padding: 0.35em 0.75em 0.625em;
