@@ -1,3 +1,6 @@
-span([class]='"tag-"+tag.id%10', [ngClass]='{"selected":selected}',
-    (click) = 'clickedOnTag()' ) {{tag.key}}
+span([ngClass]='{"selected":selected}',
+    (click) = 'clickedOnTag()',
+    appTextToColor [text]='tag.key', [colorMap] = '["red", "yellow"]',
+
+    ) {{tag.key}}
 
