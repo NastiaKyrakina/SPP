@@ -4,11 +4,39 @@ import {UsersService} from '../../root-service/users.service';
 import {User} from '../../module/User';
 import {WorkshopService} from '../workshop.service';
 import {Tag} from '../../module/additional';
+import {
+    trigger,
+    state,
+    style,
+    animate,
+    transition,
+} from '@angular/animations';
 
 @Component({
     selector: 'app-article',
     templateUrl: './article.component.pug',
     styleUrls: ['./article.component.scss'],
+    animations: [
+        trigger('openClose', [
+            // ...
+            state('open', style({
+                height: '200px',
+                opacity: 1,
+                backgroundColor: 'yellow'
+            })),
+            state('closed', style({
+                height: '100px',
+                opacity: 0.5,
+                backgroundColor: 'green'
+            })),
+            transition('open => closed', [
+                animate('1s')
+            ]),
+            transition('closed => open', [
+                animate('0.5s')
+            ]),
+        ]),
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
@@ -17,6 +45,9 @@ export class ArticleComponent implements OnInit {
     currentUser: User;
     likeIt: boolean;
     desc: string;
+
+
+    isOpen = true;
 
     constructor(private usersService: UsersService,
                 private wrkService: WorkshopService) {
@@ -34,5 +65,7 @@ export class ArticleComponent implements OnInit {
         this.wrkService.liked($event, this.workshop.id);
     }
 
-
+    changeState(): void {
+        this.isOpen = !this.isOpen;
+    }
 }

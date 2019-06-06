@@ -1,6 +1,6 @@
-app-card
+app-card(*appCollapsable = 'let state set "collapsed" height "100px" animation "on"; let ctrl = controller')
     .card-header(card-header='')
-        a([routerLink]='["../workshop", workshop.id]' )
+        a([routerLink]='["../workshop", workshop.id]')
             figure
                 img([src]='workshop.img')
                 figcaption {{workshop.title}}
@@ -14,3 +14,8 @@ app-card
     .card-footer.row(card-footer='')
         app-like([likes]='workshop.likes', [isActive] = 'likeIt',(likedWorkshop)='liked($event)')
         app-timestamp([timestamp]='workshop.date', [onlyDate]='true')
+    .row(card-buttons='')
+        button.open-btn(
+            (click)='ctrl.expand()', [hidden]='state!="collapsed"') Show More
+        button.close-btn(
+            (click)='ctrl.collapse()', [hidden]='state=="collapsed"') Show Less

@@ -15,6 +15,9 @@ import {TimestampComponent} from './timestamp/timestamp.component';
 import {CommentCardComponent} from './comment-card/comment-card.component';
 import {CommentFormComponent} from './comment-form/comment-form.component';
 import {SharedRoutingModule} from './shared-routing.module';
+import { CollapsableDirective } from './directives/collapsable.directive';
+import { RangeDirective } from './directives/range.directive';
+import { TextToColorDirective } from './directives/text-to-color.directive';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import {SharedRoutingModule} from './shared-routing.module';
         TabGroupComponent,
         TimestampComponent,
         CommentCardComponent,
-        CommentFormComponent],
+        CommentFormComponent,
+        CollapsableDirective,
+        RangeDirective,
+        TextToColorDirective],
     imports: [
         CommonModule,
         FormsModule,
@@ -46,7 +52,10 @@ import {SharedRoutingModule} from './shared-routing.module';
         TabGroupComponent,
         TimestampComponent,
         CommentCardComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        CollapsableDirective,
+        RangeDirective,
+        TextToColorDirective
     ],
     entryComponents: [
         CommentFormComponent,

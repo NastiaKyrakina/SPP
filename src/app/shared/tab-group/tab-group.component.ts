@@ -14,12 +14,7 @@ export class TabGroupComponent implements OnInit  {
     ngOnInit() {
         this.tabs[0].active  = true;
     }
-    changeTabState(tab: TabComponent): void {
-        this.tabs.forEach((tb) => {
-            tb.active = false;
-        });
-        tab.active = true;
-    }
+
     addTab(tab: TabComponent): void {
         this.tabs.push(tab);
     }

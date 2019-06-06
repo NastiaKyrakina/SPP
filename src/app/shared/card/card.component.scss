@@ -4,17 +4,24 @@
 
 
 :host {
-    height: 100%;
     display: flex;
     flex-flow: column nowrap;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 2em;
 }
 
 .footer {
     margin-top: auto;
 }
-
+.buttons-area{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
 .content {
-    margin-top: auto;
+        margin-top: auto;
 }
 
 h2 {
