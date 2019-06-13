@@ -1,0 +1,18 @@
+.comment.row(#commentBlock='', [hidden]='formOpen')
+    .user-block
+        app-user-pic([lname]='user.lname',
+        [fname]='user.fname',
+        [picture]='user.img')
+        .name
+            small {{user.fname}}
+    p {{comment.text}}
+    ng-container(*ngIf='user.id===current.id' )
+        button.open-mini((click)="openMenu()" )
+            i.icon-circle-up
+        .btn-block([hidden]='!comtMenuOpened')
+            button.del-btn
+                i.icon-bin
+            button.edit-btn
+                i.icon-pencil((click)='openForm()')
+    app-timestamp([timestamp]='comment.date')
+template(#commentForm='', (closedForm) = 'closeForm()')

@@ -1,0 +1,66 @@
+@import "layouts/breakpoints";
+
+.feed {
+    justify-content: center;
+    // position: relative;
+}
+
+.aside-menu {
+    flex: 1;
+    left: 0;
+    top: 0;
+    @include mq($until: md) {
+        display: none;
+    }
+}
+
+.main-content {
+    flex: 4;
+    //display: flex;
+    //flex-flow: row wrap;
+    //justify-content: left;
+}
+
+.tags {
+    flex: 1;
+
+
+    @include mq($until: md) {
+        display: none;
+    }
+
+    .tag-cloud {
+        max-width: 18%;
+        position: absolute;
+        right: 10px;
+        top: 5em;
+    }
+}
+
+.menu {
+    max-width: 18%;
+    position: absolute;
+    left: 0;
+    top: 5em;
+
+    .catg-btn {
+        width: 20%;
+        min-width: 100px;
+        margin: 0 0.5em 0.3em;
+        color: white;
+        font-size: 1.3em;
+        border-radius: 10px;
+        background-color: #3f51b5;
+        &:hover{
+            background-color: #ffd777;
+            color: #0c0c0c;
+        }
+
+    }
+
+    .selected.catg-btn{
+        background-color: #ff7700;
+        color: #0c0c0c;
+    }
+
+}

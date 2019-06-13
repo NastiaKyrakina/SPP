@@ -1,0 +1,11 @@
+.centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    img{
+        display: block;
+        width: 90%;
+        margin: 2em;
+    }
+}

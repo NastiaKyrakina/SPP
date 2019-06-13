@@ -1,0 +1,37 @@
+@import "abstracts/abstracts";
+@import "layouts/breakpoints";
+
+
+.group {
+    padding-top: 1.5em;
+    background-color: lighten($top_menu_color, 20%);
+}
+
+a{
+    width: 100%;
+    text-align: center;
+    background-color: $side_menu_color;
+    color: #dbe1ca;
+    padding: 0.4em;
+    margin: 0.1em 0.1em 0 0.1em;
+    border-radius: 10px 10px 0 0;
+
+    text-decoration: none;
+
+    transition: color 200ms ease-in-out,
+                background-color 200ms ease-in-out;
+
+    &:hover {
+        color: white;
+    }
+
+    &.open {
+        background-color: #7f96c3;
+        color: white;
+    }
+
+}
+
+.content {
+    margin: 1em 0;
+}

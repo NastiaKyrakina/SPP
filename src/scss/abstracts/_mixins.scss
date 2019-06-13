@@ -1,0 +1,7 @@
+@mixin setting_position($left: auto, $right: auto, $top: auto, $bottom: auto){
+    position: absolute;
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+}

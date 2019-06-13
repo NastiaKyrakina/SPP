@@ -1,0 +1,17 @@
+
+.icon-base{
+    cursor: pointer;
+    transition: color 200ms ease-in,
+                background-color 200ms ease-in;
+    &:hover{
+        color: darkorange;
+    }
+}
+
+.search-bar-icon{
+    border: none;
+    background: white;
+    color: $top_menu_color;
+    padding: 0 5px 0 10px;
+    height: 2.0em;
+}
