@@ -1,6 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, HostListener} from '@angular/core';
 
-import {Tag} from '../../module/additional';
+import {Tag} from '../../models/additional.model';
 
 
 @Component({
@@ -17,13 +17,13 @@ export class TagComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
-        this.selected = this.tag.selected;
-    }
-
+    @HostListener('click')
     clickedOnTag(): void {
         this.selected = !this.selected;
         this.selectTag.emit(this.tag.id);
     }
 
+    ngOnInit() {
+        this.selected = this.tag.selected;
+    }
 }

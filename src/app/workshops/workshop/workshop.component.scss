@@ -10,7 +10,9 @@ figure {
         border-radius: 2%;
     }
 }
-
+[main] {
+    padding: 0 0.7em;
+}
 .footer {
     justify-content: space-between;
     border-radius: 30px;
@@ -26,7 +28,8 @@ p {
         font-size: 1.2em;
     }
     @include mq($from: md) {
-        font-size: 1.6em;
+        padding: 1.5em 0;
+        line-height: 1.3em;
     }
 
 }
@@ -42,13 +45,6 @@ p {
         background-color: rgba(100, 149, 237, 0.35);
         border-radius: 5px;
         color: #5b5f54;
-        cursor: pointer;
-
-        transition: transform 100ms linear;
-
-        &:hover {
-            transform: scale(1.2);
-        }
     }
 }
 
@@ -57,4 +53,19 @@ h1 {
     font-size: 3em;
     color: #030e24;
     text-shadow: 1px 1px 2px #06235c;
+}
+.back {
+    justify-content: flex-end;
+}
+.btn{
+    display: inline-block;
+    background-color: $side_menu_color;
+    color: white;
+    padding: 0.3em 0.4em;
+    margin: 1em 0 2em 0;
+    border-radius: 2px;
+    transition: transform 400ms ease-in;
+    &:hover {
+        transform: scale(1.2);
+    }
 }

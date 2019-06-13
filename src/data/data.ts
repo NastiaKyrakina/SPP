@@ -1,5 +1,5 @@
-import {User} from '../app/module/User';
-export const users: Array<User> = [
+import {UserModel} from '../app/models/user.model';
+export const users: Array<UserModel> = [
     {
         id: 1,
         fname: 'Louis',

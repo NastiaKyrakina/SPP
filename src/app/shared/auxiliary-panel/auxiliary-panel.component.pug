@@ -4,7 +4,8 @@
             app-tab([title]='"Comments"', [href] = '"comments"')
             app-tab([title]='"Resources"', [href] = '"resources"')
             app-tab([title]='"Quizzes"', [href] = '"quizzes"')
-        router-outlet('name'='aside')
+            div(route='')
+                router-outlet('name'='aside')
     ng-template( #emptyMessage="" )
         .message Empty area
 .aux-icon([ngClass]="auxOpen ? 'icon-minus' : 'icon-plus'", (click)="openAuxContent()")

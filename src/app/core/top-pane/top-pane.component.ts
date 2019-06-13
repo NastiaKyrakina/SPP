@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter} from '@angular/core';
 
-import {User} from '../../module/User';
+import {UserModel} from '../../models/user.model';
 import {NgForm} from '@angular/forms';
 import {UsersService} from '../../root-service/users.service';
 
@@ -13,7 +13,7 @@ import {UsersService} from '../../root-service/users.service';
 export class TopPaneComponent implements OnInit {
     @Output() clOnMenuBtn = new EventEmitter<boolean>();
     // user
-    user: User;
+    user: UserModel;
     searchOpen = false;
 
     constructor(private userSrv: UsersService) {
@@ -31,7 +31,7 @@ export class TopPaneComponent implements OnInit {
         this.searchOpen = !this.searchOpen;
     }
 
-    getFullName(user: User): string {
+    getFullName(user: UserModel): string {
         return user.fname + ' ' + user.lname;
     }
     // will be implement in future

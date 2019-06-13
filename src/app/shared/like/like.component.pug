@@ -1,4 +1,4 @@
-button([ngClass]='{"active": isActive}',
-                (click) = 'changeState()')
-    i.icon-heart
-span {{likes}}
+div([ngClass]='{"active": isActive}')
+    button((click) = 'changeState()')
+        i.icon-heart
+    span {{likes}}

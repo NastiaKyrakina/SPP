@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 
-import {MenuItems} from '../module/MenuItems';
+import {MenuItems} from '../models/menu-items.model';
 
 @Component({
     selector: 'app-side-menu',

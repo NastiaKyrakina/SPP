@@ -1,4 +1,4 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import {TabComponent} from '../tab/tab.component';
 
 @Component({
@@ -7,15 +7,15 @@ import {TabComponent} from '../tab/tab.component';
     styleUrls: ['./tab-group.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabGroupComponent implements OnInit  {
+export class TabGroupComponent implements OnInit, AfterContentInit  {
+    @ContentChildren(TabComponent, {descendants: true}) nestedTabs !: QueryList<TabComponent>;
+
     tabs = [];
     constructor() {
     }
     ngOnInit() {
-        this.tabs[0].active  = true;
     }
-
-    addTab(tab: TabComponent): void {
-        this.tabs.push(tab);
+    ngAfterContentInit(): void {
+        this.tabs = this.nestedTabs.toArray();
     }
 }

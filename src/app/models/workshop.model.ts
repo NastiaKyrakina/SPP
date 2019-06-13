@@ -1,4 +1,4 @@
-export class Workshop {
+export class WorkshopModel {
     id: number;
     userId: number;
     title: string;

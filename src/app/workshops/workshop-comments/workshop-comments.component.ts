@@ -1,6 +1,6 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 
-import {Comment} from '../../module/additional';
+import {Comment} from '../../models/additional.model';
 import {WorkshopService} from '../workshop.service';
 import {ActivatedRoute} from '@angular/router';
 

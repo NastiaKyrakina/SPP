@@ -17,8 +17,4 @@ export class ViewportComponent implements OnInit {
     ngOnInit() {
         this.scrollPos = this.mainArea.nativeElement.scrollTop;
     }
-
-    detectScrollPosition(): void {
-        this.scrollPos = this.mainArea.nativeElement.scrollTop;
-    }
 }

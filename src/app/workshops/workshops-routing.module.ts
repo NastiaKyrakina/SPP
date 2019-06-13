@@ -28,12 +28,11 @@ const routes: Routes = [
             {path: 'comments', component: WorkshopCommentsComponent, outlet: 'aside'},
             {path: 'quizzes', component: WorkshopQuizzesComponent, outlet: 'aside'},
             {path: 'resources', component: WorkshopResourcesComponent, outlet: 'aside'},
-           // {path: '', redirectTo: 'comments', pathMatch: 'full', outlet: 'aside'},
         ]
     },
     {
         path: '',
-        redirectTo: 'workshops',
+        redirectTo: 'feed',
         pathMatch: 'full'
     },
 ];

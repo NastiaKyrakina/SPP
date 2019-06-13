@@ -5,12 +5,10 @@ import {
     Input,
     Output,
     EventEmitter,
-    ViewChild,
-    ElementRef
-} from '@angular/core';
-import {NgForm} from '@angular/forms';
+ } from '@angular/core';
+import {NgForm, NgModel} from '@angular/forms';
 
-import {Comment} from 'src/app/module/additional';
+import {Comment} from 'src/app/models/additional.model';
 
 @Component({
     selector: 'app-comment-form',
@@ -19,19 +17,18 @@ import {Comment} from 'src/app/module/additional';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentFormComponent implements OnInit {
-    @Input() comment: Comment | null;
+    @Input() comment: Comment | null = null;
     @Output() closedForm = new EventEmitter<boolean>();
     @Output() submitedForm = new EventEmitter<Comment>();
-    @ViewChild('area') area: ElementRef;
-    isEdit = false;
+    text: string;
+    isEdit: boolean;
 
     constructor() {
     }
 
     ngOnInit() {
-        if (this.comment) {
-            console.log(this.comment);
-        }
+        this.isEdit = !!this.comment;
+        this.text = this.isEdit ? this.comment.text : '';
     }
 
     closeForm(): void {
@@ -39,15 +36,20 @@ export class CommentFormComponent implements OnInit {
     }
 
     submitForm(commentForm: NgForm): void {
-        const text = commentForm.form.value.comment;
-       // bug: must add correct data for new comment
-        const comment = {
+        if (!commentForm.form.invalid) {
+            const text = commentForm.form.value.comment;
+            // bug: must add correct data for new comment
+            const comment = {
                 id: 6,
                 wrkId: 1,
                 userId: 1,
                 text,
                 date: new Date(),
             };
-        this.submitedForm.emit(comment);
+            this.submitedForm.emit(comment);
+            commentForm.form.reset();
+        }
     }
+
+
 }

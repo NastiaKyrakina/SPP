@@ -8,8 +8,8 @@ import {
     ComponentRef, ComponentFactoryResolver
 } from '@angular/core';
 
-import {Comment} from 'src/app/module/additional';
-import {User} from '../../module/User';
+import {Comment} from 'src/app/models/additional.model';
+import {UserModel} from '../../models/user.model';
 import {users} from '../../../data/data';
 import {CommentFormComponent} from '../comment-form/comment-form.component';
 import {WorkshopService} from '../../workshops/workshop.service';
@@ -24,8 +24,8 @@ import {UsersService} from '../../root-service/users.service';
 export class CommentCardComponent implements OnInit {
     @Input() comment: Comment;
     @ViewChild('commentForm', {read: ViewContainerRef}) form;
-    user: User;
-    current: User;
+    user: UserModel;
+    current: UserModel;
     comtMenuOpened = false;
     formOpen = false;
 

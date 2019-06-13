@@ -57,12 +57,6 @@ app-card .card-footer {
         border-radius: 5px;
         color: #5b5f54;
         cursor: pointer;
-
-        transition: transform 100ms linear;
-
-        &:hover {
-            transform: scale(1.2);
-        }
     }
 }
 

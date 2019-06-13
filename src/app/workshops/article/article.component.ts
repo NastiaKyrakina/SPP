@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {Workshop} from '../../module/Workshop';
+import {WorkshopModel} from '../../models/workshop.model';
 import {UsersService} from '../../root-service/users.service';
-import {User} from '../../module/User';
+import {UserModel} from '../../models/user.model';
 import {WorkshopService} from '../workshop.service';
-import {Tag} from '../../module/additional';
+import {Tag} from '../../models/additional.model';
 import {
     trigger,
     state,
@@ -40,9 +40,9 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
-    @Input() workshop: Workshop;
+    @Input() workshop: WorkshopModel;
     tags: Array<Tag>;
-    currentUser: User;
+    currentUser: UserModel;
     likeIt: boolean;
     desc: string;
 

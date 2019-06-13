@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ContentChildren} from '@angular/core';
 
 import {TabGroupComponent} from '../tab-group/tab-group.component';
 
@@ -10,11 +10,9 @@ import {TabGroupComponent} from '../tab-group/tab-group.component';
 export class TabComponent implements OnInit {
     @Input() title: string;
     @Input() href: string;
-
     active = false;
 
-    constructor(tabsGr: TabGroupComponent) {
-        tabsGr.addTab(this);
+    constructor() {
     }
 
     ngOnInit() {

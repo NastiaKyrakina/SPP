@@ -1,4 +1,4 @@
-import {Like, Comment, Tag, WorkshopTag} from '../../module/additional';
+import {Like, Comment, Tag, WorkshopTag} from '../../models/additional.model';
 
 export let comments: Array<Comment> = [
     {
