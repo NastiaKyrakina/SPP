@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectionStrategy, ElementRef, Input, Renderer2} from '@angular/core';
 import {fromEvent, Observable, Subscriber} from 'rxjs';
 import {Scroll} from '@angular/router';
-import {debounceTime, filter} from "rxjs/operators";
+import {debounceTime, filter} from 'rxjs/operators';
 
 @Component({
     selector: 'app-to-top-button',

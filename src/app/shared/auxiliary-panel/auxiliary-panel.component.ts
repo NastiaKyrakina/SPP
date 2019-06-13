@@ -18,7 +18,6 @@ export class AuxiliaryPanelComponent implements OnInit {
 
     openAuxContent(): void {
         this.auxOpen = !this.auxOpen;
-        console.log(this.router);
         if (this.auxOpen) {
             this.router.navigate([
                 this.currentPath.join('/'),

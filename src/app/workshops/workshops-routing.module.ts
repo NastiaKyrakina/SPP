@@ -7,8 +7,8 @@ import {WorkshopsComponent} from './workshops/workshops.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {WorkshopResolverService} from './workshop-resolver.service';
 import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
-import {WorkshopQuizzesComponent} from "./workshop-quizzes/workshop-quizzes.component";
-import {WorkshopResourcesComponent} from "./workshop-resources/workshop-resources.component";
+import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
+import {WorkshopResourcesComponent} from './workshop-resources/workshop-resources.component';
 
 const routes: Routes = [
     {

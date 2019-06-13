@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Directive({
     selector: '[appQueryParamsActive]'
@@ -23,7 +23,7 @@ export class QueryParamsActiveDirective implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.querySubscription = this.route.queryParamMap.subscribe(
             (queryParam: any) => {
-                let tags = queryParam.get('tags');
+                const tags = queryParam.get('tags');
                 if (tags && tags.includes(this.paramValue)) {
                     this.renderer.addClass(this.elRef.nativeElement,
                         this.className);
