@@ -18,6 +18,8 @@ import {SharedRoutingModule} from './shared-routing.module';
 import { CollapsableDirective } from './directives/collapsable.directive';
 import { RangeDirective } from './directives/range.directive';
 import { TextToColorDirective } from './directives/text-to-color.directive';
+import { InitialsPipe } from './pipe/initials.pipe';
+import { QueryParamsActiveDirective } from './directives/query-params-active.directive';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { TextToColorDirective } from './directives/text-to-color.directive';
         CommentFormComponent,
         CollapsableDirective,
         RangeDirective,
-        TextToColorDirective],
+        TextToColorDirective,
+        InitialsPipe,
+        QueryParamsActiveDirective],
     imports: [
         CommonModule,
         FormsModule,
@@ -55,7 +59,8 @@ import { TextToColorDirective } from './directives/text-to-color.directive';
         CommentFormComponent,
         CollapsableDirective,
         RangeDirective,
-        TextToColorDirective
+        TextToColorDirective,
+        QueryParamsActiveDirective
     ],
     entryComponents: [
         CommentFormComponent,

@@ -11,5 +11,14 @@ app-viewport
             .col.tags
                 .tag-cloud
                     app-tag(*ngFor='let tag of tags',
-                        [tag] = 'tag',
-                        (selectTag)='selectTag($event)')
+                    [tag] = 'tag',
+                    (selectTag)='selectTag($event)',
+                    appTextToColor
+                    [text]='tag.key',
+                    [hoverEffect] = '"on"',
+                    [effectType] = '"darken"' ,
+                    appQueryParamsActive
+                    paramName="tags",
+                    [paramValue]='tag.id'
+                    )
+

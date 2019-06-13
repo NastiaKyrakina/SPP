@@ -1,8 +1,9 @@
 @import "abstracts/vars";
 @import "abstracts/mixins";
+@import "layouts/breakpoints";
 
 button {
-    @include setting_position($left: 2px, $top: 10px);
+    @include setting_position($left: 2px, $bottom: 10px);
     background-color: transparent;
     color: $unactivated_color;
     font-size: 1.5em;
@@ -10,7 +11,10 @@ button {
     opacity: 0;
     transition: opacity 400ms ease-in-out,
                 transform 100ms linear;
+    @include mq($from: sm) {
+        @include setting_position($left: 2px, $top: 10px);
 
+    }
     &.canHover {
         //show button
         opacity: 1;

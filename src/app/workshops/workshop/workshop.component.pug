@@ -10,7 +10,9 @@ app-viewport
         p {{workshop.text}}
 
         .footer.row
-            app-like([likes]='workshop.likes', (likedWorkshop)='liked($event)')
+            app-like([likes]='workshop.likes', [isActive] = 'likeIt', (likedWorkshop)='liked($event)')
             app-timestamp([timestamp]='workshop.date')
+        .row.back
+            a.btn(routerLink='/workshops/feed') Back to feed
     div(aside="")
         app-aux-panel([auxOpen] = 'auxOpen')

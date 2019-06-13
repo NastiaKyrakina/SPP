@@ -21,4 +21,5 @@ export class LikeComponent implements OnInit {
         this.isActive = !this.isActive;
         this.likedWorkshop.emit(this.isActive);
     }
+
 }

@@ -1,5 +1,6 @@
 div(*ngIf="picture; else alter" )
     img.pic([src]='"/assets/img/user/"+picture')
 ng-template(#alter='')
-    // will be implement different color for pic
-    .pic.initials([ngStyle]='{"background-color": "green"}' ) {{getInitial()}}
+    .pic.initials(appTextToColor [text]='fname+lname',
+    [colorMap] = '["#856812", "#08b775", "#9642c8", "#dd0017"]')
+        | {{[fname, lname] | initials}}

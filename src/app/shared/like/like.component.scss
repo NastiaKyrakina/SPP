@@ -1,5 +1,5 @@
-$select-botton-color: #dd0035;
-$hover-botton-color: lighten($select-botton-color, 20%);
+$select-botton-color: #dd0017;
+$hover-botton-color: lighten($select-botton-color, 40%);
 button {
     font-size: 1.7em;
     color: #787782;
@@ -10,11 +10,16 @@ button {
         color: $hover-botton-color;
     }
 
-    &:active, &.active, &:hover.active {
+    &:active, .active &, &:hover.active {
         color: $select-botton-color;
+        text-shadow: 1px 1px 6px $hover-botton-color, -1px -1px 6px $hover-botton-color;
     }
 }
 
 span {
     color: grey;
+    .active &{
+        color: $select-botton-color;
+        font-weight: bold;
+    }
 }

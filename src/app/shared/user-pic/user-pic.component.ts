@@ -11,15 +11,9 @@ export class UserPicComponent implements OnInit {
     @Input() fname: string;
     @Input() lname: string;
 
-
     constructor() {
     }
 
     ngOnInit() {
-        console.log(this.fname);
-    }
-
-    getInitial(): string {
-        return `${this.fname[0]} ${this.lname[0]}`;
     }
 }

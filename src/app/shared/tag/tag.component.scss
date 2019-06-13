@@ -1,35 +1,23 @@
 $main-backg: #dbe1ca;
 $text-color: darkslategrey;
-span {
+$box-color: #001108;
+:host {
     display: inline-block;
-    background-color: cyan;
-    color: $text-color;
+    color: white;
+    background-color: #06235c;
     font-weight: bold;
     padding: 0.2em 0.3em;
-    margin: 0.2em 0.5em;
+    margin: 0.5em 0.5em;
     border-radius: 5px;
+    box-shadow: 0px 5px 0px $box-color;
     border: 2px solid darkslategrey;
     transition: background-color 200ms ease-in-out,
-                color 200ms ease-in-out,
+                box-shadow 200ms ease-in-out,
                 border-radius 200ms ease-in-out;
     cursor: pointer;
 }
 
-@for $i from 1 through 10 {
-    .tag-#{$i} {
-        $color: saturate(adjust-hue($main-backg,
-            random(200)+45), 80%);
-        background-color: $color;
-
-        &:hover, &.selected {
-            background-color: darken($color, 30%);
-            color: lighten($text-color, 30%)
-        }
-
-        &.selected {
-            border-radius: 50px;
-            border-color: #fbff08;
-
-        }
-    }
+:host.active{
+    border-radius: 10px;
+    box-shadow: inset 0px 2px 0px $box-color;
 }

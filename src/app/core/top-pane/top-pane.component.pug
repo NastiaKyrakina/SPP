@@ -1,6 +1,6 @@
 .top-pane
     .rigth
-        .logo
+        a.logo(routerLink='/workshops/feed')
         .icons
             button.menu-icon((click)='changeMenuState()')
                 i([ngClass]='searchOpen ? "icon-cross" : "icon-menu"' )

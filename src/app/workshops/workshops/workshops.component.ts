@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, OnDestroy} from '@angular/core';
 
-import {tags} from '../workshops-data/additional';
-import {Tag} from '../../module/additional';
-import {Workshop} from '../../module/Workshop';
+import {Tag} from '../../models/additional.model';
+import {WorkshopModel} from '../../models/workshop.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WorkshopService} from '../workshop.service';
 import {Subscription} from 'rxjs';
@@ -13,9 +12,9 @@ import {Subscription} from 'rxjs';
     styleUrls: ['./workshops.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WorkshopsComponent implements OnInit {
+export class WorkshopsComponent implements OnInit, OnDestroy {
     tags: Array<Tag>;
-    workshops: Array<Workshop>;
+    workshops: Array<WorkshopModel>;
     private querySubscription: Subscription;
     private paramsList = [];
     ctgList = ['All', 'Favorite', 'My'];
@@ -27,7 +26,7 @@ export class WorkshopsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.data.subscribe((data: { workshops: Array<Workshop> }) => {
+        this.route.data.subscribe((data: { workshops: Array<WorkshopModel> }) => {
             this.workshops = data.workshops;
         });
 
@@ -85,8 +84,7 @@ export class WorkshopsComponent implements OnInit {
 
     selectTag(tagId: number): void {
         const newTagList = this.getNewTagList(tagId);
-        if (newTagList) {
-            console.log(newTagList);
+        if (newTagList.length) {
             this.addQueryParam('tags', newTagList.toString());
         } else {
             this.addQueryParam('tags', null);
@@ -100,5 +98,9 @@ export class WorkshopsComponent implements OnInit {
         } else {
             this.addQueryParam('ctg', category);
         }
+    }
+
+    ngOnDestroy(): void {
+        this.querySubscription.unsubscribe();
     }
 }

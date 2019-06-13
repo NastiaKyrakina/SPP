@@ -1,9 +1,13 @@
 @import "abstracts/abstracts";
 @import "layouts/breakpoints";
 
-$auxil_width: 350px;
+
+:host{
+}
 
 .auxiliary {
+    position: relative;
+
     width: $auxil_width;
     overflow-y: auto;
     -ms-overflow-style: auto;
