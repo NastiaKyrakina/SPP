@@ -3,8 +3,8 @@ import {Injectable} from '@angular/core';
 import {WorkshopModel} from '../models/workshop.model';
 import {Comment, Tag, WorkshopTag, Like} from '../models/additional.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {currentUser, users} from "../../data/data";
-import {UserModel} from "../models/user.model";
+import {currentUser, users} from '../../data/data';
+import {UserModel} from '../models/user.model';
 
 let workshops: Array<WorkshopModel> = [
     new WorkshopModel(1, 1, 'Angular Console: What is it and why is it valuable for you?',
@@ -148,7 +148,6 @@ export class WorkshopService {
 
     getComments(): Array<Comment> {
         const id = +this.router.url.split('/')[3];
-        console.log(id);
         comments = comments.filter(comment => comment.wrkId === id);
 
         return comments.sort((a, b) => +b.date - +a.date);

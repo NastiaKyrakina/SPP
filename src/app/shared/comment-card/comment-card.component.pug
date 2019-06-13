@@ -1,4 +1,7 @@
-.comment.row(#commentBlock='', [hidden]='formOpen')
+.comment.row(
+#commentBlock='', [hidden]='formOpen',
+appCurentUserObj, [user] = 'comment.userId'
+)
     .user-block
         app-user-pic([lname]='user.lname',
         [fname]='user.fname',

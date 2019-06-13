@@ -13,27 +13,20 @@ export class RangeDirective implements OnInit {
         console.log(range);
         this.viewContainer.clear();
 
-        if (typeof(range) === 'object') {
+        if (typeof (range) === 'object') {
             this.start = range[0];
             this.end = range[1];
         } else {
             this.end = range;
         }
-
-        console.log( this.start);
-        console.log(this.end);
-        this.contect = {
-        };
+        this.contect = {};
         const count = this.end - this.start;
         let curNumber = this.start;
         for (let i = 0; i < count; i++) {
-            console.log(curNumber++);
-            console.log(i);
             this.viewContainer.createEmbeddedView(this.templateRef, {
                 index: i,
-                number: curNumber,
-        });
-
+                number: curNumber++,
+            });
         }
     }
 
@@ -41,9 +34,5 @@ export class RangeDirective implements OnInit {
                 private viewContainer: ViewContainerRef) {
     }
 
-    ngOnInit(): void {
-
-
-
-    }
+    ngOnInit(): void {}
 }
