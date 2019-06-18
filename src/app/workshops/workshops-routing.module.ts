@@ -9,6 +9,7 @@ import {WorkshopResolverService} from './workshop-resolver.service';
 import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
 import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
 import {WorkshopResourcesComponent} from './workshop-resources/workshop-resources.component';
+import {CommentResolverService} from "./comment-resolver.service";
 
 const routes: Routes = [
     {
@@ -25,7 +26,12 @@ const routes: Routes = [
             workshop: WorkshopResolverService,
         },
         children: [
-            {path: 'comments', component: WorkshopCommentsComponent, outlet: 'aside'},
+            {path: 'comments',
+                component: WorkshopCommentsComponent,
+                resolve: {
+                    comments: CommentResolverService,
+                },
+                outlet: 'aside'},
             {path: 'quizzes', component: WorkshopQuizzesComponent, outlet: 'aside'},
             {path: 'resources', component: WorkshopResourcesComponent, outlet: 'aside'},
         ]

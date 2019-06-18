@@ -20,7 +20,7 @@ export class TagComponent implements OnInit {
     @HostListener('click')
     clickedOnTag(): void {
         this.selected = !this.selected;
-        this.selectTag.emit(this.tag.id);
+        this.selectTag.emit(this.tag.seq);
     }
 
     ngOnInit() {

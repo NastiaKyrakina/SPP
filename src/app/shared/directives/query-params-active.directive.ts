@@ -11,7 +11,6 @@ export class QueryParamsActiveDirective implements OnInit, OnDestroy {
     @Input() paramName: string;
     @Input() paramValue: string;
 
-
     private querySubscription: Subscription;
 
     constructor(private elRef: ElementRef,
@@ -23,8 +22,8 @@ export class QueryParamsActiveDirective implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.querySubscription = this.route.queryParamMap.subscribe(
             (queryParam: any) => {
-                const tags = queryParam.get('tags');
-                if (tags && tags.includes(this.paramValue)) {
+                const tags = queryParam.get(this.paramName);
+                if (tags && tags.split(',').includes(this.paramValue + '')) {
                     this.renderer.addClass(this.elRef.nativeElement,
                         this.className);
                 } else {

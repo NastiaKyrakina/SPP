@@ -4,21 +4,29 @@ app-viewport
             .col.aside-menu
                 .menu
                     button.catg-btn(*ngFor = 'let ctg of ctgList',
-                    (click) = 'selectCategory(ctg)', [ngClass] = '{"selected": ctgSelect === ctg}') {{ctg}}
-            .col.main-content
-                ng-container(*ngFor='let workshop of workshops' )
-                    app-article([workshop]='workshop')
+                    (click) = 'selectCategory(ctg)',
+                    appQueryParamsActive
+                    className = 'selected',
+                    paramName='ctg',
+                    [paramValue]='ctg') {{ctg}}
+            .col.main-contentng-container
+
+                div(*ngIf='workshops; else empty' )
+                    app-article(*ngFor='let workshop of workshops', [workshop]='workshop')
+                ng-template(#empty='')
+                button.secondary((click) = 'loadArticles()',
+                [hidden]='emptyPage') Load more articles...
             .col.tags
                 .tag-cloud
-                    app-tag(*ngFor='let tag of tags',
+                    app-tag(*ngFor='let tag of tags$ | async',
                     [tag] = 'tag',
                     (selectTag)='selectTag($event)',
                     appTextToColor
-                    [text]='tag.key',
+                    [text]='tag.name',
                     [hoverEffect] = '"on"',
                     [effectType] = '"darken"' ,
                     appQueryParamsActive
                     paramName="tags",
-                    [paramValue]='tag.id'
+                    [paramValue]='tag.seq'
                     )
 

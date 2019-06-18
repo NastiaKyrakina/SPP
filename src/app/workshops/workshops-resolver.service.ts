@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
     Router, Resolve,
     RouterStateSnapshot,
@@ -6,18 +6,21 @@ import {
 } from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {WorkshopModel} from '../models/workshop.model';
+import {PostModel, WorkshopModel} from '../models/workshop.model';
 import {WorkshopService} from './workshop.service';
+import {first} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
-export class WorkshopsResolverService implements Resolve<Array<WorkshopModel>> {
+export class WorkshopsResolverService implements Resolve<Array<PostModel>> {
 
-  constructor(private wrkService: WorkshopService, private router: Router) { }
+    constructor(private wrkService: WorkshopService, private router: Router) {
+    }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<WorkshopModel>>
-        | Promise<Array<WorkshopModel>> | Array<WorkshopModel> {
-        return this.wrkService.getArticles();
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<PostModel>>
+        | Promise<Array<PostModel>> | Array<PostModel> {
+        this.wrkService.getArticles();
+        return this.wrkService.workshops.getValue();
     }
 }

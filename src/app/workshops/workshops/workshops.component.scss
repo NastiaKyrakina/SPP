@@ -1,8 +1,8 @@
 @import "layouts/breakpoints";
+@import "abstracts/abstracts";
 
 .feed {
     justify-content: center;
-    // position: relative;
 }
 
 .aside-menu {
@@ -57,4 +57,14 @@
         color: #0c0c0c;
     }
 
+}
+
+.secondary{
+    width: 100%;
+    background-color: $side_menu_color;
+    color: $main_color;
+    margin: 2em 0.2em;
+    padding: 0.3em 0.1em;
+    border-radius: 1em;
+    text-align: center;
 }

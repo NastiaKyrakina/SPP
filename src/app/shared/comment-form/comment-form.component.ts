@@ -9,6 +9,7 @@ import {
 import {NgForm, NgModel} from '@angular/forms';
 
 import {Comment} from 'src/app/models/additional.model';
+import {CommentModel} from "../../models/workshop.model";
 
 @Component({
     selector: 'app-comment-form',
@@ -17,9 +18,9 @@ import {Comment} from 'src/app/models/additional.model';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentFormComponent implements OnInit {
-    @Input() comment: Comment | null = null;
+    @Input() comment: CommentModel | null = null;
     @Output() closedForm = new EventEmitter<boolean>();
-    @Output() submitedForm = new EventEmitter<Comment>();
+    @Output() submitedForm = new EventEmitter<string>();
     text: string;
     isEdit: boolean;
 
@@ -38,15 +39,10 @@ export class CommentFormComponent implements OnInit {
     submitForm(commentForm: NgForm): void {
         if (!commentForm.form.invalid) {
             const text = commentForm.form.value.comment;
-            // bug: must add correct data for new comment
             const comment = {
-                id: 6,
-                wrkId: 1,
-                userId: 1,
                 text,
-                date: new Date(),
             };
-            this.submitedForm.emit(comment);
+            this.submitedForm.emit(text);
             commentForm.form.reset();
         }
     }

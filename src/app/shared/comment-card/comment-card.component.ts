@@ -5,7 +5,7 @@ import {
     Input,
     ViewChild,
     ViewContainerRef,
-    ComponentRef, ComponentFactoryResolver
+    ComponentRef, ComponentFactoryResolver, Output, EventEmitter, OnDestroy
 } from '@angular/core';
 
 import {Comment} from 'src/app/models/additional.model';
@@ -13,7 +13,9 @@ import {UserModel} from '../../models/user.model';
 import {users} from '../../../data/data';
 import {CommentFormComponent} from '../comment-form/comment-form.component';
 import {WorkshopService} from '../../workshops/workshop.service';
-import {UsersService} from '../../root-service/users.service';
+import {UserService} from '../../services/user.service';
+import {CommentModel} from "../../models/workshop.model";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-comment-card',
@@ -21,24 +23,30 @@ import {UsersService} from '../../root-service/users.service';
     styleUrls: ['./comment-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CommentCardComponent implements OnInit {
-    @Input() comment: Comment;
+export class CommentCardComponent implements OnInit, OnDestroy {
+    @Input() comment: CommentModel;
+    @Output() deletedComment = new EventEmitter<string>();
+    @Output() editedComment = new EventEmitter<{ id: string; text: string; }>();
     @ViewChild('commentForm', {read: ViewContainerRef}) form;
-    user: UserModel;
+    user$: Observable<UserModel>;
     current: UserModel;
     comtMenuOpened = false;
     formOpen = false;
 
     componentRef: ComponentRef<CommentFormComponent>;
+    private userSbs: Subscription;
 
     constructor(private resolver: ComponentFactoryResolver,
                 private wrkService: WorkshopService,
-                private userService: UsersService) {
+                private userService: UserService) {
     }
 
     ngOnInit() {
-        this.current = this.userService.getCurrentUser();
-        this.user = this.wrkService.getCommentOwner(this.comment.userId);
+        this.userSbs = this.userService.currentUser.subscribe((current) => {
+            this.current = current;
+        });
+        this.user$ = this.userService.getUser(this.comment._author);
+
     }
 
     openMenu(): void {
@@ -55,6 +63,10 @@ export class CommentCardComponent implements OnInit {
         this.componentRef.instance.closedForm.subscribe(val => {
             this.closeForm();
         });
+        this.componentRef.instance.submitedForm.subscribe(text => {
+            this.editedComment.emit({id: this.comment._id, text});
+            this.closeForm();
+        });
     }
 
     closeForm(): void {
@@ -62,4 +74,11 @@ export class CommentCardComponent implements OnInit {
         this.componentRef.destroy();
     }
 
+    deleteComment() {
+        this.deletedComment.emit(this.comment._id);
+    }
+
+    ngOnDestroy(): void {
+        this.userSbs.unsubscribe();
+    }
 }

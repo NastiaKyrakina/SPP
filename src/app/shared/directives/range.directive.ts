@@ -10,7 +10,6 @@ export class RangeDirective implements OnInit {
 
     @Input('appRangeSet')
     set range(range: number[] | number) {
-        console.log(range);
         this.viewContainer.clear();
 
         if (typeof (range) === 'object') {
