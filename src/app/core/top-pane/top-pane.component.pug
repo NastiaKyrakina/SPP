@@ -15,9 +15,20 @@
             placeholder='Search...', ngModel='')
             button.search-btn()
                 i.icon-search
-    button.user-account
+    button.user-account(
+    *ngIf='user!==null; else enter',
+    (click)='changePopMenuState()'
+    )
         .name
             span {{getFullName(user)}}
-        app-user-pic([picture]= 'user.img', [fname]='user.fname', [lname]='user.lname')
+        app-user-pic([picture]= 'user.picture', [fname]='user.firstName', [lname]='user.lastName')
+        .panel
+            .pop-menu([hidden]='!isPopMenuOpen')
+                a.menu-item(routerLink='/auth/reset') Change password
+                a.menu-item(routerLink='/auth/logout') Exit
+    ng-template(#enter='')
+        div.user-account
+            a.vrt-menu(routerLink='/auth/login') Sing In
+            a.vrt-menu(routerLink='/auth/sing-up') Sing Up
 .hide-zone([ngClass] = '{"open-search":searchOpen}', (click)='changeSrchBarState()')
 

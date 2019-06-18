@@ -1,5 +1,5 @@
 div(*ngIf="picture; else alter" )
-    img.pic([src]='"/assets/img/user/"+picture')
+    img.pic([src]='picture')
 ng-template(#alter='')
     .pic.initials(appTextToColor [text]='fname+lname',
     [colorMap] = '["#856812", "#08b775", "#9642c8", "#dd0017"]')

@@ -1,5 +1,5 @@
-@import "abstracts/abstracts";
 @import "base/typography";
+@import "abstracts/abstracts";
 @import "layouts/breakpoints";
 
 .top-pane {
@@ -79,11 +79,8 @@
     }
 
     input {
+        @extend .base-input;
         width: 90%;
-        height: 2em;
-        border: none;
-        padding: 2px;
-        font-family: $menu_font;
         @include mq($from: sm) {
             display: block;
             min-width: 100px;
@@ -155,9 +152,34 @@
     }
 }
 
+.vrt-menu{
+    display: inline-block;
+    margin-left: 1.5em;
+    color: $main_color
+}
+
 .hide-zone.open-search {
     @include setting_position($left: 0, $right: 0,
                                 $top: $top_menu_height, $bottom: 0);
     background-color: black;
     opacity: 0.4;
+}
+
+.panel {
+    position: relative;
+}
+
+.pop-menu{
+        position: absolute;
+        right: 0;
+        bottom: -7em;
+        background-color: $top_menu_color;
+}
+
+.menu-item{
+    display: block;
+    color: $main_color;
+    padding: 0.1em;
+    margin: 0.5em;
+    border-bottom: 1px solid $main_color;
 }

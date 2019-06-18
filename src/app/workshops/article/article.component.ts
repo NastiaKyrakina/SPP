@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {WorkshopModel} from '../../models/workshop.model';
-import {UsersService} from '../../root-service/users.service';
+import {PostModel, WorkshopModel} from '../../models/workshop.model';
 import {UserModel} from '../../models/user.model';
 import {WorkshopService} from '../workshop.service';
 import {Tag} from '../../models/additional.model';
@@ -11,6 +10,7 @@ import {
     animate,
     transition,
 } from '@angular/animations';
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-article',
@@ -40,29 +40,23 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
-    @Input() workshop: WorkshopModel;
-    tags: Array<Tag>;
+    @Input() workshop: PostModel;
+    tags$: Observable<Array<Tag>>;
     currentUser: UserModel;
     likeIt: boolean;
-    desc: string;
-
-
     isOpen = true;
 
-    constructor(private usersService: UsersService,
-                private wrkService: WorkshopService) {
-
+    constructor(private wrkService: WorkshopService) {
     }
 
     ngOnInit() {
-        this.tags = this.wrkService.getWrkTags(this.workshop.id);
-        this.currentUser = this.usersService.getCurrentUser();
-        this.likeIt = this.wrkService.isUserLikeIt(this.workshop.id, this.currentUser.id);
-        this.desc = this.wrkService.getShordDescr(this.workshop.id);
+        this.tags$ = this.wrkService.getTags(this.workshop.tags);
+        this.wrkService.getTags(this.workshop.tags);
+        this.likeIt = false;
     }
 
     liked($event: boolean): void {
-        this.wrkService.liked($event, this.workshop.id);
+        // this.wrkService.liked($event, this.workshop.id);
     }
 
     changeState(): void {

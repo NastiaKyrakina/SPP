@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'app-viewport',
@@ -9,6 +9,7 @@ import {ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild} from 
 export class ViewportComponent implements OnInit {
     @ViewChild('top') topPoint: ElementRef;
     @ViewChild('main') mainArea: ElementRef;
+
     scrollPos: number;
 
     constructor() {
