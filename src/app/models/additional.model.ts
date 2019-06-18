@@ -12,8 +12,8 @@ export interface Comment {
 }
 
 export interface Tag {
-    id: number;
-    key: string;
+    seq: number;
+    name: string;
     selected?: boolean;
 }
 

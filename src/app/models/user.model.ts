@@ -1,6 +1,13 @@
 export interface UserModel {
-    id: number;
-    fname: string;
-    lname: string;
-    img?: string;
+    _id: string;
+    username: string;
+    firstName?: string;
+    lastName?: string;
+    picture?: string;
+
+}
+
+export interface PrivateDataModel {
+    username: string;
+    password: string;
 }

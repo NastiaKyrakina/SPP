@@ -1,3 +1,52 @@
+// const postSchema = new Schema({
+//     _author: { type: Schema.Types.ObjectId, ref: 'User' },
+//     tags: { type: [Number], required: true },
+//     title: { type: String, required: true },
+//     description: { type: String, required: false },
+//     text: { type: String, required: false },
+//     image: { type: String, required: false },
+//     createdAt: { type: Date, default: Date.now },
+//     updatedAt: { type: Date, default: Date.now },
+//     likes: [ReactionSchema.schema],
+//     stars: [ReactionSchema.schema],
+//     uni: [ReactionSchema.schema],
+//     comments: [CommentSchema.schema]
+// });
+import {UserModel} from './user.model';
+
+export interface ReacrionModel {
+    userId: string;
+    wrkId: string;
+}
+
+export interface CommentModel {
+    _id: string;
+    _post: string;
+    _author: string;
+    author?: UserModel;
+    text: string;
+    createdAt: Date;
+    updatedAt: Date;
+    tags?: string;
+}
+
+export interface PostModel {
+    id: string;
+    _author: string;
+    title: string;
+    description?: string;
+    text?: string;
+    image?: string;
+    createdAt: Date;
+    updatedAt: Date;
+    tags: number[];
+    likes?: Array<ReacrionModel>;
+    likesCount?: number;
+    stars?: Array<ReacrionModel>;
+    uni?: Array<ReacrionModel>;
+    comments?: Array<Comment>;
+}
+
 export class WorkshopModel {
     id: number;
     userId: number;

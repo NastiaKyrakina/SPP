@@ -8,6 +8,7 @@ const routes: Routes = [
     {path: 'quizzes', loadChildren: './quizzes/quizzes.module#QuizzesModule'},
     {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
     {path: 'workshops',   canActivate: [AuthGuard], loadChildren: './workshops/workshops.module#WorkshopsModule'},
+    {path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
     {path: '', redirectTo: 'workshops', pathMatch: 'full'},
     {path: '**', component: NotFoundComponent},
 
