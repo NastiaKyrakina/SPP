@@ -1,0 +1,21 @@
+app-card(*appCollapsable = 'let state set "exp" height "100px" animation "on"; let ctrl = controller')
+    .card-header(card-header='')
+        a([routerLink]='["../workshop", workshop.id]')
+            figure
+                img([src]='workshop.image')
+                figcaption {{workshop.title}}
+    .desc-block
+         p
+            | {{workshop.description}}
+            a([routerLink]='["../workshop", workshop.id]') read more
+    .tags.row
+        .tag(*ngFor="let tag of tags$ | async", [id]='"tag-"+tag.seq').
+            {{tag.name}}
+    .card-footer.row(card-footer='')
+        app-like([likes]='workshop.likesCount', [isActive] = 'likeIt',(likedWorkshop)='liked($event)')
+        app-timestamp([timestamp]='workshop.createdAt', [onlyDate]='true')
+    .row(card-buttons='')
+        button.open-btn(
+            (click)='ctrl.expand()', [hidden]='state!="collapsed"') Show More
+        button.close-btn(
+            (click)='ctrl.collapse()', [hidden]='state=="collapsed"') Show Less

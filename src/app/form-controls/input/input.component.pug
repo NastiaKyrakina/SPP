@@ -1,0 +1,12 @@
+label(*ngIf='label', [for]='id') {{label}}
+input(
+    #customInput='',
+    [(ngModel)]='value',
+    [id] = 'id',
+    [type]='type',
+    [placeholder]='placeholder',
+    [maxlength]='maxLength',
+    [minlength]='minLength',
+    (blur)='onTouch($event)',
+    (ngModelChange)='onChange(value)'
+)

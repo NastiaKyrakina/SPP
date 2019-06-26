@@ -1,0 +1,185 @@
+@import "base/typography";
+@import "abstracts/abstracts";
+@import "layouts/breakpoints";
+
+.top-pane {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: $top_menu_height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $top_menu_color;
+    color: $text_menu;
+    font-family: $menu_font;
+}
+
+.rigth {
+    display: flex;
+    align-items: center;
+
+    .logo {
+        background: url('/assets/img/logo/mini-logo.png') no-repeat center center;
+        background-size: cover;
+        width: 60px;
+        height: $top_menu_height;
+        margin-left: 10px;
+        display: none;
+
+        @include mq($from: sm) {
+            display: block;
+        }
+        @include mq($from: md) {
+            display: block;
+            background-image: url('/assets/img/logo/logo_transparent.png')
+        }
+    }
+}
+
+.icons {
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+
+    .menu-icon {
+        @extend .icon-base;
+        padding: 0 1em;
+        cursor: pointer;
+    }
+
+    .icon-search {
+        @extend .icon-base;
+        margin-left: 15px;
+        cursor: pointer;
+    }
+
+    @include mq($from: sm) {
+        display: none;
+    }
+}
+
+.search-bar {
+    padding: 0 auto;
+    background-color: $top_menu_color;
+    width: 100%;
+    height: $top_menu_height;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    display: none;
+
+    @include mq($from: sm) {
+        position: static;
+        margin-left: 30px;
+        width: auto;
+        display: flex;
+    }
+
+    input {
+        @extend .base-input;
+        width: 90%;
+        @include mq($from: sm) {
+            display: block;
+            min-width: 100px;
+            max-width: 300px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        @include mq($from: lg) {
+            width: 300px;
+            max-width: 700px;
+            transition: width 400ms ease-in;
+            &:focus {
+                width: 600px;
+            }
+        }
+    }
+
+    .search-btn {
+        @extend .icon-base;
+        @extend .search-bar-icon;
+        border-left: 1px solid $top_menu_color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .close-btn {
+        @extend .icon-base;
+        @extend .search-bar-icon;
+        border-right: 1px solid $top_menu_color;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        display: flex;
+        align-items: center;
+
+        @include mq($from: sm) {
+            display: none;
+        }
+    }
+}
+
+.open-search {
+    display: flex;
+}
+
+.user-account {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    margin: 2px 20px 2px 10px;
+    cursor: pointer;
+    height: $top_menu_height;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+
+    .name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+        padding: 0 20px 0 10px;
+        font-size: 0.9em;
+
+        display: none;
+        @include mq($from: md) {
+            display: block;
+        }
+    }
+}
+
+.vrt-menu{
+    display: inline-block;
+    margin-left: 1.5em;
+    color: $main_color
+}
+
+.hide-zone.open-search {
+    @include setting_position($left: 0, $right: 0,
+                                $top: $top_menu_height, $bottom: 0);
+    background-color: black;
+    opacity: 0.4;
+}
+
+.panel {
+    position: relative;
+}
+
+.pop-menu{
+        position: absolute;
+        right: 0;
+        bottom: -7em;
+        background-color: $top_menu_color;
+}
+
+.menu-item{
+    display: block;
+    color: $main_color;
+    padding: 0.1em;
+    margin: 0.5em;
+    border-bottom: 1px solid $main_color;
+}
