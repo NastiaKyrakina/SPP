@@ -1,0 +1,8 @@
+label
+    input(
+    type='checkbox',
+    [id]='id',
+    [name]='groupName',
+    [(ngModel)]='value',
+    (ngModelChange)='onChange(value)' )
+    span(*ngIf='label') {{label}}
