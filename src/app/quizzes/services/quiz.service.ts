@@ -4,6 +4,7 @@ import {UserService} from "../../services/user.service";
 import {Observable} from "rxjs";
 import {Params} from "../../models/param.model";
 import {QuizModel, ResultModel} from "../models/quiz.model";
+import {first, map} from 'rxjs/operators';
 
 export interface QuizParams extends Params {
     name?: string;
@@ -20,8 +21,9 @@ export class QuizService {
                 private userService: UserService) {
     }
 
-    getQuizzes(params: QuizParams): Observable<Array<QuizModel>> {
-        return this.apiService.getRequest(`/quizzes`, params);
+    getQuizzes(params: QuizParams = {page: '0'}): Observable<Array<QuizModel>> {
+        return this.apiService.getRequest(`/quizzes`, params).pipe(
+            map(request => request.quizzes));
     }
 
     getQuiz(id: string): Observable<QuizModel>  {

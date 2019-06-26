@@ -1,0 +1,8 @@
+app-viewport
+    div(main="")
+        ng-container(*ngIf='quizLoaded' )
+            | {{quiz.name}}
+            | {{quiz.questions | json}}
+
+            app-dynamic-form([config] = 'quiz.questions|quizzesToConfig',
+            (submited) = 'getResult($event)')
