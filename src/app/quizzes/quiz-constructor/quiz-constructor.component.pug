@@ -1,0 +1,11 @@
+form
+    form([formGroup]='quizForm')
+        input(formControlName='name' )
+        //dynamic fields
+        fieldset(formArrayName='questions' )
+            app-answer-group(*ngFor='let question of quizForm.get("questions").controls; let i = index',
+            [form]='quizForm', [question]='question', [options]='options', [index]='i',
+            (questionRemoved)='removeQuestion(index)')
+        button((click)='addQuestion()') Add question
+        button((click)='submitForm()') Create quiz
+        | {{quizForm.value | json}}

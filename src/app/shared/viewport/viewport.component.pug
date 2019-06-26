@@ -1,0 +1,8 @@
+.row.col
+    .content-area
+        main(#main='')
+            div(#top='')
+            .centered
+                ng-content(select='[main]')
+            app-to-top-button([blockForScroll]='topPoint', [scrollContainer]='mainArea')
+        ng-content(select='[aside]')

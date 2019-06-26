@@ -1,0 +1,23 @@
+div([formGroup]='question')
+    button((click)='removeQuestion(index)' ) Delete
+    app-dropdown([options]='options',
+    [id]='"type-"+index',
+    [formControl]='question.controls.questionType',
+    (change)='changeSelect(i, question.controls.questionType.value)')
+
+    input(type='text', [formControl] = 'question.controls.question')
+    | {{question.controls.answers}}
+    div([ngSwitch]='this.currentOption')
+        div(*ngSwitchCase='"input"' )
+           app-input([id]='"answer-"+i', [type]='"number"' ,[formControl]='question.controls.correctAnswer')
+        div(*ngSwitchCase='"select"' )
+            div(formArrayName='answerVariants')
+                div(*ngFor='let variant of question.get("answerVariants").controls; let j = index' )
+                    app-checkbox([id]=`variant-${index}-${j}`,
+                                [groupName]=`variant-${index}`,
+                                [formControl]='variant.controls.isCorrect')
+                    app-input([id]=`answer-${index}-${j}`,
+                                [formControl]='variant.controls.answer')
+                    button(*ngIf='question.get("answerVariants").controls.length>1',
+                            (click)='removeVariant(j)') remove
+                button((click)='addVariant()' ) Add variants

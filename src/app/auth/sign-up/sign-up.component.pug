@@ -1,0 +1,19 @@
+app-viewport()
+    div(main="")
+        .centered
+            form.centered-form([formGroup]='singUpForm')
+                .caption Sing Up
+                label(for='username') *Username
+                input(type='text' required="" name=username id=username,
+                formControlName="username" )
+                label(for='username') *Password
+                input(type='password' required="" name=password id=password,
+                formControlName="password" )
+                .row
+                    label(for='username') First Name
+                        input(type='text' required="", name=firstName id=firstName,
+                        formControlName="firstName" )
+                        label(for='username') Last Name
+                            input(type='text' required="", name=lastName id=lastName,
+                            formControlName="lastName" )
+                button((click)='submitForm()') Sing Up

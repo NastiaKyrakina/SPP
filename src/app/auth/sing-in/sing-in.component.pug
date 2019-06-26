@@ -1,0 +1,12 @@
+app-viewport()
+    div(main="")
+        .centered
+            form.centered-form([formGroup]='singInForm')
+                .caption Sing In
+                label(for='username') Username
+                input(type='text' required="" name=username id=username,
+                    formControlName="username" )
+                label(for='username') Password
+                input(type='password' required="" name=password id=password,
+                    formControlName="password" )
+                button((click)='submitForm()') Sing In

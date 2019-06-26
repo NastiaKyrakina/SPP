@@ -1,0 +1,33 @@
+
+.icon-base{
+    cursor: pointer;
+    transition: color 200ms ease-in,
+                background-color 200ms ease-in;
+    &:hover{
+        color: darkorange;
+    }
+}
+
+.search-bar-icon{
+    border: none;
+    background: white;
+    color: $top_menu_color;
+    padding: 0 5px 0 10px;
+    height: 2.0em;
+}
+
+.base-input{
+    height: 2em;
+    border: none;
+    padding: 2px;
+    font-family: $menu_font;
+}
+
+
+.centered-form{
+    background-color: $top_menu_color;
+    color: $text_menu;
+    margin: 1em;
+    padding: 1em 0.5em;
+    border-radius: 10px;
+}

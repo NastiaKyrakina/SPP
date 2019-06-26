@@ -1,0 +1,23 @@
+$main-backg: #dbe1ca;
+$text-color: darkslategrey;
+$box-color: #001108;
+:host {
+    display: inline-block;
+    color: white;
+    background-color: #06235c;
+    font-weight: bold;
+    padding: 0.2em 0.3em;
+    margin: 0.5em 0.5em;
+    border-radius: 5px;
+    box-shadow: 0px 5px 0px $box-color;
+    border: 2px solid darkslategrey;
+    transition: background-color 200ms ease-in-out,
+                box-shadow 200ms ease-in-out,
+                border-radius 200ms ease-in-out;
+    cursor: pointer;
+}
+
+:host.active{
+    border-radius: 10px;
+    box-shadow: inset 0px 2px 0px $box-color;
+}

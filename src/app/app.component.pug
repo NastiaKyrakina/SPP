@@ -1,3 +1,9 @@
-span.icon-menu
-h1 Hello!
+router-outlet
+app-side-menu([menuOpened]='menuOpened', (clOnMenuDrop)="changeMenuState()" )
+app-top-pane((clOnMenuBtn)="changeMenuState()" )
+
+
+
+
+
 

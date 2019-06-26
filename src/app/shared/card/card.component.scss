@@ -1,0 +1,39 @@
+@import "abstracts/abstracts";
+@import "base/typography";
+@import "layouts/breakpoints";
+
+
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 2em;
+}
+
+.footer {
+    margin-top: auto;
+}
+.buttons-area{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.content {
+        margin-top: auto;
+}
+
+h2 {
+    text-align: center;
+    color: #132626;
+    font-size: $h2-font-size;
+
+    @include mq($from: md) {
+        font-size: $h1-font-size;
+    }
+}
+
+
+
+
