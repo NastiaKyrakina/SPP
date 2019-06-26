@@ -11,7 +11,8 @@ export interface QuestionModel {
 }
 
 export interface QuizModel {
-    _author: string;
+    id: string;
+    author: string;
     posts: string[];
     status?: 'draft' | 'published';
     name?: string;
