@@ -12,10 +12,9 @@ import {filter, first, map, shareReplay} from "rxjs/operators";
 import {TagsService} from "../services/tags.service";
 import {UserService} from "../services/user.service";
 import {AuthService} from "../auth/auth.service";
+import {Params} from "../models/param.model";
 
-export interface WorkshopParams {
-    page: string;
-    authorId?: string;
+export interface WorkshopParams extends Params {
     tags?: string;
 }
 

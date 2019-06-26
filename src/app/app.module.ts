@@ -8,10 +8,11 @@ import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {UserService} from './services/user.service';
+import {DynamicFormModule} from './dynamic-form/dynamic-form.module';
 
 export function userProviderFactory(provider: UserService) {
     return () => provider.getUserBeforeInit();
@@ -25,11 +26,11 @@ export function userProviderFactory(provider: UserService) {
     imports: [
         BrowserModule,
         HttpClientModule,
-        ReactiveFormsModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         CoreModule,
         SharedModule,
+        DynamicFormModule
     ],
     providers: [
     UserService, {

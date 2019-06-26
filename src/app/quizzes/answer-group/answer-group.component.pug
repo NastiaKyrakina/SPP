@@ -1,0 +1,14 @@
+div()
+    app-dropdown([options]='options',
+    [id]='"type-"+i',
+    [formControl]='question.controls.type',
+    (change)='changeSelect(i, question.controls.type.value)')
+
+    input(type='text', [formControl] = 'question.controls.question')
+    | {{question}}
+    div([ngSwitch]='this.currentOption')
+        div(*ngSwitchCase='"answer"' )
+           app-input([id]='"answer-"+i', [formControl]='question.controls.answer')
+        div(*ngSwitchCase='"answers"' )
+
+            app-checkbox()

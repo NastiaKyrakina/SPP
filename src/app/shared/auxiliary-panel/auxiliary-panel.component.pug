@@ -1,9 +1,7 @@
 .auxiliary([ngClass]="{'open-aux': auxOpen, 'empty-content': !hasContent}")
     .area(*ngIf="hasContent; else emptyMessage")
         app-tab-group
-            app-tab([title]='"Comments"', [href] = '"comments"')
-            app-tab([title]='"Resources"', [href] = '"resources"')
-            app-tab([title]='"Quizzes"', [href] = '"quizzes"')
+            app-tab(*ngFor='let tab of tabs', [title]='tab.title', [href] = 'tab.href')
             div(route='')
                 router-outlet('name'='aside')
     ng-template( #emptyMessage="" )
