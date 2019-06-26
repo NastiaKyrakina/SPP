@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TabModel} from "../../models/tab.model";
 
 @Component({
     selector: 'app-aux-panel',
@@ -9,6 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AuxiliaryPanelComponent implements OnInit {
     @Input() auxOpen: boolean;
+    @Input() tabs: Array<TabModel>;
+
     hasContent = true;
     currentPath: string[];
     constructor(private route: ActivatedRoute,

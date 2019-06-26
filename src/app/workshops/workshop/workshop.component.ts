@@ -5,7 +5,23 @@ import {PostModel, WorkshopModel} from '../../models/workshop.model';
 import {Comment, Tag} from '../../models/additional.model';
 import {WorkshopService} from '../workshop.service';
 import {UserModel} from '../../models/user.model';
-import {UserService} from "../../services/user.service";
+import {UserService} from '../../services/user.service';
+import {TabModel} from '../../models/tab.model';
+
+const tabsList = [
+    {
+        title: 'Comments',
+        href: 'comments',
+    },
+    {
+        title: 'Resources',
+        href: 'resources',
+    },
+    {
+        title: 'Quizzes',
+        href: 'quizzes',
+    },
+];
 
 @Component({
     selector: 'app-workshop',
@@ -14,7 +30,7 @@ import {UserService} from "../../services/user.service";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkshopComponent implements OnInit, OnDestroy {
-
+    tabs: Array<TabModel> = tabsList;
     private id: number;
     private subscription: Subscription;
     workshop: PostModel;
