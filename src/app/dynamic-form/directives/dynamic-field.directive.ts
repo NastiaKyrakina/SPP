@@ -12,11 +12,14 @@ import {FormInputComponent} from '../form-input/form-input.component';
 import {FormSelectComponent} from '../form-select/form-select.component';
 import {FormButtonComponent} from '../form-button/form-button.component';
 import {Field} from '../models/field.model';
+import {FormCheckComponent} from '../form-check/form-check.component';
+import {ConfigModel} from '../models/config.model';
 
 const components = {
     input: FormInputComponent,
     select: FormSelectComponent,
     button: FormButtonComponent,
+    check: FormCheckComponent,
 };
 
 @Directive({
@@ -24,7 +27,7 @@ const components = {
 })
 export class DynamicFieldDirective implements OnInit {
     @Input() group: FormGroup;
-    @Input() config: any;
+    @Input() config: ConfigModel;
     private component: ComponentRef<Field>;
 
     constructor(

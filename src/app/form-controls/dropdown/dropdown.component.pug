@@ -7,6 +7,6 @@ select(
     (blur)='onTouch($event)',
     (ngModelChange)='selectOption(value)'
 )
-    option(disabled='') {{placeholder}}
+    option(*ngIf='placeholder', disabled='') {{placeholder}}
     option(*ngFor='let option of options',
             [value]='option.value') {{option.name}}

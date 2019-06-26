@@ -23,7 +23,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
     @ViewChild('customInput') input: ElementRef;
-    @Input() value: string | null = null;
+    @Input() value: string;
     @Input() type = 'text';
     @Input() maxLength = 255;
     @Input() minLength = 0;
@@ -58,6 +58,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
 
     writeValue(value: any): void {
+        console.log(value);
         this.value = value;
     }
 

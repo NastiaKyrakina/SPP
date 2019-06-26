@@ -7,13 +7,15 @@ import {FormInputComponent} from './form-input/form-input.component';
 import {FormSelectComponent} from './form-select/form-select.component';
 import {FormButtonComponent} from './form-button/form-button.component';
 import {DynamicFieldDirective} from './directives/dynamic-field.directive';
+import { FormCheckComponent } from './form-check/form-check.component';
 
 @NgModule({
     declarations: [DynamicFormComponent,
         FormInputComponent,
         FormSelectComponent,
         FormButtonComponent,
-        DynamicFieldDirective],
+        DynamicFieldDirective,
+        FormCheckComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,

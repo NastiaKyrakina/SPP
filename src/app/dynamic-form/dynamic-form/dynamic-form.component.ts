@@ -1,5 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ConfigModel} from '../models/config.model';
 
 @Component({
     selector: 'app-dynamic-form',
@@ -9,8 +10,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 })
 export class DynamicFormComponent implements OnInit {
     @Input()
-    config: any[] = [];
+    config: ConfigModel[] = [];
     form: FormGroup;
+    @Output() submited = new EventEmitter<any>();
 
     constructor(private fb: FormBuilder) {
     }
@@ -21,9 +23,19 @@ export class DynamicFormComponent implements OnInit {
 
     createGroup() {
         const group = this.fb.group({});
-        this.config.forEach(control =>
+        this.config.forEach(control => {
+            if (!control.value) {
+                control.value = '';
+            }
+            console.log(control.value);
             group.addControl(control.name, this.fb.control(
-                {value: ''})));
+                control.value));
+        });
         return group;
+    }
+
+    onSubmit() {
+        console.log(this.form.value);
+        this.submited.emit(this.form.value);
     }
 }
