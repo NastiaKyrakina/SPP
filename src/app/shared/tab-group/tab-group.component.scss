@@ -43,7 +43,7 @@ a {
 }
 
 .content {
-    padding: 1em 0;
+    padding: 1em 0.2em;
     overflow-y: auto;
     -ms-overflow-style: auto;
     height: calc(100vh - #{$top_menu_height} - #{$tabs_menu_height});

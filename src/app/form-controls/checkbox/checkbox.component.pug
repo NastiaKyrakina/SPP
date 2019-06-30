@@ -5,4 +5,6 @@ label
     [name]='groupName',
     [(ngModel)]='value',
     (ngModelChange)='onChange(value)' )
+    span.checkmark
+        i([ngClass]='{"icon-checkmark": isChecked}' )
     span(*ngIf='label') {{label}}

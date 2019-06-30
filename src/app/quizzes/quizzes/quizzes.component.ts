@@ -1,24 +1,28 @@
-import {Component, OnInit, ChangeDetectionStrategy, OnDestroy} from '@angular/core';
-import {UserService} from '../../services/user.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {QuizService} from '../services/quiz.service';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import {TabModel} from '../../models/tab.model';
+import {UserService} from "../../services/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {WorkshopService} from "../../workshops/workshop.service";
 import {Observable, Subscription} from 'rxjs';
 import {QuizModel} from '../models/quiz.model';
-import {take} from 'rxjs/operators';
-import {$e} from 'codelyzer/angular/styles/chars';
+import {QuizService} from '../services/quiz.service';
+import {UserModel} from '../../models/user.model';
 
 @Component({
-    selector: 'app-quizzes',
+    selector: 'app-quizze',
     templateUrl: './quizzes.component.pug',
     styleUrls: ['./quizzes.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuizzesComponent implements OnInit, OnDestroy {
-    private subscription: Subscription;
-    id: string;
-    quiz: QuizModel;
-    quizLoaded = false;
-    config: any;
+    quizzes$: Observable<Array<QuizModel>>;
+    users: Array<UserModel>;
+    tabs: Array<TabModel> = [{
+        title: 'Constructor',
+        href: 'constructor'
+    }];
+    auxOpen = false;
+    private subscribeUsers: Subscription;
 
     constructor(private userService: UserService,
                 private quizService: QuizService,
@@ -27,34 +31,20 @@ export class QuizzesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscription = this.route.params
-            .subscribe(params => this.id = params.id);
-        this.quizService.getQuiz(this.id).pipe(take(1)).subscribe(response => {
-            this.quiz = response[0];
-            console.log(response);
-            console.log(this.quiz);
-            this.quizLoaded = true;
-
+        this.quizzes$ = this.quizService.getQuizzes();
+        if (this.router.url.split('/').pop()[0] === '(') {
+            this.auxOpen = true;
+        }
+        this.subscribeUsers = this.userService.getUsers().subscribe(response => {
+            this.users = response;
         });
 
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        if (this.subscribeUsers) {
+            this.subscribeUsers.unsubscribe();
+        }
     }
 
-    getResult($event: any) {
-        // console.log($event);
-        let result = [];
-        for (const key in $event) {
-            if ($event.hasOwnProperty(key)) {
-                result.push($event[key]);
-            }
-        }
-        result = result.slice(0, -2);
-        console.log(result);
-        this.quizService.validateQuiz(this.id, result).subscribe(response => {
-            console.log(response);
-        });
-    }
 }

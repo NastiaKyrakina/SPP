@@ -78,6 +78,10 @@ export class UserService {
         return this.currentUser.asObservable();
     }
 
+    getUsers(): Observable<Array<UserModel>> {
+        return this.apiService.getRequest(`/users`);
+    }
+
     private getCurrentUser(): Observable<UserModel> {
         return this.apiService.getRequest(`/users/current`);
     }

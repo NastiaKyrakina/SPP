@@ -2,20 +2,32 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {QuizzesRoutingModule} from './quizzes-routing.module';
-import { QuizComponent } from './quiz/quiz.component';
+import {QuizzesComponent} from './quizzes/quizzes.component';
 import {SharedModule} from '../shared/shared.module';
-import { QuizzesComponent } from './quizzes/quizzes.component';
-import { QuizConstructorComponent } from './quiz-constructor/quiz-constructor.component';
+import {QuizComponent} from './quiz/quiz.component';
+import {QuizConstructorComponent} from './quiz-constructor/quiz-constructor.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormControlsModule} from '../form-controls/form-controls.module';
-import { FormsModule } from '@angular/forms';
-import { AnswerGroupComponent } from './answer-group/answer-group.component';
-import { QuizItemComponent } from './quiz-item/quiz-item.component';
+import {FormsModule} from '@angular/forms';
+import {QuestionCreateComponent} from './question-create/question-create.component';
+import {QuizItemComponent} from './quiz-item/quiz-item.component';
 import {DynamicFormModule} from '../dynamic-form/dynamic-form.module';
-import { QuizzesToConfigPipe } from './pipes/quizzes-to-config.pipe';
+import {QuizzesToConfigPipe} from './pipes/quizzes-to-config.pipe';
+import {QuestionBlockComponent} from './question-block/question-block.component';
+import {MarkDirective} from './directives/mark.directive';
+import { AuthorPipe } from './pipes/author.pipe';
 
 @NgModule({
-    declarations: [QuizComponent, QuizzesComponent, QuizConstructorComponent, AnswerGroupComponent, QuizItemComponent, QuizzesToConfigPipe],
+    declarations: [
+        QuizzesComponent,
+        QuizComponent,
+        QuizConstructorComponent,
+        QuestionCreateComponent,
+        QuizItemComponent,
+        QuizzesToConfigPipe,
+        QuestionBlockComponent,
+        MarkDirective,
+        AuthorPipe],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -25,7 +37,7 @@ import { QuizzesToConfigPipe } from './pipes/quizzes-to-config.pipe';
         DynamicFormModule,
         SharedModule,
     ],
-    exports: [QuizComponent, ]
+    exports: [QuizzesComponent,]
 })
 export class QuizzesModule {
 }

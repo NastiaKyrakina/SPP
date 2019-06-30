@@ -28,6 +28,8 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
     @Input() disabled = false;
     @Input() id: string;
     @Input() groupName: string;
+    isChecked = false;
+
     private inputChange = (value: string) => {
     };
     private inputTouch = ($event: TouchEvent) => {
@@ -58,6 +60,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
 
     onChange(value: string): void {
         this.inputChange(value);
+        this.isChecked = !this.isChecked;
     }
 
     private onTouch($event: TouchEvent): void {

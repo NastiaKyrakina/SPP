@@ -1,0 +1,32 @@
+fieldset{
+    border-radius: 1em;
+    border: 2px dashed green;
+    margin: 0.8em 0;
+}
+
+.fieldset-header{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.icon-bin{
+    color: #0c0c0c;
+
+    &:hover {
+        color: red;
+    }
+}
+
+.delete-ans {
+    height: 2em;
+}
+.icon-plus{
+    font-size: 2em;
+    color: green;
+}
+.icon-minus{
+    color: #0c0c0c;
+    button:hover &{
+        color: red;
+    }
+}

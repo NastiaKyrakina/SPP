@@ -1,0 +1,37 @@
+.big-btn{
+    margin-top: 1em;
+    padding: 0.5em;
+    width: 90%;
+    background-color: #06235c;
+    color: #dbe1ca;
+    transition: background-color 400ms ease-in;
+    &:hover{
+        background-color: #ff7800;
+    }
+}
+
+
+.round-btn{
+    margin-top: 2em;
+    padding: 3em 1.5em;
+    background-color: #06235c;
+    border-radius: 50%;
+    color: #dbe1ca;
+    transition: transform 200ms ease-in,
+                background-color 400ms ease-in;
+    &:hover{
+        transform: scale(1.1);
+        background-color: #ff7700;
+    }
+}
+
+button.round-btn[disabled] {
+    background-color: #898989;
+    transition: none;
+    transform: none;
+}
+
+.alert{
+    color: red;
+    font-size: 0.8em;
+}

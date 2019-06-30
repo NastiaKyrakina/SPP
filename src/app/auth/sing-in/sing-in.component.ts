@@ -23,7 +23,7 @@ export class SingInComponent implements OnInit {
                 private route: ActivatedRoute) {
         this.singInForm = fb.group({
             username: ['', [Validators.required,]],
-            password: ['', [Validators.required,]]
+            password: ['', [Validators.required,]],
         });
     }
 

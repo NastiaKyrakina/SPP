@@ -2,6 +2,5 @@ form(class='dynamic-form',
     [formGroup]='form',
     (ngSubmit)='onSubmit()')
     ng-container(*ngFor='let field of config;',
-    appDynamicField='',
-    [config]='field', [group]='form')
-| {{form.value | json}}
+        appDynamicField='',
+        [config]='field', [group]='form')
