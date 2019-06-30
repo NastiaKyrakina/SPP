@@ -1,0 +1,28 @@
+@import "abstracts/abstracts";
+
+select{
+    @extend .base-input;
+    margin: 0.1em 0 1em 0;
+    padding: 0 1em;
+    min-width: 100px;
+    width: 100%;
+    display: block;
+    border: 1px solid #06235c;
+    border-radius: 5px;
+    &:focus{
+        border: 2px solid #ff7800;
+        outline: none;
+    }
+}
+
+option {
+    border-radius: 5px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: block;
+    margin: 0.5em 0 0.2em 0;
+}
+

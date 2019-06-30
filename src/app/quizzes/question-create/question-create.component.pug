@@ -1,0 +1,31 @@
+fieldset([formGroup]='question')
+    legend
+        button((click)='removeQuestion(index)' )
+            i.icon-bin
+        span.fieldset-header Question №{{index+1}}
+    app-dropdown([options]='options',
+    [id]='"type-"+index',
+    [formControl]='question.controls.questionType',
+    (change)='changeSelect(index, question.controls.questionType.value)')
+
+    app-input([id]='"question-"+index',
+            label="Question",
+            [formControl] = 'question.controls.question')
+    | {{question.controls.answers}}
+    div([ngSwitch]='this.currentOption')
+        div(*ngSwitchCase='"input"' )
+           app-input([id]='"answer-"+i', [type]='"number"' ,[formControl]='question.controls.correctAnswer')
+        div(*ngSwitchCase='"select"' )
+            div(formArrayName='answerVariants')
+                div(*ngFor='let variant of question.get("answerVariants").controls; let j = index' )
+                    .row
+                        app-checkbox([id]=`variant-${index}-${j}`,
+                                [groupName]=`variant-${index}`,
+                                [formControl]='variant.controls.isCorrect')
+                        app-input([id]=`answer-${index}-${j}`,
+                                [formControl]='variant.controls.answer')
+                        button.delete-ans(*ngIf='question.get("answerVariants").controls.length>1',
+                            (click)='removeVariant(j)')
+                            i.icon-minus
+                button((click)='addVariant()' )
+                    i.icon-plus

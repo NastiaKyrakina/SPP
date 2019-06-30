@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {QuizComponent} from './quiz/quiz.component';
 import {QuizzesComponent} from './quizzes/quizzes.component';
+import {QuizComponent} from './quiz/quiz.component';
 import {QuizConstructorComponent} from './quiz-constructor/quiz-constructor.component';
 
 const routes: Routes = [
-    {path: 'quiz/:id', component: QuizzesComponent},
-    {path: 'list', component: QuizComponent,
+    {path: 'quiz/:id', component: QuizComponent},
+    {path: 'list', component: QuizzesComponent,
         children: [
             {path: 'constructor',
                 component: QuizConstructorComponent,

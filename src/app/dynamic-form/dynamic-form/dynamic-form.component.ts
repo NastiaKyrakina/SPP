@@ -27,7 +27,6 @@ export class DynamicFormComponent implements OnInit {
             if (!control.value) {
                 control.value = '';
             }
-            console.log(control.value);
             group.addControl(control.name, this.fb.control(
                 control.value));
         });
@@ -35,7 +34,6 @@ export class DynamicFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.form.value);
         this.submited.emit(this.form.value);
     }
 }

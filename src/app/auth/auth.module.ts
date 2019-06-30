@@ -4,9 +4,10 @@ import {AuthService} from './auth.service';
 import { SingInComponent } from './sing-in/sing-in.component';
 import {AuthRoutingModule} from './auth-routing.module';
 import {SharedModule} from '../shared/shared.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import {FormControlsModule} from '../form-controls/form-controls.module';
 
 @NgModule({
     declarations: [SingInComponent, SignUpComponent, PasswordResetComponent],
@@ -14,7 +15,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
         CommonModule,
         ReactiveFormsModule,
         AuthRoutingModule,
-        SharedModule
+        SharedModule,
+        FormControlsModule
         ],
     exports: [SingInComponent]
 })

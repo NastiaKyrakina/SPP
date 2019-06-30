@@ -24,9 +24,7 @@ export class QuizConstructorComponent implements OnInit {
     defaultOption: string;
 
     constructor(private fb: FormBuilder,
-                private quizService: QuizService) {
-
-    }
+                private quizService: QuizService) {}
 
     ngOnInit() {
         this.quizForm = this.fb.group({
@@ -38,28 +36,28 @@ export class QuizConstructorComponent implements OnInit {
 
     submitForm() {
         if (this.quizForm.valid) {
-            console.log(this.quizForm.value);
             this.quizService.createQuiz(this.quizForm.value)
                 .pipe(take(1))
                 .subscribe(resp => {
-                    console.log(resp);
                 });
         }
     }
 
+    get name() {
+        return this.quizForm.get('name');
+    }
+
+    get questions() {
+        return (this.quizForm.get('questions') as FormArray).controls;
+    }
     addQuestion() {
         (this.quizForm.get('questions') as FormArray).push(
             new FormGroup({
-                question: new FormControl(''),
-                questionType: new FormControl(this.defaultOption),
-                correctAnswer: new FormControl(''),
-                // answerVariants: new FormArray([new FormGroup({
-                //     isCorrect: new FormControl(false),
-                //     answer: new FormControl(''),
-                // }), ]),
+                question: new FormControl('', [Validators.required, ]),
+                questionType: new FormControl(this.defaultOption, [Validators.required, ]),
+                correctAnswer: new FormControl('', [Validators.required, ]),
             })
         );
-        console.log((this.quizForm.get('questions') as FormArray).controls);
     }
 
     removeQuestion(index: number) {

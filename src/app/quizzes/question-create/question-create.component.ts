@@ -1,14 +1,15 @@
 import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Option} from '../../form-controls/dropdown/dropdown.component';
+import {UserService} from '../../services/user.service';
 
 @Component({
     selector: 'app-answer-group',
-    templateUrl: './answer-group.component.pug',
-    styleUrls: ['./answer-group.component.scss'],
+    templateUrl: './question-create.component.pug',
+    styleUrls: ['./question-create.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AnswerGroupComponent implements OnInit {
+export class QuestionCreateComponent implements OnInit {
     @Input() form: FormGroup;
     @Input() question: FormGroup;
     @Input() options: Array<Option>;
@@ -24,19 +25,17 @@ export class AnswerGroupComponent implements OnInit {
     }
 
     changeSelect(index: number, control: string): void {
-        console.log(this.currentOption);
-        // // console.log((this.quizForm.get('questions') as FormArray).at(index));
         switch (control) {
             case 'input': {
                 this.question.removeControl('answerVariants');
-                this.question.addControl('correctAnswer', new FormControl(''));
+                this.question.addControl('correctAnswer', new FormControl('', [Validators.required, ]));
                 break;
             }
             case 'select': {
                 this.question.removeControl('correctAnswer');
                 this.question.addControl( 'answerVariants', new FormArray([new FormGroup({
                     isCorrect: new FormControl(false),
-                    answer: new FormControl(''),
+                    answer: new FormControl('', [Validators.required, ]),
                 }), ]) );
                 break;
             }
@@ -48,8 +47,7 @@ export class AnswerGroupComponent implements OnInit {
         (this.question.get('answerVariants') as FormArray).push(
             new FormGroup({
                 isCorrect: new FormControl(false),
-                answer: new FormControl(''
-                )
+                answer: new FormControl('', Validators.required)
             }));
     }
 

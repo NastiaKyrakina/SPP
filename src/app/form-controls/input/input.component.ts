@@ -45,11 +45,11 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
 
     registerOnChange(fn: (value: string) => void): void {
-        this.onChange = fn;
+        this.inputChange = fn;
     }
 
     registerOnTouched(fn: () => void): void {
-        this.onTouch = fn;
+        this.inputTouch = fn;
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -58,7 +58,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
 
     writeValue(value: any): void {
-        console.log(value);
         this.value = value;
     }
 
@@ -66,7 +65,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
         this.inputChange(value);
     }
 
-    private onTouch($event: TouchEvent): void {
+    onTouch($event: TouchEvent): void {
         this.inputTouch($event);
     }
 }

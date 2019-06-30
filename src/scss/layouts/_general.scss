@@ -37,3 +37,39 @@ code,pre{
 .edit-btn{
     color: rgba(255, 119, 0, 0.86);
 }
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-left{
+    justify-content: left;
+}
+
+.flex-right{
+    justify-content: flex-end;
+}
+
+.flex-between{
+    justify-content: space-between;
+}
+
+.flex-column {
+    flex-flow: column nowrap;
+}
+
+.hover-danger{
+    color: #858585;
+    &:hover {
+        color: red;
+    }
+}
+
+
+.btn{
+    border-radius: 5px;
+    background-color: #c3c3c3;
+    color: black;
+    padding: 0.3em;
+    margin: 0.2em;
+}

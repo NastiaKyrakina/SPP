@@ -15,8 +15,7 @@ export class QueryParamsActiveDirective implements OnInit, OnDestroy {
 
     constructor(private elRef: ElementRef,
                 private renderer: Renderer2,
-                private route: ActivatedRoute,
-                private router: Router) {
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {

@@ -63,13 +63,12 @@ export class DropdownComponent implements ControlValueAccessor, OnInit {
     }
 
     writeValue(option: any): void {
-        console.log(option);
         this.selectedOption = option;
         this.value = option;
         this.optionChange(this.value);
     }
 
-    private onTouch($event: TouchEvent): void {
+    onTouch($event: TouchEvent): void {
         this.selectTouch();
     }
 

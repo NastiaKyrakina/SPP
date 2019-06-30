@@ -25,7 +25,7 @@ export class AuxiliaryPanelComponent implements OnInit {
             this.router.navigate([
                 this.currentPath.join('/'),
                 {outlets: {
-                    aside: [ 'comments', ],
+                    aside: [this.tabs[0].href ],
                 }}]);
         } else {
             this.router.navigate([{outlets: {
