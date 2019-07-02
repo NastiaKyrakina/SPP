@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from './services/user.service';
-import {AuthService} from "./auth/auth.service";
+import {select, Store} from '@ngrx/store';
+import {AppState} from './reducers';
+import {selectAuthenticated} from './auth/store/auth.selectors';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -11,13 +13,15 @@ import {AuthService} from "./auth/auth.service";
 export class AppComponent implements OnInit {
     title = 'Skills++';
     menuOpened = false;
+    authenticated$: Observable<boolean>;
 
     changeMenuState(): void {
         this.menuOpened = !this.menuOpened;
     }
 
-    constructor(private auth: AuthService,
-                private userServ: UserService) {
+    constructor(private store: Store<AppState>,
+                ) {
+        this.authenticated$ = this.store.pipe(select(selectAuthenticated));
     }
 
     ngOnInit(): void {

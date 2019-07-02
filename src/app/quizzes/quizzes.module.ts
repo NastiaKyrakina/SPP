@@ -16,6 +16,10 @@ import {QuizzesToConfigPipe} from './pipes/quizzes-to-config.pipe';
 import {QuestionBlockComponent} from './question-block/question-block.component';
 import {MarkDirective} from './directives/mark.directive';
 import { AuthorPipe } from './pipes/author.pipe';
+import { StoreModule } from '@ngrx/store';
+import * as fromQuizzes from './store/quizzes.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { QuizzesEffects } from './store/quizzes.effects';
 
 @NgModule({
     declarations: [
@@ -36,8 +40,10 @@ import { AuthorPipe } from './pipes/author.pipe';
         FormControlsModule,
         DynamicFormModule,
         SharedModule,
+        StoreModule.forFeature('quizzes', fromQuizzes.quizzesReducer),
+        EffectsModule.forFeature([QuizzesEffects]),
     ],
-    exports: [QuizzesComponent,]
+    exports: [QuizzesComponent, ]
 })
 export class QuizzesModule {
 }

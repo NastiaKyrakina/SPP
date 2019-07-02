@@ -4,7 +4,7 @@ export interface UserModel {
     firstName?: string;
     lastName?: string;
     picture?: string;
-
+    role?: string;
 }
 
 export interface PrivateDataModel {

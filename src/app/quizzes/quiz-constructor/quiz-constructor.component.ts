@@ -2,6 +2,9 @@ import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {QuizService} from '../services/quiz.service';
 import {take} from 'rxjs/operators';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {QuizCreatingRequested} from '../store/quizzes.actions';
 
 @Component({
     selector: 'app-quiz-constructor',
@@ -24,7 +27,8 @@ export class QuizConstructorComponent implements OnInit {
     defaultOption: string;
 
     constructor(private fb: FormBuilder,
-                private quizService: QuizService) {}
+                private quizService: QuizService,
+                private store: Store<AppState>) {}
 
     ngOnInit() {
         this.quizForm = this.fb.group({
@@ -36,10 +40,13 @@ export class QuizConstructorComponent implements OnInit {
 
     submitForm() {
         if (this.quizForm.valid) {
-            this.quizService.createQuiz(this.quizForm.value)
-                .pipe(take(1))
-                .subscribe(resp => {
-                });
+            this.store.dispatch(new QuizCreatingRequested({quiz: this.quizForm.value}));
+           // this.quizForm.reset();
+            // this.quizService.createQuiz(this.quizForm.value)
+            //     .pipe(take(1))
+            //     .subscribe(resp => {
+            //         console.log(resp);
+            //     });
         }
     }
 

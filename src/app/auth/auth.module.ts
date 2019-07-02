@@ -8,6 +8,10 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import {FormControlsModule} from '../form-controls/form-controls.module';
+import {StoreModule} from '@ngrx/store';
+import * as fromAuth from './store/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
 
 @NgModule({
     declarations: [SingInComponent, SignUpComponent, PasswordResetComponent],
@@ -16,9 +20,13 @@ import {FormControlsModule} from '../form-controls/form-controls.module';
         ReactiveFormsModule,
         AuthRoutingModule,
         SharedModule,
-        FormControlsModule
+        FormControlsModule,
+        StoreModule.forFeature('auth', fromAuth.authReducer),
+        EffectsModule.forFeature([AuthEffects]),
         ],
     exports: [SingInComponent]
 })
 export class AuthModule {
 }
+
+

@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {PostModel, WorkshopModel} from '../../models/workshop.model';
 import {UserModel} from '../../models/user.model';
-import {WorkshopService} from '../workshop.service';
+import {WorkshopService} from '../services/workshop.service';
 import {Tag} from '../../models/additional.model';
 import {
     trigger,

@@ -41,3 +41,13 @@ button {
     border-radius: 2px 2px 10px 10px ;
     background-color: $side_menu_color;
 }
+
+.alternative{
+    text-align: right;
+    margin-top: 0.5em;
+
+    a{
+        color: white;
+        border-bottom: 2px solid white;
+    }
+}

@@ -7,7 +7,7 @@ import {
 import {Observable} from 'rxjs';
 
 import {CommentModel, PostModel, WorkshopModel} from '../models/workshop.model';
-import {WorkshopService} from './workshop.service';
+import {WorkshopService} from './services/workshop.service';
 import {CommentService} from '../services/comment.service';
 
 @Injectable({

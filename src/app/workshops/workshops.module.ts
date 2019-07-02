@@ -9,6 +9,10 @@ import {SharedModule} from '../shared/shared.module';
 import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
 import {WorkshopResourcesComponent} from './workshop-resources/workshop-resources.component';
 import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
+import { StoreModule } from '@ngrx/store';
+import * as fromWorkshops from './store/workshops.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { WorkshopsEffects } from './store/workshops.effects';
 
 @NgModule({
     declarations: [
@@ -22,6 +26,8 @@ import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.comp
         CommonModule,
         SharedModule,
         WorkshopsRoutingModule,
+        StoreModule.forFeature('workshops', fromWorkshops.workshopsReducer),
+        EffectsModule.forFeature([WorkshopsEffects]),
     ],
     exports: []
 })

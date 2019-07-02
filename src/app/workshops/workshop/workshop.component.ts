@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {PostModel, WorkshopModel} from '../../models/workshop.model';
 import {Comment, Tag} from '../../models/additional.model';
-import {WorkshopService} from '../workshop.service';
+import {WorkshopService} from '../services/workshop.service';
 import {UserModel} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {TabModel} from '../../models/tab.model';

@@ -13,6 +13,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {UserService} from './services/user.service';
 import {DynamicFormModule} from './dynamic-form/dynamic-form.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './reducers/app.effects';
 
 export function userProviderFactory(provider: UserService) {
     return () => provider.getUserBeforeInit();
@@ -30,7 +36,10 @@ export function userProviderFactory(provider: UserService) {
         AppRoutingModule,
         CoreModule,
         SharedModule,
-        DynamicFormModule
+        DynamicFormModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+        EffectsModule.forRoot([AppEffects])
     ],
     providers: [
     UserService, {
