@@ -4,7 +4,7 @@ import {QuizService} from '../services/quiz.service';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {QuizCreatingRequested} from '../store/quizzes/quizzes.actions';
+import {QuizCreatingRequested} from '../store/quizzes.actions';
 
 @Component({
     selector: 'app-quiz-constructor',

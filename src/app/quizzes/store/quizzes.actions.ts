@@ -1,11 +1,15 @@
 import {Action} from '@ngrx/store';
-import {QuizModel} from '../../models/quiz.model';
-import {QuizParams} from '../../services/quiz.service';
+import {QuizModel} from '../models/quiz.model';
+import {QuizParams} from '../services/quiz.service';
 
 export enum QuizzesActionTypes {
     QuizzesRequested = '[Quizzes] Quizzes Requested',
     QuizzesLoaded = '[Quizzes] Quizzes Loaded',
     QuizzesLoadingFailed = '[Quizzes] Quizzes Loading Failed',
+
+    QuizRequested = '[Quiz] Quiz Requested',
+    QuizLoaded = '[Quiz] Quiz Loaded',
+    QuizLoadingFailed = '[Quiz] Quiz Loading Failed',
 
     QuizCreatingRequested = '[Quizzes] Quiz Creating Requested',
     QuizCreated = '[Quizzes] Quiz Created',
@@ -36,6 +40,28 @@ export class QuizzesLoadingFailed implements Action {
     }
 }
 
+
+export class QuizRequested implements Action {
+    readonly type = QuizzesActionTypes.QuizRequested;
+    constructor(public payload: { quizId: string }) {
+    }
+}
+
+export class QuizLoaded implements Action {
+    readonly type = QuizzesActionTypes.QuizLoaded;
+
+    constructor(public payload: { quiz: QuizModel }) {
+    }
+}
+
+export class QuizLoadingFailed implements Action {
+    readonly type = QuizzesActionTypes.QuizLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+
 export class QuizCreatingRequested implements Action {
     readonly type = QuizzesActionTypes.QuizCreatingRequested;
 
@@ -56,6 +82,7 @@ export class QuizCreatingFailed implements Action {
     constructor(public payload: { error: any }) {
     }
 }
+
 
 export class QuizDeleteRequested implements Action {
     readonly type = QuizzesActionTypes.QuizDeleteRequested;
@@ -82,6 +109,9 @@ export type QuizzesActions =
     QuizzesRequested |
     QuizzesLoaded |
     QuizzesLoadingFailed |
+    QuizRequested |
+    QuizLoaded |
+    QuizLoadingFailed |
     QuizCreatingRequested |
     QuizCreated |
     QuizCreatingFailed |

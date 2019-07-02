@@ -8,8 +8,8 @@ import {QuizService} from '../services/quiz.service';
 import {UserModel} from '../../models/user.model';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {QuizDeleteRequested, QuizzesRequested} from '../store/quizzes/quizzes.actions';
-import {selectQuizzes} from '../store/quizzes/quizzes.selectors';
+import {QuizDeleteRequested, QuizzesRequested} from '../store/quizzes.actions';
+import {selectQuizzes} from '../store/quizzes.selectors';
 
 @Component({
     selector: 'app-quizze',

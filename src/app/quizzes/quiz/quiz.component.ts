@@ -6,6 +6,10 @@ import {Observable, Subscription} from 'rxjs';
 import {QuizModel} from '../models/quiz.model';
 import {take} from 'rxjs/operators';
 import {$e} from 'codelyzer/angular/styles/chars';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {QuizRequested, QuizzesRequested} from '../store/quizzes.actions';
+import {selectQuiz, selectQuizzes} from '../store/quizzes.selectors';
 
 @Component({
     selector: 'app-quizzes',
@@ -16,7 +20,8 @@ import {$e} from 'codelyzer/angular/styles/chars';
 export class QuizComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     id: string;
-    quiz: QuizModel;
+    // quiz: QuizModel;
+    quiz$: Observable<QuizModel>;
     quizLoaded = false;
     config: any;
     result: boolean[];
@@ -28,17 +33,24 @@ export class QuizComponent implements OnInit, OnDestroy {
     constructor(private userService: UserService,
                 private quizService: QuizService,
                 private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
         this.subscription = this.route.params
-            .subscribe(params => this.id = params.id);
-        this.quizService.getQuiz(this.id).pipe(take(1)).subscribe(response => {
-            this.quiz = response[0];
-            this.quizLoaded = true;
+            .subscribe(
+                params => {
+                    this.id = params.id;
+                    this.store.dispatch(new QuizRequested({quizId: this.id}));
+                }
+            );
+        this.quiz$ = this.store.pipe(select(selectQuiz));
 
-        });
+        // this.quizService.getQuiz(this.id).pipe(take(1)).subscribe(response => {
+        //     this.quiz = response[0];
+        //
+        // });
     }
 
     ngOnDestroy(): void {

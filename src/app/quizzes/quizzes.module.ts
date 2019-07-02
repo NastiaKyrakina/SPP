@@ -17,11 +17,9 @@ import {QuestionBlockComponent} from './question-block/question-block.component'
 import {MarkDirective} from './directives/mark.directive';
 import { AuthorPipe } from './pipes/author.pipe';
 import { StoreModule } from '@ngrx/store';
-import * as fromQuizzes from './store/quizzes/quizzes.reducer';
+import * as fromQuizzes from './store/quizzes.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { QuizzesEffects } from './store/quizzes/quizzes.effects';
-import * as fromQuiz from './store/quiz/quiz.reducer';
-import { QuizEffects } from './store/quiz/quiz.effects';
+import { QuizzesEffects } from './store/quizzes.effects';
 
 @NgModule({
     declarations: [
@@ -43,8 +41,7 @@ import { QuizEffects } from './store/quiz/quiz.effects';
         DynamicFormModule,
         SharedModule,
         StoreModule.forFeature('quizzes', fromQuizzes.quizzesReducer),
-        StoreModule.forFeature('quiz', fromQuiz.reducer),
-        EffectsModule.forFeature([QuizzesEffects, QuizEffects]),
+        EffectsModule.forFeature([QuizzesEffects]),
     ],
     exports: [QuizzesComponent, ]
 })
