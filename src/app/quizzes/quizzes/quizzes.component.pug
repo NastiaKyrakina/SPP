@@ -1,9 +1,10 @@
 app-viewport
     div(main="")
         .items.flex-center
-            app-quiz-item(*ngFor='let quiz of quizzes$ | async',
+            app-quiz-item(*ngFor='let quiz of quizzes$ | async; trackBy: trackByFn;',
             [quiz] = 'quiz',
             [user] = 'users| author:quiz.author',
+            (quizDeleted) = 'deleteQuiz($event)',
             appTextToColor [text]='quiz.name',
             [colorMap] = '["#ffb628", "#e98ed7", "#93c5e9", "#e4e96c", "#afe56c"]',
             [hoverEffect]='"off"'

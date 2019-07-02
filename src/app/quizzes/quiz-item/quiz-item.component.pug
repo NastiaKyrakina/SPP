@@ -1,6 +1,6 @@
 .row.flex-between
     app-timestamp([timestamp]='quiz.createdAt', [onlyDate]='true' )
-    button(*ngIf='isAuthor')
+    button(*ngIf='isAuthor', (click)='deleteQuiz(quiz.id)')
         i.icon-bin.hover-danger
 a([routerLink]='["../quiz", quiz.id]').row.centered
         h3 {{quiz.name}}

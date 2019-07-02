@@ -16,7 +16,7 @@
             button.search-btn()
                 i.icon-search
     button.user-account(
-    *ngIf='user!==null; else enter',
+    *ngIf='user!==null',
     (click)='changePopMenuState()'
     )
         .name
@@ -26,9 +26,6 @@
             .pop-menu([hidden]='!isPopMenuOpen')
                 a.menu-item(routerLink='/auth/reset') Change password
                 a.menu-item(routerLink='/auth/logout') Exit
-    ng-template(#enter='')
-        div.user-account
-            a.vrt-menu(routerLink='/auth/login') Sing In
-            a.vrt-menu(routerLink='/auth/sing-up') Sing Up
+
 .hide-zone([ngClass] = '{"open-search":searchOpen}', (click)='changeSrchBarState()')
 

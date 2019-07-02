@@ -12,7 +12,7 @@ import {Comment} from 'src/app/models/additional.model';
 import {UserModel} from '../../models/user.model';
 import {users} from '../../../data/data';
 import {CommentFormComponent} from '../comment-form/comment-form.component';
-import {WorkshopService} from '../../workshops/workshop.service';
+import {WorkshopService} from '../../workshops/services/workshop.service';
 import {UserService} from '../../services/user.service';
 import {CommentModel} from "../../models/workshop.model";
 import {Observable, Subscription} from "rxjs";

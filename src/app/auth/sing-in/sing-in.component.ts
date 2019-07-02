@@ -3,8 +3,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {PrivateDataModel} from '../../models/user.model';
 import {AuthService} from '../auth.service';
-import {ActivatedRoute, Router} from "@angular/router";
-import {take} from "rxjs/operators";
+import {ActivatedRoute, Router} from '@angular/router';
+import {take} from 'rxjs/operators';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {SignInRequested} from '../store/auth.actions';
 
 @Component({
     selector: 'app-login',
@@ -20,10 +23,11 @@ export class SingInComponent implements OnInit {
                 private userService: UserService,
                 private authService: AuthService,
                 private router: Router,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private store: Store<AppState>) {
         this.singInForm = fb.group({
-            username: ['', [Validators.required,]],
-            password: ['', [Validators.required,]],
+            username: ['', [Validators.required, ]],
+            password: ['', [Validators.required, ]],
         });
     }
 
@@ -35,16 +39,10 @@ export class SingInComponent implements OnInit {
 
     submitForm(): void {
         if (this.singInForm.valid) {
-            this.userService.singIn(this.singInForm.value)
-                .pipe(
-                    take(1)
-                )
-                .subscribe((resp) => {
-                    this.userService.setUser(resp);
-                    this.authService.setToken(resp.token);
-                    this.authService.setId(resp._id);
-                    this.router.navigateByUrl(this.return);
-                });
+            this.store.dispatch(new SignInRequested({
+                data: this.singInForm.value,
+                redirectTo: this.return,
+            }));
         }
     }
 }

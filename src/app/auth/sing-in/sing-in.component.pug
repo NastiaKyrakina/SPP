@@ -2,9 +2,11 @@ app-viewport()
     div(main="")
         .centered
             form.centered-form([formGroup]='singInForm')
-                .caption Sing In
+                .caption Sign In
                 app-input([id]=username formControlName='username' label='Username', id='name', )
                 label(for='password') Password
                 input(type='password' required='' name=password, id=password,
                     formControlName='password')
-                button((click)='submitForm()') Sing In
+                button((click)='submitForm()') Sign In
+                .alternative
+                    a(routerLink='/auth/sing-up') Or Sign Up

@@ -3,7 +3,7 @@ import {ChangeDetectionStrategy, Component, OnInit, OnDestroy} from '@angular/co
 import {Tag} from '../../models/additional.model';
 import {PostModel, WorkshopModel} from '../../models/workshop.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WorkshopService} from '../workshop.service';
+import {WorkshopService} from '../services/workshop.service';
 import {Observable, ReplaySubject, Subscription} from 'rxjs';
 import {TagsService} from '../../services/tags.service';
 import {UserService} from '../../services/user.service';
@@ -51,7 +51,7 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
             (queryParam: any) => {
                 const tags = queryParam.get('tags');
                 const ctg = queryParam.get('ctg');
-                const page = queryParam.get('page') || '1';
+                const page = queryParam.get('page') || '0';
                 this.wrkService.filterWorkshops(tags, ctg, page);
             });
         this.ctgSelect = this.ctgList[0];

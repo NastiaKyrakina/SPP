@@ -1,7 +1,7 @@
 import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef, OnDestroy} from '@angular/core';
 
 import {Comment} from '../../models/additional.model';
-import {WorkshopService} from '../workshop.service';
+import {WorkshopService} from '../services/workshop.service';
 import {ActivatedRoute} from '@angular/router';
 import {CommentModel} from '../../models/workshop.model';
 import {CommentService} from "../../services/comment.service";

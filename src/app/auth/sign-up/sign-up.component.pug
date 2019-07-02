@@ -2,7 +2,7 @@ app-viewport()
     div(main="")
         .centered
             form.centered-form([formGroup]='singUpForm')
-                .caption Sing Up
+                .caption Sign Up
                 label(for='username') *Username
                 input(type='text' required="" name=username id=username,
                 formControlName="username" )
@@ -16,4 +16,6 @@ app-viewport()
                         label(for='username') Last Name
                             input(type='text' required="", name=lastName id=lastName,
                             formControlName="lastName" )
-                button((click)='submitForm()') Sing Up
+                button((click)='submitForm()') Sign Up
+                .alternative
+                    a(routerLink='/auth/login') Or Sign In
