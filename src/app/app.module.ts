@@ -41,6 +41,7 @@ export function userProviderFactory(provider: UserService) {
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([AppEffects])
     ],
+    exports: [],
     providers: [
     UserService, {
             provide: APP_INITIALIZER, useFactory: userProviderFactory, deps: [UserService], multi: true

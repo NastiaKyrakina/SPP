@@ -6,20 +6,20 @@ import {
 } from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {PostModel, WorkshopModel} from '../models/workshop.model';
+import {WorkshopModel} from '../models/workshop.model';
 import {WorkshopService} from './services/workshop.service';
 import {first} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
-export class WorkshopsResolverService implements Resolve<Array<PostModel>> {
+export class WorkshopsResolverService implements Resolve<Array<WorkshopModel>> {
 
     constructor(private wrkService: WorkshopService, private router: Router) {
     }
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<PostModel>>
-        | Promise<Array<PostModel>> | Array<PostModel> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Array<WorkshopModel>>
+        | Promise<Array<WorkshopModel>> | Array<WorkshopModel> {
         this.wrkService.getArticles();
         return this.wrkService.workshops.getValue();
     }

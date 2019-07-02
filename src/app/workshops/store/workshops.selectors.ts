@@ -1,16 +1,33 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import * as fromQuizzes from './quizzes.reducer';
-import {QuizzesState} from './quizzes.reducer';
+import * as fromWorkshops from './workshops.reducer';
+import {WorkshopsState} from './workshops.reducer';
+import {WorkshopModel} from '../../models/workshop.model';
 
+export const selectWorkshopsState = createFeatureSelector<fromWorkshops.WorkshopsState>('workshops');
 
-export const selectQuizzesState = createFeatureSelector<fromQuizzes.QuizzesState>('quizzes');
-
-export const selectQuizzes = createSelector(
-    selectQuizzesState,
-    fromQuizzes.selectAll
+export const selectWorkshops = createSelector(
+    selectWorkshopsState,
+    fromWorkshops.selectAll
 );
 
-export const selectQuiz = createSelector(
-    selectQuizzesState,
-    (state: QuizzesState) => state.selectedQuiz
+export const selectIsWorkshopLoaded = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.workshopLoaded
 );
+
+export const selectWorkshop = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.workshop
+);
+
+
+export const selectWorkshopComments = createSelector(
+    selectWorkshop,
+    (workshop: WorkshopModel) => workshop ? workshop.comments : null
+);
+
+export const selectUsers = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.users
+);
+

@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import {Observable} from 'rxjs';
 
-import {CommentModel, PostModel, WorkshopModel} from '../models/workshop.model';
+import {CommentModel} from '../models/workshop.model';
 import {WorkshopService} from './services/workshop.service';
 import {CommentService} from '../services/comment.service';
 
