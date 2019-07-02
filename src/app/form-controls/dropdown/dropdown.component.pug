@@ -1,0 +1,12 @@
+label(*ngIf='label', [for]='id') {{label}}
+select(
+    #customSelect='',
+    [(ngModel)]='value',
+    [id] = 'id',
+    [size] = 'size',
+    (blur)='onTouch($event)',
+    (ngModelChange)='selectOption(value)'
+)
+    option(*ngIf='placeholder', disabled='') {{placeholder}}
+    option(*ngFor='let option of options',
+            [value]='option.value') {{option.name}}

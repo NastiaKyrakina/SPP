@@ -1,0 +1,18 @@
+app-viewport
+    div(main="")
+        .tags.row
+            .tag(*ngFor="let tag of tags$ | async", [id]='"tag-"+tag.seq').
+                {{tag.name}}
+        .header
+            h1 {{workshop.title}}
+        figure
+            img([src]='workshop.image')
+        p {{workshop.text}}
+
+        .footer.row
+            app-like([likes]='workshop.likesCount', [isActive] = 'likeIt', (likedWorkshop)='liked($event)')
+            app-timestamp([timestamp]='workshop.createdAt')
+        .row.back
+            a.btn(routerLink='/workshops/feed') Back to feed
+    div(aside="")
+        app-aux-panel([auxOpen] = 'auxOpen', [tabs]='tabs')

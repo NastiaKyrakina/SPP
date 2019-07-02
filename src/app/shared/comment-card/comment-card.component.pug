@@ -1,0 +1,22 @@
+.comment.row(
+*ngIf='user$ | async as user',
+#commentBlock='', [hidden]='formOpen',
+appCurentUserObj, [user] = 'comment.userId'
+)
+    .user-block
+        app-user-pic([lname]='user.lastName',
+        [fname]='user.firstName',
+        [picture]='user.picture')
+        .name
+            small {{user.username}}
+    p {{comment.text}}
+    ng-container(*ngIf='user._id == current._id' )
+        button.open-mini((click)="openMenu()" )
+            i.icon-circle-up
+        .btn-block([hidden]='!comtMenuOpened')
+            button.del-btn((click)="deleteComment()" )
+                i.icon-bin
+            button.edit-btn((click)='openForm()')
+                i.icon-pencil
+    app-timestamp([timestamp]='comment.createdAt')
+template(#commentForm='', (closedForm) = 'closeForm()')

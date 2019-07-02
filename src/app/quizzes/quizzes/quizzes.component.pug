@@ -1,0 +1,12 @@
+app-viewport
+    div(main="")
+        .items.flex-center
+            app-quiz-item(*ngFor='let quiz of quizzes$ | async',
+            [quiz] = 'quiz',
+            [user] = 'users| author:quiz.author',
+            appTextToColor [text]='quiz.name',
+            [colorMap] = '["#ffb628", "#e98ed7", "#93c5e9", "#e4e96c", "#afe56c"]',
+            [hoverEffect]='"off"'
+            )
+    div(aside="")
+        app-aux-panel([auxOpen] = 'auxOpen', [tabs] = 'tabs')

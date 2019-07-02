@@ -1,0 +1,27 @@
+@import "layouts/breakpoints";
+
+:host {
+    background-color: white;
+    border-radius: 0.5em;
+    flex: 1;
+    max-width: 450px;
+    min-width: 300px;
+    margin: 0 0.5em 1em 0.5em;
+    padding: 0.5em;
+}
+
+a {
+    color: #0a0729;
+}
+
+.centered {
+    justify-content: center;
+    align-items: center;
+}
+.footer{
+    border-top: 1px solid #dbe1ca;
+}
+small {
+    font-style: italic;
+    color: #030e24;
+}

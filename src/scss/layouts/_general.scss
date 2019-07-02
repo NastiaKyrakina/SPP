@@ -1,0 +1,75 @@
+html{
+    font-family: $main_font;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE 10+ */
+}
+
+html::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+h1{
+    font-family: $header_font;
+}
+
+code,pre{
+    font-family: $code_font;
+}
+
+.row{
+    display: flex;
+}
+
+.columns{
+    flex-flow: column nowrap;
+}
+
+.md-icon{
+    font-size: 1.7em;
+}
+
+.del-btn{
+    color: rgba(255, 26, 4, 0.86);
+}
+
+.edit-btn{
+    color: rgba(255, 119, 0, 0.86);
+}
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-left{
+    justify-content: left;
+}
+
+.flex-right{
+    justify-content: flex-end;
+}
+
+.flex-between{
+    justify-content: space-between;
+}
+
+.flex-column {
+    flex-flow: column nowrap;
+}
+
+.hover-danger{
+    color: #858585;
+    &:hover {
+        color: red;
+    }
+}
+
+
+.btn{
+    border-radius: 5px;
+    background-color: #c3c3c3;
+    color: black;
+    padding: 0.3em;
+    margin: 0.2em;
+}

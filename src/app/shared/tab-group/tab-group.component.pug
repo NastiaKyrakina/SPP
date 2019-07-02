@@ -1,0 +1,8 @@
+.group.row
+    a.col(*ngFor='let tab of tabs',
+            routerLinkActive='open',
+            [routerLink] = '[{ outlets: { aside: [tab.href] } }]',
+           )
+        | {{tab.title}}
+.content
+    ng-content(select="[route]" )
