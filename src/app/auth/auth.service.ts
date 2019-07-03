@@ -21,7 +21,6 @@ export class AuthService {
         this.authorized = false;
         this.token = null;
         this.id = null;
-        this.userService.currentUser.next(null);
         localStorage.clear();
     }
 

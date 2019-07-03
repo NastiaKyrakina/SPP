@@ -10,20 +10,15 @@ const routes: Routes = [
         component: SingInComponent,
     },
     {
-        path: 'sing-up',
+        path: 'auth/sing-up',
         component: SignUpComponent,
     },
     {
-        path: 'reset',
+        path: 'auth/reset',
         component: PasswordResetComponent,
     },
     {
-        path: 'logout',
-        redirectTo: 'login',
-        pathMatch: 'full'
-    },
-    {
-        path: '',
+        path: 'auth/logout',
         redirectTo: 'login',
         pathMatch: 'full'
     },

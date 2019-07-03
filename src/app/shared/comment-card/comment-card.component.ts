@@ -16,6 +16,9 @@ import {WorkshopService} from '../../workshops/services/workshop.service';
 import {UserService} from '../../services/user.service';
 import {CommentModel} from "../../models/workshop.model";
 import {Observable, Subscription} from "rxjs";
+import {AppState} from '../../reducers';
+import {select, Store} from '@ngrx/store';
+import {selectCurrentUser} from '../../auth/store/auth.selectors';
 
 @Component({
     selector: 'app-comment-card',
@@ -38,11 +41,12 @@ export class CommentCardComponent implements OnInit, OnDestroy {
 
     constructor(private resolver: ComponentFactoryResolver,
                 private wrkService: WorkshopService,
-                private userService: UserService) {
+                private userService: UserService,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
-        this.userSbs = this.userService.currentUser.subscribe((current) => {
+        this.userSbs = this.store.pipe(select(selectCurrentUser)).subscribe((current) => {
             this.current = current;
         });
     }
@@ -62,7 +66,7 @@ export class CommentCardComponent implements OnInit, OnDestroy {
             this.closeForm();
         });
         this.componentRef.instance.submitedForm.subscribe(text => {
-            this.editedComment.emit({id: this.comment._id, text});
+            this.editedComment.emit({id: this.comment.id, text});
             this.closeForm();
         });
     }
@@ -73,7 +77,7 @@ export class CommentCardComponent implements OnInit, OnDestroy {
     }
 
     deleteComment() {
-        this.deletedComment.emit(this.comment._id);
+        this.deletedComment.emit(this.comment.id);
     }
 
     ngOnDestroy(): void {

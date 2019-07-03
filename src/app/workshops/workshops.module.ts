@@ -14,6 +14,7 @@ import * as fromWorkshops from './store/workshops.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { WorkshopsEffects } from './store/workshops.effects';
 
+
 @NgModule({
     declarations: [
         WorkshopsComponent,

@@ -43,7 +43,11 @@ export enum WorkshopsActionTypes {
 export class WorkshopsRequested implements Action {
     readonly type = WorkshopsActionTypes.WorkshopsRequested;
 
-    constructor(public payload: { queryParams: WorkshopParams }) {
+    constructor(public payload: {
+        page?: string
+        category?: string
+        tags?: string;
+    }) {
     }
 }
 
@@ -105,6 +109,76 @@ export class WorkshopCommentsLoadingFailed implements Action {
     }
 }
 
+// create new comment
+export class WorkshopCommentsCreating implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsCreating;
+
+    constructor(public payload: { workshopId: string, comment: string }) {
+    }
+}
+
+export class WorkshopCommentsCreated implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsCreated;
+
+    constructor(public payload: { comment: CommentModel }) {
+    }
+}
+
+export class WorkshopCommentsCreatingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsCreatingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+// update comment
+export class WorkshopCommentsUpdating implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsUpdating;
+
+    constructor(public payload: {
+        workshopId: string,
+        commentId: string,
+        comment: string
+    }) {
+    }
+}
+
+export class WorkshopCommentsUpdated implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsUpdated;
+
+    constructor(public payload: { commentId: string, comment: CommentModel }) {
+    }
+}
+
+export class WorkshopCommentsUpdatingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsUpdatingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+// delete comment
+export class WorkshopCommentsDeleting implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsDeleting;
+
+    constructor(public payload: { workshopId: string, commentId: string }) {
+    }
+}
+
+export class WorkshopCommentsDeleted implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsDeleted;
+
+    constructor(public payload: { commentId: string }) {
+    }
+}
+
+export class WorkshopCommentsDeletingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopCommentsDeletingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
 export class TagsRequested implements Action {
     readonly type = WorkshopsActionTypes.TagsRequested;
 }
@@ -126,7 +200,7 @@ export class TagsLoadingFailed implements Action {
 export class UsersRequested implements Action {
     readonly type = WorkshopsActionTypes.UsersRequested;
 
-    constructor(public payload: { usersIds: string[]}) {
+    constructor(public payload: { usersIds: string[] }) {
     }
 }
 
@@ -154,6 +228,15 @@ export type WorkshopsActions =
     WorkshopCommentsRequested |
     WorkshopCommentsLoaded |
     WorkshopCommentsLoadingFailed |
+    WorkshopCommentsCreating |
+    WorkshopCommentsCreated |
+    WorkshopCommentsCreatingFailed |
+    WorkshopCommentsUpdating |
+    WorkshopCommentsUpdated |
+    WorkshopCommentsUpdatingFailed |
+    WorkshopCommentsDeleting |
+    WorkshopCommentsDeleted |
+    WorkshopCommentsDeletingFailed |
     TagsRequested |
     TagsLoaded |
     TagsLoadingFailed |

@@ -21,8 +21,6 @@ export class QuizItemComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.quiz);
-        console.log(this.user);
         this.userName = this.getUserName();
         if (this.authService.getId() === this.quiz.author) {
             this.isAuthor = true;

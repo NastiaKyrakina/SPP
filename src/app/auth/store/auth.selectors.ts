@@ -1,6 +1,7 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {AuthState} from './auth.reducer';
 import {AuthModel} from '../models/auth.model';
+import {of} from 'rxjs';
 
 export const selectAuthState = createFeatureSelector<AuthState>('auth');
 
@@ -22,13 +23,13 @@ export const selectAuthenticatedToken = createSelector(
 export const selectCurrentUser = createSelector(
     selectAuthData,
     (authData: AuthModel) => {
-        return {
-            _id: authData._id,
+        return authData ? {
+            id: authData.id,
             username: authData.username,
             lastName: authData.lastName,
             firstName: authData.firstName,
             picture: authData.picture,
             role: authData.role,
-        };
+        } : null;
     }
 );

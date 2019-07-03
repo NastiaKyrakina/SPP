@@ -57,7 +57,6 @@ export class QuizzesComponent implements OnInit, OnDestroy {
     }
 
     deleteQuiz(quizId: string) {
-        console.log(quizId);
         this.store.dispatch(new QuizDeleteRequested({quizId}));
     }
 }

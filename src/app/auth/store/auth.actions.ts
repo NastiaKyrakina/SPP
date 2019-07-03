@@ -6,7 +6,14 @@ export enum AuthActionTypes {
     SignInRequested = '[Auth] Tried To Sing In',
     SignedIn = '[Auth] Successfully Signed In',
     SignInFailed = '[Auth] Failed To Sing In',
+
+    SignedOutRequested = '[Auth] Signed Out Requested',
     SignedOut = '[Auth] Signed Out',
+
+    CurrentUserRequested = '[Auth] Current User Requested',
+    CurrentUserLoaded = '[Auth] Current User Loaded',
+    CurrentUserLoadingFailed = '[Auth] Current User Loading Failed',
+
 }
 
 export class SignInRequested implements Action {
@@ -34,8 +41,34 @@ export class SignedOut implements Action {
     readonly type = AuthActionTypes.SignedOut;
 }
 
+export class SignedOutRequested implements Action {
+    readonly type = AuthActionTypes.SignedOutRequested;
+}
+
+export class CurrentUserRequested implements Action {
+    readonly type = AuthActionTypes.CurrentUserRequested;
+}
+
+export class CurrentUserLoaded implements Action {
+    readonly type = AuthActionTypes.CurrentUserLoaded;
+
+    constructor(public payload: { authData: AuthModel }) {
+    }
+}
+
+export class CurrentUserLoadingFailed implements Action {
+    readonly type = AuthActionTypes.CurrentUserLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
 export type AuthActions =
     SignInRequested |
     SignedIn |
     SignInFailed |
-    SignedOut;
+    SignedOutRequested |
+    SignedOut |
+    CurrentUserRequested |
+    CurrentUserLoaded |
+    CurrentUserLoadingFailed;

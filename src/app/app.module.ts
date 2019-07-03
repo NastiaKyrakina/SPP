@@ -19,10 +19,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './reducers/app.effects';
+import {AuthModule} from './auth/auth.module';
 
-export function userProviderFactory(provider: UserService) {
-    return () => provider.getUserBeforeInit();
-}
 
 @NgModule({
     declarations: [
@@ -33,6 +31,7 @@ export function userProviderFactory(provider: UserService) {
         BrowserModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        AuthModule,
         AppRoutingModule,
         CoreModule,
         SharedModule,
@@ -43,9 +42,6 @@ export function userProviderFactory(provider: UserService) {
     ],
     exports: [],
     providers: [
-    UserService, {
-            provide: APP_INITIALIZER, useFactory: userProviderFactory, deps: [UserService], multi: true
-        },
     {
         provide: HTTP_INTERCEPTORS,
         useClass: AuthInterceptor,

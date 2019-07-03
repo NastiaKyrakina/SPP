@@ -41,7 +41,7 @@ import {Observable} from "rxjs";
 })
 export class ArticleComponent implements OnInit {
     @Input() workshop: WorkshopModel;
-    tags$: Observable<Array<Tag>>;
+    @Input() tags: Array<Tag>;
     currentUser: UserModel;
     likeIt: boolean;
     isOpen = true;
@@ -50,7 +50,7 @@ export class ArticleComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tags$ = this.wrkService.getTags(this.workshop.tags);
+       // this.tags$ = this.wrkService.getTags(this.workshop.tags);
         this.wrkService.getTags(this.workshop.tags);
         this.likeIt = false;
     }

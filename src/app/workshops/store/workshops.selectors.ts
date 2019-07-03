@@ -7,7 +7,7 @@ export const selectWorkshopsState = createFeatureSelector<fromWorkshops.Workshop
 
 export const selectWorkshops = createSelector(
     selectWorkshopsState,
-    fromWorkshops.selectAll
+    fromWorkshops.selectAllWorkshops
 );
 
 export const selectIsWorkshopLoaded = createSelector(
@@ -21,10 +21,32 @@ export const selectWorkshop = createSelector(
 );
 
 
-export const selectWorkshopComments = createSelector(
-    selectWorkshop,
-    (workshop: WorkshopModel) => workshop ? workshop.comments : null
+export const selectWorkshopCommentsState = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.comments,
 );
+
+export const selectWorkshopComments = createSelector(
+    selectWorkshopCommentsState,
+    fromWorkshops.selectAllComments
+);
+
+export const selectTags = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.tags
+);
+
+export const selectCurrentWorkshopTags = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => {
+        if (!state.tags) {
+            return [];
+        }
+        const tagsIds = state.workshop ? state.workshop.tags : [];
+        return state.tags.filter(tag => tagsIds.includes(tag.seq));
+    }
+);
+
 
 export const selectUsers = createSelector(
     selectWorkshopsState,

@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {SignInRequested} from '../store/auth.actions';
+import {SignedOut, SignedOutRequested, SignInRequested} from '../store/auth.actions';
 
 @Component({
     selector: 'app-login',
@@ -34,7 +34,7 @@ export class SingInComponent implements OnInit {
     ngOnInit() {
         this.route.queryParams.pipe(take(1))
             .subscribe(params => this.return = params.return || '/workshops');
-        this.authService.logout();
+        this.store.dispatch(new SignedOutRequested());
     }
 
     submitForm(): void {

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {AuthActions, AuthActionTypes, SignedIn, SignInFailed} from './auth.actions';
+import {AuthActions, AuthActionTypes, CurrentUserLoaded, SignedIn, SignInFailed} from './auth.actions';
 import {UserModel} from '../../models/user.model';
 import {AuthModel} from '../models/auth.model';
 
@@ -29,6 +29,14 @@ export function authReducer(state = authInitialState, action: AuthActions): Auth
                 authenticated: false,
                 authData: null,
             };
+
+        case AuthActionTypes.CurrentUserLoaded:
+            return {
+                ...state,
+                authenticated: true,
+                authData: action.payload.authData,
+            };
+
         default:
             return state;
     }

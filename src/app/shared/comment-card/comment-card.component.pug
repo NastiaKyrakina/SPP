@@ -10,7 +10,7 @@ appCurentUserObj, [user] = 'comment.userId'
         .name
             small {{user.username}}
     p {{comment.text}}
-    ng-container(*ngIf='user._id == current._id' )
+    ng-container(*ngIf='user.id == current.id' )
         button.open-mini((click)="openMenu()" )
             i.icon-circle-up
         .btn-block([hidden]='!comtMenuOpened')
