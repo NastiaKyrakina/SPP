@@ -1,12 +1,16 @@
 import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subscription} from 'rxjs';
-import {PostModel, WorkshopModel} from '../../models/workshop.model';
+import {Observable, of, Subscription} from 'rxjs';
+import {WorkshopModel} from '../../models/workshop.model';
 import {Comment, Tag} from '../../models/additional.model';
 import {WorkshopService} from '../services/workshop.service';
 import {UserModel} from '../../models/user.model';
 import {UserService} from '../../services/user.service';
 import {TabModel} from '../../models/tab.model';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {WorkshopRequested} from '../store/workshops.actions';
+import {selectWorkshop} from '../store/workshops.selectors';
 
 const tabsList = [
     {
@@ -31,9 +35,10 @@ const tabsList = [
 })
 export class WorkshopComponent implements OnInit, OnDestroy {
     tabs: Array<TabModel> = tabsList;
-    private id: number;
+    private id: string;
     private subscription: Subscription;
-    workshop: PostModel;
+   // workshop: WorkshopModel;
+    workshop$: Observable<WorkshopModel>;
     tags$: Observable<Array<Tag>>;
     auxOpen = false;
     currentUser: UserModel;
@@ -43,19 +48,26 @@ export class WorkshopComponent implements OnInit, OnDestroy {
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private wrkService: WorkshopService) {
+                private wrkService: WorkshopService,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
         this.subscription = this.route.params
-            .subscribe(params => this.id = params.id);
-        this.routeSbs = this.route.data.subscribe((data: { workshop: PostModel }) => {
-            this.workshop = data.workshop;
-        });
+            .subscribe(params => {
+                this.id = params.id;
+                this.store.dispatch(new WorkshopRequested({workshopId: this.id}));
+            });
+        // this.routeSbs = this.route.data.subscribe((data: { workshop: WorkshopModel }) => {
+        //     this.workshop = data.workshop;
+        // });
+
+        this.workshop$ = this.store.pipe(select(selectWorkshop));
         if (this.router.url.split('/').pop()[0] === '(') {
             this.auxOpen = true;
         }
-        this.tags$ = this.wrkService.getTags(this.workshop.tags);
+       // this.tags$ = this.wrkService.getTags(this.workshop.tags);
+        this.tags$ = of([]);
     }
 
     liked($event: boolean): void {
@@ -63,7 +75,7 @@ export class WorkshopComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
-        this.routeSbs.unsubscribe();
+       // this.routeSbs.unsubscribe();
     }
 
 }

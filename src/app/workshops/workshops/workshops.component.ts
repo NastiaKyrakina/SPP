@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit, OnDestroy} from '@angular/core';
 
 import {Tag} from '../../models/additional.model';
-import {PostModel, WorkshopModel} from '../../models/workshop.model';
+import {WorkshopModel} from '../../models/workshop.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WorkshopService} from '../services/workshop.service';
 import {Observable, ReplaySubject, Subscription} from 'rxjs';
@@ -17,14 +17,14 @@ import {first} from "rxjs/operators";
 })
 export class WorkshopsComponent implements OnInit, OnDestroy {
     tags$: Observable<Array<Tag>>;
-    workshops: Array<PostModel>;
+    workshops: Array<WorkshopModel>;
     private querySubscription: Subscription;
     private paramsList = [];
     ctgList = ['All', 'Favorite', 'My'];
     ctgSelect: string;
     private wrkSbsc: Subscription;
     private routeSubs: Subscription;
-    workshopsSubj = new ReplaySubject<Array<PostModel>>(1);
+    workshopsSubj = new ReplaySubject<Array<WorkshopModel>>(1);
     isFirst = true;
     emptyPage = false;
 

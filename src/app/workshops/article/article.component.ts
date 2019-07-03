@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {PostModel, WorkshopModel} from '../../models/workshop.model';
+import {WorkshopModel} from '../../models/workshop.model';
 import {UserModel} from '../../models/user.model';
 import {WorkshopService} from '../services/workshop.service';
 import {Tag} from '../../models/additional.model';
@@ -40,7 +40,7 @@ import {Observable} from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ArticleComponent implements OnInit {
-    @Input() workshop: PostModel;
+    @Input() workshop: WorkshopModel;
     tags$: Observable<Array<Tag>>;
     currentUser: UserModel;
     likeIt: boolean;

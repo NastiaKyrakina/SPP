@@ -25,10 +25,10 @@ import {Observable, Subscription} from "rxjs";
 })
 export class CommentCardComponent implements OnInit, OnDestroy {
     @Input() comment: CommentModel;
+    @Input() user: UserModel;
     @Output() deletedComment = new EventEmitter<string>();
     @Output() editedComment = new EventEmitter<{ id: string; text: string; }>();
     @ViewChild('commentForm', {read: ViewContainerRef}) form;
-    user$: Observable<UserModel>;
     current: UserModel;
     comtMenuOpened = false;
     formOpen = false;
@@ -45,8 +45,6 @@ export class CommentCardComponent implements OnInit, OnDestroy {
         this.userSbs = this.userService.currentUser.subscribe((current) => {
             this.current = current;
         });
-        this.user$ = this.userService.getUser(this.comment._author);
-
     }
 
     openMenu(): void {
@@ -79,6 +77,6 @@ export class CommentCardComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.userSbs.unsubscribe();
+       // this.userSbs.unsubscribe();
     }
 }

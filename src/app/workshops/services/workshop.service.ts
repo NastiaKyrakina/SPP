@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {PostModel, ReacrionModel, WorkshopModel} from '../../models/workshop.model';
+import {ReactionModel, WorkshopModel} from '../../models/workshop.model';
 import {Comment, Tag, WorkshopTag, Like} from '../../models/additional.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {currentUser, users} from '../../../data/data';
@@ -23,7 +23,7 @@ export interface WorkshopParams extends Params {
 })
 export class WorkshopService {
     comments: Array<Comment>;
-    workshops = new BehaviorSubject<Observable<Array<PostModel>>>(null);
+    workshops = new BehaviorSubject<Observable<Array<WorkshopModel>>>(null);
     page = 0;
     pageCount: number;
     constructor(private route: ActivatedRoute,

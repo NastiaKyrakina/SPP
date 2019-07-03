@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs';
 import {CommentModel} from '../models/workshop.model';
-import {UserService} from "./user.service";
+import {UserService} from './user.service';
+import {concatMap} from 'rxjs/operators';
+import {UserModel} from '../models/user.model';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +16,13 @@ export class CommentService {
     }
 
     getWrkComments(idWrk: string): Observable<Array<CommentModel>> {
-        return this.apiService.getRequest(`/comments/${idWrk}`);
+        return this.apiService.getRequest(`/comments/${idWrk}`).pipe(
+        );
+    }
+
+    getUsersByIds(authorIdArray: string[]): Observable<Array<UserModel>> {
+        return this.apiService.postRequest(`/users/manyusers`,
+            {ids: authorIdArray});
     }
 
     createComment(idWrk: string, text: string): Observable<any> {
