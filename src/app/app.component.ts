@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from './reducers';
-import {selectAuthenticated} from './auth/store/auth.selectors';
+import {selectAuthenticated, selectCurrentUser} from './auth/store/auth.selectors';
 import {Observable} from 'rxjs';
+import {CurrentUserRequested} from './auth/store/auth.actions';
+
 
 @Component({
     selector: 'app-root',
@@ -21,9 +23,11 @@ export class AppComponent implements OnInit {
 
     constructor(private store: Store<AppState>,
                 ) {
-        this.authenticated$ = this.store.pipe(select(selectAuthenticated));
     }
 
     ngOnInit(): void {
+        this.store.dispatch(new CurrentUserRequested());
+        this.authenticated$ = this.store.pipe(select(selectAuthenticated));
+        const user$ = this.store.pipe(select(selectCurrentUser));
     }
 }

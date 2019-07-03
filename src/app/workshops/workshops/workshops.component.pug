@@ -9,24 +9,27 @@ app-viewport
                     className = 'selected',
                     paramName='ctg',
                     [paramValue]='ctg') {{ctg}}
-            .col.main-contentng-container
+            .col.main-content
+                div(*ngIf='workshops$ | async as workshops; else empty' )
+                    app-article(*ngFor='let workshop of workshops',
+                    [workshop] = 'workshop',
+                    [tags] = 'tags | workshopTags: workshop.tags')
 
-                div(*ngIf='workshops; else empty' )
-                    app-article(*ngFor='let workshop of workshops', [workshop]='workshop')
-                ng-template(#empty='')
                 button.secondary((click) = 'loadArticles()',
                 [hidden]='emptyPage') Load more articles...
             .col.tags
                 .tag-cloud
-                    app-tag(*ngFor='let tag of tags$ | async',
-                    [tag] = 'tag',
-                    (selectTag)='selectTag($event)',
-                    appTextToColor
-                    [text]='tag.name',
-                    [hoverEffect] = '"on"',
-                    [effectType] = '"darken"' ,
-                    appQueryParamsActive
-                    paramName="tags",
-                    [paramValue]='tag.seq'
-                    )
-
+                    ng-container(*ngIf='tagsLoaded; else emptyTags')
+                        app-tag(*ngFor='let tag of tags',
+                        [tag] = 'tag',
+                        (selectTag)='selectTag($event)',
+                        appTextToColor
+                        [text]='tag.name',
+                        [hoverEffect] = '"on"',
+                        [effectType] = '"darken"' ,
+                        appQueryParamsActive
+                        paramName="tags",
+                        [paramValue]='tag.seq'
+                        )
+                    ng-template(#emptyTags='')
+                        div.tags-loaded Tags Loaded....

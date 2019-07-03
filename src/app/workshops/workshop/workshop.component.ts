@@ -9,8 +9,8 @@ import {UserService} from '../../services/user.service';
 import {TabModel} from '../../models/tab.model';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {WorkshopRequested} from '../store/workshops.actions';
-import {selectWorkshop} from '../store/workshops.selectors';
+import {TagsRequested, WorkshopRequested} from '../store/workshops.actions';
+import {selectCurrentWorkshopTags, selectWorkshop} from '../store/workshops.selectors';
 
 const tabsList = [
     {
@@ -37,7 +37,6 @@ export class WorkshopComponent implements OnInit, OnDestroy {
     tabs: Array<TabModel> = tabsList;
     private id: string;
     private subscription: Subscription;
-   // workshop: WorkshopModel;
     workshop$: Observable<WorkshopModel>;
     tags$: Observable<Array<Tag>>;
     auxOpen = false;
@@ -57,17 +56,15 @@ export class WorkshopComponent implements OnInit, OnDestroy {
             .subscribe(params => {
                 this.id = params.id;
                 this.store.dispatch(new WorkshopRequested({workshopId: this.id}));
+                this.store.dispatch(new TagsRequested());
             });
-        // this.routeSbs = this.route.data.subscribe((data: { workshop: WorkshopModel }) => {
-        //     this.workshop = data.workshop;
-        // });
 
         this.workshop$ = this.store.pipe(select(selectWorkshop));
+        this.tags$ = this.store.pipe(select(selectCurrentWorkshopTags));
+
         if (this.router.url.split('/').pop()[0] === '(') {
             this.auxOpen = true;
         }
-       // this.tags$ = this.wrkService.getTags(this.workshop.tags);
-        this.tags$ = of([]);
     }
 
     liked($event: boolean): void {
@@ -75,7 +72,6 @@ export class WorkshopComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
-       // this.routeSbs.unsubscribe();
     }
 
 }

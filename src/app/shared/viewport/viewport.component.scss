@@ -25,7 +25,6 @@ main {
     height: auto !important;
     overflow: hidden;
     margin-top: $top_menu_height;
-    background-color: #dbe1ca;
     @include mq($from: sm) {
         margin-left: $sm_width_md;
     }

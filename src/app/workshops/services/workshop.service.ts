@@ -5,14 +5,14 @@ import {Comment, Tag, WorkshopTag, Like} from '../../models/additional.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {currentUser, users} from '../../../data/data';
 import {UserModel} from '../../models/user.model';
-import {ApiService} from "../../services/api.service";
+import {ApiService} from '../../services/api.service';
 import {HttpParams} from '@angular/common/http';
-import {BehaviorSubject, Observable, ReplaySubject} from "rxjs";
-import {filter, first, map, shareReplay} from "rxjs/operators";
-import {TagsService} from "../../services/tags.service";
-import {UserService} from "../../services/user.service";
-import {AuthService} from "../../auth/auth.service";
-import {Params} from "../../models/param.model";
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {filter, first, map, shareReplay} from 'rxjs/operators';
+import {TagsService} from '../../services/tags.service';
+import {UserService} from '../../services/user.service';
+import {AuthService} from '../../auth/auth.service';
+import {Params} from '../../models/param.model';
 
 export interface WorkshopParams extends Params {
     tags?: string;
@@ -23,9 +23,9 @@ export interface WorkshopParams extends Params {
 })
 export class WorkshopService {
     comments: Array<Comment>;
-    workshops = new BehaviorSubject<Observable<Array<WorkshopModel>>>(null);
     page = 0;
     pageCount: number;
+
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private api: ApiService,
@@ -33,9 +33,8 @@ export class WorkshopService {
                 private tagsService: TagsService) {
     }
 
-    getArticles(params: WorkshopParams = {page: this.page + ''}): void {
-        const workshops$ = this.api.getRequest('/posts', params).pipe(
-            first(),
+    getArticles(params: WorkshopParams = {page: this.page + ''}): Observable<Array<WorkshopModel>> {
+        return this.api.getRequest('/posts', params).pipe(
             map(request => request.posts),
             map(posts => {
                 return posts.map(post => {
@@ -44,15 +43,14 @@ export class WorkshopService {
                 });
             })
         );
-        this.workshops.next(workshops$);
     }
 
-    getWorkshop(id: string): Observable<any> {
+    getWorkshop(id: string): Observable<WorkshopModel> {
         return this.api.getRequest(`/posts/${id}`)
             .pipe(first(),
                 map(workshop => {
-                     workshop.likesCount = 0;
-                     return workshop;
+                    workshop.likesCount = 0;
+                    return workshop;
                 })
             );
     }
@@ -70,7 +68,7 @@ export class WorkshopService {
         return false;
     }
 
-    filterWorkshops(tagsId ?: string, ctg ?: string, page: string = '0'): void {
+    filterWorkshops(tagsId ?: string, ctg ?: string, page: string = '0'): Observable<Array<WorkshopModel>> {
         const params: WorkshopParams = {
             page,
         };
@@ -81,9 +79,11 @@ export class WorkshopService {
         if (tagsId) {
             params.tags = tagsId.split(',').join('|');
         }
-        this.getArticles(params);
+        return this.getArticles(params);
     }
-    liked(youLikeIt: boolean, wrkId: number): void {}
+
+    liked(youLikeIt: boolean, wrkId: number): void {
+    }
 
     isLastPage(): boolean {
         return false;

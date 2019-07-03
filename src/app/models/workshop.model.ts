@@ -20,7 +20,7 @@ export interface ReactionModel {
 }
 
 export interface CommentModel {
-    _id: string;
+    id: string;
     _post: string;
     _author: string;
     author?: UserModel;

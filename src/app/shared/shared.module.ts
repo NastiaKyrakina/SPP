@@ -22,6 +22,7 @@ import { InitialsPipe } from './pipe/initials.pipe';
 import { QueryParamsActiveDirective } from './directives/query-params-active.directive';
 import { CurrentUserObjDirective } from './directives/current-user-obj.directive';
 import {AuthorPipe} from './pipe/author.pipe';
+import {WorkshopTagsPipe} from './pipe/workshop-tags.pipe';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import {AuthorPipe} from './pipe/author.pipe';
         TextToColorDirective,
         InitialsPipe,
         AuthorPipe,
+        WorkshopTagsPipe,
         QueryParamsActiveDirective,
         CurrentUserObjDirective],
     imports: [
@@ -67,6 +69,7 @@ import {AuthorPipe} from './pipe/author.pipe';
         QueryParamsActiveDirective,
         CurrentUserObjDirective,
         AuthorPipe,
+        WorkshopTagsPipe,
     ],
     entryComponents: [
         CommentFormComponent,

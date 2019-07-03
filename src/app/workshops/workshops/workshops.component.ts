@@ -7,54 +7,59 @@ import {WorkshopService} from '../services/workshop.service';
 import {Observable, ReplaySubject, Subscription} from 'rxjs';
 import {TagsService} from '../../services/tags.service';
 import {UserService} from '../../services/user.service';
-import {first} from "rxjs/operators";
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../reducers';
+import {TagsRequested, WorkshopsRequested} from '../store/workshops.actions';
+import {selectTags, selectWorkshops} from '../store/workshops.selectors';
 
 @Component({
     selector: 'app-workshops',
     templateUrl: './workshops.component.pug',
     styleUrls: ['./workshops.component.scss'],
-   // changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkshopsComponent implements OnInit, OnDestroy {
-    tags$: Observable<Array<Tag>>;
-    workshops: Array<WorkshopModel>;
-    private querySubscription: Subscription;
-    private paramsList = [];
+    workshops$: Observable<Array<WorkshopModel>>;
+    tags: Array<Tag> | null = null;
+    tagsLoaded = false;
     ctgList = ['All', 'Favorite', 'My'];
     ctgSelect: string;
-    private wrkSbsc: Subscription;
-    private routeSubs: Subscription;
-    workshopsSubj = new ReplaySubject<Array<WorkshopModel>>(1);
-    isFirst = true;
     emptyPage = false;
+    private querySubscription: Subscription;
+    private tagsSbs: Subscription;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private wrkService: WorkshopService,
                 private tagService: TagsService,
-                private userService: UserService) {
+                private userService: UserService,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
-        this.wrkSbsc = this.wrkService.workshops.asObservable().subscribe(
-            workshops$ => {
-                workshops$.subscribe(wrk => {
-                    this.workshops = wrk;
-                    this.emptyPage = this.workshops.length ? false : true;
-                });
-            }
-        );
-        this.tags$ = this.tagService.getAllTags();
-        const currentTags = this.route.snapshot
-            .queryParamMap.get('tags');
         this.querySubscription = this.route.queryParamMap.subscribe(
             (queryParam: any) => {
                 const tags = queryParam.get('tags');
-                const ctg = queryParam.get('ctg');
+                const category = queryParam.get('ctg');
                 const page = queryParam.get('page') || '0';
-                this.wrkService.filterWorkshops(tags, ctg, page);
+                this.store.dispatch(new WorkshopsRequested({
+                    page,
+                    tags,
+                    category
+                }));
             });
+        this.store.dispatch(new TagsRequested());
+        this.store.pipe(select(selectTags)).subscribe(
+            tags => {
+                this.tags = tags;
+                this.tagsLoaded = true;
+           }
+        );
+        this.workshops$ = this.store.pipe(select(selectWorkshops));
+        const currentTags = this.route.snapshot
+            .queryParamMap.get('tags');
         this.ctgSelect = this.ctgList[0];
+
     }
 
     getCurrentTags(): string[] {
@@ -107,7 +112,6 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.querySubscription.unsubscribe();
-        this.wrkSbsc.unsubscribe();
     }
 
     loadArticles(): void {

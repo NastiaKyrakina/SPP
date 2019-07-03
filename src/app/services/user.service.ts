@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {HttpHeaders} from '@angular/common/http';
 import {PrivateDataModel, UserModel} from '../models/user.model';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {AuthService} from "../auth/auth.service";
+import {AuthModel} from '../auth/models/auth.model';
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +39,7 @@ export class UserService {
     }
 
     changeUser(body) {
-        const id = this.currentUser.getValue()._id;
+        const id = this.currentUser.getValue().id;
         return this.apiService.putRequest(`/users/${id}`, body);
     }
 
@@ -46,17 +47,12 @@ export class UserService {
         return this.apiService.getRequest(`/users/${id}`);
     }
 
-    getUserBeforeInit(): Promise<any> {
-        return new Promise(resolve => {
-            if (localStorage.getItem('token')) {
-                this.getCurrentUser().subscribe((req) => {
-                    this.setUser(req);
-                });
-            } else {
-               this.currentUser.next(null);
-            }
-            resolve(true);
-        });
+    getUserBeforeInit(): Observable<AuthModel> | null {
+        if (localStorage.getItem('token')) {
+            return this.getCurrentUser();
+        } else {
+            return of(null);
+        }
     }
 
     setUser(reqUser) {
@@ -67,7 +63,7 @@ export class UserService {
         const {_id, username, firstName = null, lastName = null, picture = null} = reqUser;
         return {
             firstName,
-            _id,
+            id: _id,
             lastName,
             picture,
             username,
@@ -82,7 +78,7 @@ export class UserService {
         return this.apiService.getRequest(`/users`);
     }
 
-    private getCurrentUser(): Observable<UserModel> {
+    getCurrentUser(): Observable<AuthModel> {
         return this.apiService.getRequest(`/users/current`);
     }
 }
