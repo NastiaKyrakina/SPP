@@ -19,6 +19,7 @@ import {Observable, Subscription} from "rxjs";
 import {AppState} from '../../reducers';
 import {select, Store} from '@ngrx/store';
 import {selectCurrentUser} from '../../auth/store/auth.selectors';
+import {take, takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-comment-card',
@@ -38,6 +39,8 @@ export class CommentCardComponent implements OnInit, OnDestroy {
 
     componentRef: ComponentRef<CommentFormComponent>;
     private userSbs: Subscription;
+    private componentSbs: Subscription;
+
 
     constructor(private resolver: ComponentFactoryResolver,
                 private wrkService: WorkshopService,
@@ -62,10 +65,10 @@ export class CommentCardComponent implements OnInit, OnDestroy {
         this.componentRef.instance.comment = this.comment;
         this.formOpen = true;
         this.componentRef.instance.isEdit = true;
-        this.componentRef.instance.closedForm.subscribe(val => {
+        this.componentRef.instance.closedForm.pipe(take(1)).subscribe(val => {
             this.closeForm();
         });
-        this.componentRef.instance.submitedForm.subscribe(text => {
+        this.componentSbs = this.componentRef.instance.submitedForm.subscribe(text => {
             this.editedComment.emit({id: this.comment.id, text});
             this.closeForm();
         });
@@ -81,6 +84,7 @@ export class CommentCardComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-       // this.userSbs.unsubscribe();
+        this.userSbs.unsubscribe();
+        this.componentSbs.unsubscribe();
     }
 }

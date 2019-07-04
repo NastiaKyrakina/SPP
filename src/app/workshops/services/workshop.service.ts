@@ -55,16 +55,16 @@ export class WorkshopService {
             );
     }
 
-    getTags(wrksId: number[]): Observable<Array<Tag>> {
+    getTags(workshopsId: number[]): Observable<Array<Tag>> {
         const tags$ = this.tagsService.saveTags().pipe(
             map(tagsReq => {
-                return tagsReq.filter(tag => wrksId.includes(tag.seq));
+                return tagsReq.filter(tag => workshopsId.includes(tag.seq));
             })
         );
         return tags$;
     }
 
-    isUserLikeIt(wrkId: number, userId: number): boolean {
+    isUserLikeIt(workshopId: number, userId: number): boolean {
         return false;
     }
 
@@ -82,7 +82,7 @@ export class WorkshopService {
         return this.getArticles(params);
     }
 
-    liked(youLikeIt: boolean, wrkId: number): void {
+    liked(youLikeIt: boolean, workshopId: number): void {
     }
 
     isLastPage(): boolean {

@@ -23,10 +23,13 @@ export class CreateWorkshopComponent implements OnInit, OnDestroy {
 
     createWorkshopForm: FormGroup;
     return: string;
-    private tagsSbs: Subscription;
     tags: Tag[];
     selectedTags: string[] = [];
+
+    private tagsSbs: Subscription;
     private subscription: Subscription;
+    private workshopSbs: Subscription;
+
     id: string;
     workshopLoad = false;
     isEdited = false;
@@ -59,7 +62,7 @@ export class CreateWorkshopComponent implements OnInit, OnDestroy {
                 this.requestTypeChecked = true;
             });
 
-        this.store.pipe(select(selectWorkshop)).subscribe(workshop => {
+        this.workshopSbs = this.store.pipe(select(selectWorkshop)).subscribe(workshop => {
             if (this.requestTypeChecked) {
                 if (workshop && this.isEdited) {
                     this.workshop.title = workshop.title;
@@ -72,7 +75,7 @@ export class CreateWorkshopComponent implements OnInit, OnDestroy {
                     title: [this.workshop.title, [Validators.required,]],
                     image: [this.workshop.image, []],
                     description: [this.workshop.description, []],
-                    text: [this.workshop.text, [Validators.required,]],
+                    text: [this.workshop.text, [Validators.required, ]],
                     tags: ['', []],
                 });
                 this.tagsSbs = this.store.pipe(select(selectTags)).subscribe(
@@ -132,8 +135,6 @@ export class CreateWorkshopComponent implements OnInit, OnDestroy {
                 this.workshopService.updateWorkshop(this.id, this.workshop)
                     .pipe(take(1))
                     .subscribe((response) => {
-                        console.log(response);
-
                         this.router.navigate(['workshops/workshop', this.id]);
                     });
             } else {
@@ -151,6 +152,8 @@ export class CreateWorkshopComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+        this.workshopSbs.unsubscribe();
+        this.tagsSbs.unsubscribe();
     }
 
 

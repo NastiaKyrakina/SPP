@@ -64,7 +64,9 @@ export class QuizComponent implements OnInit, OnDestroy {
                 result.push($event[key]);
             }
         }
-        this.quizService.validateQuiz(this.id, result).subscribe(response => {
+        this.quizService.validateQuiz(this.id, result)
+            .pipe(take(1))
+            .subscribe(response => {
             this.message = response.message;
             this.result = response.results;
             this.all = this.result.length;

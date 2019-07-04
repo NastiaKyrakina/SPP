@@ -53,7 +53,7 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
 
         this.store.dispatch(new TagsRequested());
         this.users$ = this.store.pipe(select(selectUsers));
-        this.store.pipe(select(selectTags)).subscribe(
+        this.tagsSbs = this.store.pipe(select(selectTags)).subscribe(
             tags => {
                 this.tags = tags;
                 this.tagsLoaded = true;
@@ -114,10 +114,6 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
         }
     }
 
-    ngOnDestroy(): void {
-        this.querySubscription.unsubscribe();
-    }
-
     loadArticles(): void {
         this.wrkService.page += 1;
         this.addQueryParam('page', this.wrkService.page + '');
@@ -126,4 +122,11 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
     deleteWorkshop($event: string): void {
         this.store.dispatch(new WorkshopDeleting({workshopId: $event}));
     }
+
+    ngOnDestroy(): void {
+        this.querySubscription.unsubscribe();
+        this.tagsSbs.unsubscribe();
+    }
+
+    
 }
