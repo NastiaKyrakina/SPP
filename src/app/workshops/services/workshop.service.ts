@@ -88,4 +88,18 @@ export class WorkshopService {
     isLastPage(): boolean {
         return false;
     }
+
+    creatWorkshop(workshop: Partial<WorkshopModel>): Observable<any> {
+        return this.api.postRequest(`/posts`,
+            workshop);
+    }
+
+    updateWorkshop(workshopId: string, workshop: Partial<WorkshopModel>): Observable<any> {
+        return this.api.putRequest(`/posts/${workshopId}`,
+            workshop);
+    }
+
+    deleteWorkshop(workshopId: string): Observable<any> {
+        return this.api.deleteRequest(`/posts/${workshopId}`);
+    }
 }

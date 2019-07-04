@@ -9,11 +9,13 @@ import {selectWorkshopsState} from './workshops.selectors';
 
 export const adapter: EntityAdapter<WorkshopModel> = createEntityAdapter<WorkshopModel>();
 export const commentAdapter: EntityAdapter<CommentModel> = createEntityAdapter<CommentModel>();
+export const quizzesAdapter: EntityAdapter<QuizModel> = createEntityAdapter<QuizModel>();
 
 export interface WorkshopsState extends EntityState<WorkshopModel> {
     workshopLoaded: boolean;
     workshop: WorkshopModel | null;
     comments: EntityState<CommentModel>;
+    quizzes: EntityState<QuizModel>;
     tags: Tag[] | null;
     users: Array<UserModel> | null;
 }
@@ -22,6 +24,7 @@ export const workshopsInitialState: WorkshopsState = adapter.getInitialState({
     workshopLoaded: false,
     workshop: null,
     comments: commentAdapter.getInitialState({}),
+    quizzes: quizzesAdapter.getInitialState({}),
     tags: null,
     users: null,
 });
@@ -39,10 +42,20 @@ export function workshopsReducer(state = workshopsInitialState, action: Workshop
                 workshop: action.payload.workshop,
             };
 
+        case WorkshopsActionTypes.WorkshopDeleted:
+            return adapter.removeOne(
+                action.payload.workshopId, state);
+
         case WorkshopsActionTypes.WorkshopCommentsLoaded:
             return {
                 ...state,
                 comments: commentAdapter.addAll(action.payload.comments, state.comments),
+            };
+
+        case WorkshopsActionTypes.WorkshopQuizzesLoaded:
+            return {
+                ...state,
+                quizzes: quizzesAdapter.addAll(action.payload.quizzes, state.quizzes),
             };
 
         case WorkshopsActionTypes.WorkshopCommentsCreated:
@@ -91,3 +104,7 @@ export const {
 export const {
     selectAll: selectAllComments
 } = commentAdapter.getSelectors();
+
+export const {
+    selectAll: selectAllQuizzes
+} = quizzesAdapter.getSelectors();

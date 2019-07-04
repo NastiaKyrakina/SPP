@@ -4,6 +4,8 @@ import {WorkshopParams} from '../services/workshop.service';
 import {CommentModel, WorkshopModel} from '../../models/workshop.model';
 import {Tag} from '../../models/additional.model';
 import {UserModel} from '../../models/user.model';
+import {QuizModel} from '../../quizzes/models/quiz.model';
+import {QuizzesActionTypes} from '../../quizzes/store/quizzes.actions';
 
 export enum WorkshopsActionTypes {
     WorkshopsRequested = '[Workshops] Quizzes Requested',
@@ -13,6 +15,10 @@ export enum WorkshopsActionTypes {
     WorkshopRequested = '[Workshop] Workshop Requested',
     WorkshopLoaded = '[Workshop] Workshop Loaded',
     WorkshopLoadingFailed = '[Workshop] Workshop Loading Failed',
+
+    WorkshopDeleting = '[Workshop] Workshop Deleting',
+    WorkshopDeleted = '[Workshop] Workshop Deleted',
+    WorkshopDeletingFailed = '[Workshop]  omments Deleting',
 
     WorkshopCommentsRequested = '[Workshop Comments] Workshop Comments Requested',
     WorkshopCommentsLoaded = '[Workshop Comments] Workshop Comments Loaded',
@@ -29,6 +35,10 @@ export enum WorkshopsActionTypes {
     WorkshopCommentsDeleting = '[Workshop Comments] Workshop Comments Deleting',
     WorkshopCommentsDeleted = '[Workshop Comments] Workshop Comments Deleted',
     WorkshopCommentsDeletingFailed = '[Workshop Comments] Workshop Comments Deleting Failed',
+
+    WorkshopQuizzesRequested = '[Workshop Quizzes] Workshop  Quizzes Requested',
+    WorkshopQuizzesLoaded = '[Workshop Quizzes]  Workshop Quizzes Loaded',
+    WorkshopQuizzesLoadingFailed = '[Workshop Quizzes]  Workshop Quizzes Loading Failed',
 
     TagsRequested = '[Workshop Tags] Workshop Tags Requested',
     TagsLoaded = '[Workshop Tags] Workshop Tags Loaded',
@@ -82,6 +92,28 @@ export class WorkshopLoaded implements Action {
 
 export class WorkshopLoadingFailed implements Action {
     readonly type = WorkshopsActionTypes.WorkshopLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+// delete workshop
+export class WorkshopDeleting implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopDeleting;
+
+    constructor(public payload: { workshopId: string}) {
+    }
+}
+
+export class WorkshopDeleted implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopDeleted;
+
+    constructor(public payload: { workshopId: string }) {
+    }
+}
+
+export class WorkshopDeletingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopDeletingFailed;
 
     constructor(public payload: { error: any }) {
     }
@@ -179,6 +211,26 @@ export class WorkshopCommentsDeletingFailed implements Action {
     }
 }
 
+export class WorkshopQuizzesRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopQuizzesRequested;
+    constructor(public payload: { workshopId: string }) {
+    }
+}
+
+export class WorkshopQuizzesLoaded implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopQuizzesLoaded;
+
+    constructor(public payload: { quizzes: Array<QuizModel> }) {
+    }
+}
+
+export class WorkshopQuizzesLoadingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopQuizzesLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
 export class TagsRequested implements Action {
     readonly type = WorkshopsActionTypes.TagsRequested;
 }
@@ -225,6 +277,9 @@ export type WorkshopsActions =
     WorkshopRequested |
     WorkshopLoaded |
     WorkshopLoadingFailed |
+    WorkshopDeleting |
+    WorkshopDeleted |
+    WorkshopDeletingFailed |
     WorkshopCommentsRequested |
     WorkshopCommentsLoaded |
     WorkshopCommentsLoadingFailed |
@@ -237,6 +292,9 @@ export type WorkshopsActions =
     WorkshopCommentsDeleting |
     WorkshopCommentsDeleted |
     WorkshopCommentsDeletingFailed |
+    WorkshopQuizzesRequested |
+    WorkshopQuizzesLoaded |
+    WorkshopQuizzesLoadingFailed |
     TagsRequested |
     TagsLoaded |
     TagsLoadingFailed |

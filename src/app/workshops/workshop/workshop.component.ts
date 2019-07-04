@@ -18,10 +18,6 @@ const tabsList = [
         href: 'comments',
     },
     {
-        title: 'Resources',
-        href: 'resources',
-    },
-    {
         title: 'Quizzes',
         href: 'quizzes',
     },
@@ -59,9 +55,8 @@ export class WorkshopComponent implements OnInit, OnDestroy {
                 this.store.dispatch(new TagsRequested());
             });
 
-        this.workshop$ = this.store.pipe(select(selectWorkshop));
         this.tags$ = this.store.pipe(select(selectCurrentWorkshopTags));
-
+        this.workshop$ = this.store.pipe(select(selectWorkshop));
         if (this.router.url.split('/').pop()[0] === '(') {
             this.auxOpen = true;
         }

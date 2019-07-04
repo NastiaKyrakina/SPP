@@ -1,17 +1,3 @@
-// const postSchema = new Schema({
-//     _author: { type: Schema.Types.ObjectId, ref: 'User' },
-//     tags: { type: [Number], required: true },
-//     title: { type: String, required: true },
-//     description: { type: String, required: false },
-//     text: { type: String, required: false },
-//     image: { type: String, required: false },
-//     createdAt: { type: Date, default: Date.now },
-//     updatedAt: { type: Date, default: Date.now },
-//     likes: [ReactionSchema.schema],
-//     stars: [ReactionSchema.schema],
-//     uni: [ReactionSchema.schema],
-//     comments: [CommentSchema.schema]
-// });
 import {UserModel} from './user.model';
 
 export interface ReactionModel {
@@ -32,7 +18,7 @@ export interface CommentModel {
 
 export interface WorkshopModel {
     id: string;
-    _author: string;
+    author: string;
     title: string;
     description?: string;
     text?: string;

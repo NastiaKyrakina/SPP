@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {WorkshopModel} from '../../models/workshop.model';
 import {UserModel} from '../../models/user.model';
 import {WorkshopService} from '../services/workshop.service';
@@ -10,7 +10,12 @@ import {
     animate,
     transition,
 } from '@angular/animations';
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {UserService} from '../../services/user.service';
+import {AuthService} from '../../auth/auth.service';
+import {AppState} from '../../reducers';
+import {select, Store} from '@ngrx/store';
+import {selectCurrentUser} from '../../auth/store/auth.selectors';
 
 @Component({
     selector: 'app-article',
@@ -39,20 +44,30 @@ import {Observable} from "rxjs";
     ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnDestroy {
     @Input() workshop: WorkshopModel;
     @Input() tags: Array<Tag>;
+    @Input() user: UserModel;
+    @Output() workshopDeleted = new EventEmitter<string>();
     currentUser: UserModel;
     likeIt: boolean;
     isOpen = true;
-
-    constructor(private wrkService: WorkshopService) {
+    contrMenuOpened = false;
+    isAdmin = false;
+    private userSbs: Subscription;
+    constructor(private wrkService: WorkshopService,
+                private store: Store<AppState>) {
     }
 
     ngOnInit() {
-       // this.tags$ = this.wrkService.getTags(this.workshop.tags);
         this.wrkService.getTags(this.workshop.tags);
         this.likeIt = false;
+        this.userSbs = this.store.pipe(select(selectCurrentUser)).subscribe(
+            user => {
+                this.currentUser = user;
+                this.isAdmin = this.currentUser.role === 'admin';
+            }
+        );
     }
 
     liked($event: boolean): void {
@@ -61,5 +76,17 @@ export class ArticleComponent implements OnInit {
 
     changeState(): void {
         this.isOpen = !this.isOpen;
+    }
+
+    deleteWorkshop() {
+        this.workshopDeleted.emit(this.workshop.id);
+    }
+
+    openMenu() {
+        this.contrMenuOpened = !this.contrMenuOpened;
+    }
+
+    ngOnDestroy(): void {
+        this.userSbs.unsubscribe();
     }
 }

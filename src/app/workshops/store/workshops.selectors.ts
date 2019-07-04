@@ -31,6 +31,16 @@ export const selectWorkshopComments = createSelector(
     fromWorkshops.selectAllComments
 );
 
+export const selectWorkshopQuizzesState = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.quizzes,
+);
+
+export const selectWorkshopQuizzes = createSelector(
+    selectWorkshopQuizzesState,
+    fromWorkshops.selectAllQuizzes
+);
+
 export const selectTags = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => state.tags

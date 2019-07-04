@@ -1,6 +1,6 @@
 app-viewport
     div(main="")
-        .feed.row
+       .feed.row
             .col.aside-menu
                 .menu
                     button.catg-btn(*ngFor = 'let ctg of ctgList',
@@ -9,14 +9,19 @@ app-viewport
                     className = 'selected',
                     paramName='ctg',
                     [paramValue]='ctg') {{ctg}}
-            .col.main-content
-                div(*ngIf='workshops$ | async as workshops; else empty' )
-                    app-article(*ngFor='let workshop of workshops',
-                    [workshop] = 'workshop',
-                    [tags] = 'tags | workshopTags: workshop.tags')
-
-                button.secondary((click) = 'loadArticles()',
-                [hidden]='emptyPage') Load more articles...
+                .menu-control
+                    a.control-btn(
+                    routerLink='/workshops/create'
+                    ) Add workshop
+            .col.main-content(*ngIf = 'users$ | async as users')
+                app-article('*ngFor'='let workshop of workshops$ | async',
+                [workshop] = 'workshop',
+                [user] = 'users|author:workshop.author',
+                [tags] = 'tags | workshopTags: workshop.tags',
+                (workshopDeleted) = 'deleteWorkshop($event)')
+                button.secondary(
+                    (click) = 'loadArticles()',
+                    [hidden]='emptyPage') Load more articles...
             .col.tags
                 .tag-cloud
                     ng-container(*ngIf='tagsLoaded; else emptyTags')

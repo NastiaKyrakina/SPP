@@ -14,9 +14,9 @@ import {
     WorkshopCommentsLoadingFailed,
     WorkshopCommentsRequested,
     WorkshopCommentsUpdated, WorkshopCommentsUpdating,
-    WorkshopCommentsUpdatingFailed,
+    WorkshopCommentsUpdatingFailed, WorkshopDeleted, WorkshopDeleting,
     WorkshopLoaded,
-    WorkshopLoadingFailed,
+    WorkshopLoadingFailed, WorkshopQuizzesLoaded, WorkshopQuizzesLoadingFailed, WorkshopQuizzesRequested,
     WorkshopRequested,
     WorkshopsActionTypes,
     WorkshopsLoaded,
@@ -31,6 +31,7 @@ import {AppState} from '../../reducers';
 import {TagsService} from '../../services/tags.service';
 import {of} from 'rxjs';
 import {CommentModel} from '../../models/workshop.model';
+import {QuizService} from '../../quizzes/services/quiz.service';
 
 @Injectable()
 export class WorkshopsEffects {
@@ -48,6 +49,10 @@ export class WorkshopsEffects {
                             }) => {
                 return this.workshopService.filterWorkshops(tags, category, page).pipe(
                     map(workshops => {
+                        const workshopsAuthors = workshops.map(workshop => workshop.author);
+                        if (workshopsAuthors.length) {
+                            this.store.dispatch(new UsersRequested({usersIds: workshopsAuthors}));
+                        }
                         return new WorkshopsLoaded({workshops});
                     }),
                     catchError((error) => {
@@ -73,6 +78,22 @@ export class WorkshopsEffects {
             }));
 
     @Effect()
+    WorkshopDeleting$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopDeleting),
+            map((action: WorkshopDeleting) => action.payload),
+            exhaustMap(({workshopId}: { workshopId: string }) => {
+                return this.workshopService.deleteWorkshop(workshopId).pipe(
+                    map(responce => {
+                        return new WorkshopDeleted({workshopId});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopLoadingFailed({error}));
+                    })
+                );
+            }));
+
+    @Effect()
     WorkshopCommentsRequested$ = this.actions$
         .pipe(
             ofType(WorkshopsActionTypes.WorkshopCommentsRequested),
@@ -81,11 +102,29 @@ export class WorkshopsEffects {
                 return this.commentsService.getWrkComments(workshopId).pipe(
                     map(comments => {
                         const commentsAuthors = comments.map(comment => comment._author);
-                        this.store.dispatch(new UsersRequested({usersIds: commentsAuthors}));
+                        if (commentsAuthors.length) {
+                            this.store.dispatch(new UsersRequested({usersIds: commentsAuthors}));
+                        }
                         return new WorkshopCommentsLoaded({comments});
                     }),
                     catchError((error) => {
                         return of(new WorkshopCommentsLoadingFailed({error}));
+                    })
+                );
+            }));
+
+    @Effect()
+    WorkshopQuizzesRequested$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopQuizzesRequested),
+            map((action: WorkshopQuizzesRequested) => action.payload),
+            exhaustMap(({workshopId}: { workshopId: string }) => {
+                return this.quizService.getQuizzes({page: '0', postId: workshopId}).pipe(
+                    map(quizzes => {
+                        return new WorkshopQuizzesLoaded({quizzes});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopQuizzesLoadingFailed({error}));
                     })
                 );
             }));
@@ -127,7 +166,7 @@ export class WorkshopsEffects {
         .pipe(
             ofType(WorkshopsActionTypes.WorkshopCommentsDeleting),
             map((action: WorkshopCommentsDeleting) => action.payload),
-            exhaustMap(({workshopId, commentId}: { workshopId: string, commentId: string}) => {
+            exhaustMap(({workshopId, commentId}: { workshopId: string, commentId: string }) => {
                 return this.commentsService.deleteComment(workshopId, commentId).pipe(
                     map(responce => {
                         return new WorkshopCommentsDeleted({commentId: responce.commId});
@@ -172,6 +211,7 @@ export class WorkshopsEffects {
     constructor(private actions$: Actions,
                 private workshopService: WorkshopService,
                 private commentsService: CommentService,
+                private quizService: QuizService,
                 private tagService: TagsService,
                 private store: Store<AppState>) {
     }

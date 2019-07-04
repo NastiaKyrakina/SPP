@@ -9,8 +9,9 @@ import {TagsService} from '../../services/tags.service';
 import {UserService} from '../../services/user.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {TagsRequested, WorkshopsRequested} from '../store/workshops.actions';
-import {selectTags, selectWorkshops} from '../store/workshops.selectors';
+import {TagsRequested, WorkshopDeleting, WorkshopsRequested} from '../store/workshops.actions';
+import {selectTags, selectUsers, selectWorkshops} from '../store/workshops.selectors';
+import {UserModel} from '../../models/user.model';
 
 @Component({
     selector: 'app-workshops',
@@ -27,6 +28,7 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
     emptyPage = false;
     private querySubscription: Subscription;
     private tagsSbs: Subscription;
+    users$: Observable<Array<UserModel>>;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -48,7 +50,9 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
                     category
                 }));
             });
+
         this.store.dispatch(new TagsRequested());
+        this.users$ = this.store.pipe(select(selectUsers));
         this.store.pipe(select(selectTags)).subscribe(
             tags => {
                 this.tags = tags;
@@ -117,5 +121,9 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
     loadArticles(): void {
         this.wrkService.page += 1;
         this.addQueryParam('page', this.wrkService.page + '');
+    }
+
+    deleteWorkshop($event: string): void {
+        this.store.dispatch(new WorkshopDeleting({workshopId: $event}));
     }
 }

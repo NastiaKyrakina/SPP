@@ -5,7 +5,7 @@ import {WorkshopsComponent} from './workshops/workshops.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
 import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
-import {WorkshopResourcesComponent} from './workshop-resources/workshop-resources.component';
+import {CreateWorkshopComponent} from './create-workshop/create-workshop.component';
 
 const routes: Routes = [
     {
@@ -20,8 +20,15 @@ const routes: Routes = [
                 component: WorkshopCommentsComponent,
                 outlet: 'aside'},
             {path: 'quizzes', component: WorkshopQuizzesComponent, outlet: 'aside'},
-            {path: 'resources', component: WorkshopResourcesComponent, outlet: 'aside'},
         ]
+    },
+    {
+        path: 'create',
+        component: CreateWorkshopComponent,
+    },
+    {
+        path: ':id/edit',
+        component: CreateWorkshopComponent,
     },
     {
         path: '',
