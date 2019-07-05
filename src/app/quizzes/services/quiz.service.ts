@@ -42,7 +42,7 @@ export class QuizService {
         return this.apiService.postRequest(`/quizzes`, quiz);
     }
 
-    updateQuiz(id: string, quiz: QuizModel): Observable<any> {
+    updateQuiz(id: string, quiz: Partial<QuizModel>): Observable<any> {
         return this.apiService.putRequest(`/quizzes/${id}`, quiz);
     }
 

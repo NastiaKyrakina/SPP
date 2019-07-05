@@ -4,6 +4,10 @@
         i.icon-bin.hover-danger
 a([routerLink]='["../quiz", quiz.id]').row.centered
         h3 {{quiz.name}}
+.row(*ngIf='selectedMod').flex-center.selected
+    button(*ngIf='!alreadySelected; else alreadySelectedMessage',
+         (click) = 'addToWorkshop()') Add quiz to workshop
+    ng-template(#alreadySelectedMessage='') This quiz already added to workshop
 .row.flex-right.footer
     div
         small created by {{userName}}
