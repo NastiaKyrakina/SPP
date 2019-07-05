@@ -1,0 +1,61 @@
+app-viewport()
+    div(main="")
+        .centered.row.flex-center(*ngIf = 'requestTypeChecked && workshopLoad')
+            form.centered-form([formGroup]='createWorkshopForm')
+                .caption
+                    i.icon-book
+                    | {{isEdited ? 'Edit Workshop' : 'Create Workshop'}}
+                app-input(
+                    id='title',
+                    formControlName='title',
+                    [value]='workshop.title',
+                    label='*Workshop title')
+                .alert(*ngIf='title.invalid && (title.dirty || title.touched)')
+                    small *Please, enter workshop title
+                app-input(
+                    id = 'image',
+                    formControlName = 'image',
+                    [value]='workshop.image',
+                    label = 'Image link')
+                label(for='description') Description
+                textarea(
+                    id = 'description',
+                    formControlName = 'description',
+                    rows = 3 cols = 10,
+                    maxlength = '255' )
+                label(for='text') *Workshop text
+                textarea(
+                    id = 'text',
+                    formControlName = 'text',
+                    rows = 10 cols = 10 )
+                .alert(*ngIf='text.invalid && (text.dirty || text.touched)')
+                    small *Please, add workshop text
+                .tags
+                    .select
+                        label(for='tags') *Select tags
+                        input(
+                        type="text",
+                        id = 'tags',
+                        formControlName = 'tags',
+                        list = 'tagsList',
+                        )
+                        datalist(id = 'tagsList')
+                            option(*ngFor = 'let option of tags',
+                            [value] = 'option.name',
+                            [id] = 'option.seq')
+                        button.mini-btn((click) = 'addTag()') Add
+                    .alert(*ngIf='!selectedTags.length && (tagsInput.dirty || tagsInput.touched)')
+                        small *Please, add tags to workshop
+                    .cloud
+                        span.tag(*ngFor = 'let tag of selectedTags')
+                            button((click) = 'removeTag(tag)')
+                                i.icon-cross
+                            | {{tag}}
+                    .form-footer.row.flex-between
+                        button.submit-btn(
+                        [disabled] = 'createWorkshopForm.invalid || !selectedTags.length ',
+                        (click)='submitForm()'
+                        )
+                            span {{isEdited ? 'Update workshop' : 'Create workshop'}}
+                        button.reset-btn(type='reset', (click)='cleanForm()') Clean
+

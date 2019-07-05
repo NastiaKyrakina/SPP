@@ -1,0 +1,10 @@
+.comments(*ngIf = 'users$ | async as users')
+    app-comment-card(
+    *ngFor = 'let comment of comments$ | async; trackBy: trackComment',
+    [comment] = 'comment',
+    [user] = 'users|author:comment.author',
+    (deletedComment) = 'deleteComment($event)',
+    (editedComment) = 'editeComment($event)'
+    )
+.comment-form
+    app-comment-form((submitedForm)='addComment($event)')

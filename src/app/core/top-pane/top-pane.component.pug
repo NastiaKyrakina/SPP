@@ -1,0 +1,31 @@
+.top-pane
+    .rigth
+        a.logo(routerLink='/workshops/feed')
+        .icons
+            button.menu-icon((click)='changeMenuState()')
+                i([ngClass]='menuOpened ? "icon-cross" : "icon-menu"' )
+            button((click)='changeSrchBarState()')
+                i.icon-search
+        form.search-bar(#searchForm = 'ngForm',
+                        [ngClass] = '{"open-search":searchOpen}',
+                        (submit) = 'startSearch(searchForm)')
+            button.close-btn
+                i.icon-cross((click)='changeSrchBarState()')
+            input(type='text' name='search' id='search'
+            placeholder='Search...', ngModel='')
+            button.search-btn()
+                i.icon-search
+    button.user-account(
+    *ngIf='user',
+    (click)='changePopMenuState()'
+    )
+        .name
+            span {{getFullName(user)}}
+        app-user-pic([picture]= 'user.picture', [fname]='user.firstName', [lname]='user.lastName')
+        .panel
+            .pop-menu([hidden]='!isPopMenuOpen')
+                a.menu-item(routerLink='/auth/reset') Change password
+                a.menu-item(routerLink='/auth/logout') Exit
+
+.hide-zone([ngClass] = '{"open-search":searchOpen}', (click)='changeSrchBarState()')
+

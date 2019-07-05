@@ -1,0 +1,11 @@
+.row.flex-between
+    app-timestamp([timestamp]='quiz.createdAt', [onlyDate]='true' )
+    button(*ngIf='isAuthor', (click)='deleteQuiz(quiz.id)')
+        i.icon-bin.hover-danger
+a([routerLink]='["../quiz", quiz.id]').row.centered
+        h3 {{quiz.name}}
+.row.flex-right.footer
+    div
+        small created by {{userName}}
+
+

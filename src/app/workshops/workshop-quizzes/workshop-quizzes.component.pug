@@ -1,0 +1,6 @@
+.quizzez
+    .quiz-item(*ngFor = 'let quiz of quizzes$ | async',
+                appTextToColor [text]='quiz.name',
+                [colorMap] = '["#ffb628", "#e98ed7", "#93c5e9", "#e4e96c", "#afe56c"]',
+                [hoverEffect]='"off"')
+        a([routerLink] = '["/quizzes/quiz", quiz.id]') {{quiz.name}}

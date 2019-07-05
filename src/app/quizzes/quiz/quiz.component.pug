@@ -1,0 +1,23 @@
+app-viewport
+    div(main="")
+        ng-container(*ngIf='quiz$ | async as quiz; else loading' )
+            h1 {{quiz.name}}
+                img.quiz(src='/assets/quiz/quiz.png')
+            .row.flex-center
+                .questions(*ngIf='!hasResult')
+                    app-dynamic-form([config] = 'quiz.questions|quizzesToConfig',
+                    (submited) = 'getResult($event)')
+        .row.flex-center
+            .quiz-result(*ngIf='hasResult',
+                        appMark, [all]='all', [correct] = 'correct')
+                div
+                    strong {{message}}
+                div {{correct}} \ {{all}}
+                .btn-group.row
+                    button.btn.try-btn(*ngIf='correct!==all', (click) = 'restartQuiz()')
+                        i.icon-target
+                        | Try again
+                    button.btn.try-btn.exit-btn((click) = 'exitQuiz()')
+                        i.icon-enter
+                        | Close quiz
+        ng-template(#loading='') Quiz loading...

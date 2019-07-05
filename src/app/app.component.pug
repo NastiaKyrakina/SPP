@@ -1,3 +1,13 @@
-span.icon-menu
-h1 Hello!
+router-outlet
+ng-container(*ngIf = '(authenticated$ | async)')
+    app-side-menu(
+    [menuOpened] = 'menuOpened',
+    (clOnMenuDrop) = "changeMenuState()" )
+    app-top-pane(
+    [menuOpened] = 'menuOpened',
+    (clOnMenuBtn) = "changeMenuState()"
+     )
+
+
+
 

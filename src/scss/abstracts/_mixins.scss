@@ -1,0 +1,21 @@
+@mixin setting_position($left: auto, $right: auto, $top: auto, $bottom: auto){
+    position: absolute;
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+}
+
+@mixin responsive_width($sm: 100%, $md: 50%, $lg: 35%){
+    width: $sm;
+    max-width: 450px;
+    min-width: 250px;
+
+    @include mq($from: mobileLandscape) {
+        width:  $md;
+    }
+        @include mq($from: md) {
+        width: $lg;
+    }
+}
+

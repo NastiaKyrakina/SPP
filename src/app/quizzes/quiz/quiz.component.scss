@@ -1,0 +1,74 @@
+@mixin transparentOnHover($color: black) {
+    background-color: transparentize($color, 0.3);
+    transition: background-color 200ms linear;
+    &:hover {
+        background-color: transparentize($color, 0);
+    }
+}
+
+h1 {
+    text-align: center;
+    position: relative;
+}
+
+img.quiz {
+    position: absolute;
+    top: -1em;
+    left: -1em;
+
+}
+
+.questions {
+    margin: 0 1em;
+    flex: 2;
+    max-width: 400px;
+}
+
+.quiz {
+    width: 100px;
+}
+
+.quiz-result {
+    background-color: #8e8d9a;
+    color: white;
+    text-align: center;
+    border-radius: 1em;
+    padding: 2em 2em 1em 2em;
+    margin: 2em;
+    font-size: 1.3em;
+    line-height: 2em;
+}
+
+.susses {
+    background-color: #6af65d;
+    color: #0c0c0c;
+
+}
+
+.almost {
+    background-color: yellow;
+    color: #0c0c0c;
+}
+
+.fail {
+    background-color: brown;
+}
+.btn {
+    font-size: 0.8em;
+    i {
+        margin-right: 0.2em;
+    }
+}
+
+.btn-group {
+    margin-top: 2em;
+}
+
+.try-btn {
+    @include transparentOnHover(#ff7700);
+}
+
+.exit-btn {
+    @include transparentOnHover(#858585);
+}
+
