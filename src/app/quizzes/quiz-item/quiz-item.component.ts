@@ -14,6 +14,9 @@ export class QuizItemComponent implements OnInit {
 
     @Input() quiz: QuizModel;
     @Input() user: UserModel;
+    @Input() selectedMod: boolean;
+    @Input() alreadySelected = false;
+    @Output() quizSelected = new EventEmitter<string>();
     @Output() quizDeleted = new EventEmitter<string>();
     userName: string;
     isAuthor: boolean;
@@ -36,5 +39,9 @@ export class QuizItemComponent implements OnInit {
 
     deleteQuiz(id: string): void {
         this.quizDeleted.emit(id);
+    }
+
+    addToWorkshop() {
+        this.quizSelected.emit(this.quiz.id);
     }
 }
