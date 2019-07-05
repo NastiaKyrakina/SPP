@@ -12,6 +12,7 @@ import {AppState} from '../../reducers';
 import {TagsRequested, WorkshopDeleting, WorkshopsRequested} from '../store/workshops.actions';
 import {selectTags, selectUsers, selectWorkshops} from '../store/workshops.selectors';
 import {UserModel} from '../../models/user.model';
+import {ConfirmPopupService} from '../../core/confirm-popup.service';
 
 @Component({
     selector: 'app-workshops',
@@ -35,6 +36,7 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
                 private wrkService: WorkshopService,
                 private tagService: TagsService,
                 private userService: UserService,
+                private popUpService: ConfirmPopupService,
                 private store: Store<AppState>) {
     }
 
@@ -63,7 +65,6 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
         const currentTags = this.route.snapshot
             .queryParamMap.get('tags');
         this.ctgSelect = this.ctgList[0];
-
     }
 
     getCurrentTags(): string[] {
@@ -120,13 +121,18 @@ export class WorkshopsComponent implements OnInit, OnDestroy {
     }
 
     deleteWorkshop($event: string): void {
-        this.store.dispatch(new WorkshopDeleting({workshopId: $event}));
+        this.popUpService.confirm({
+            data: {
+                title: 'Delete workshop',
+                text: 'Do you really want to delete this workshop?',
+            }
+        }).subscribe((confirmed: boolean) => {
+            this.store.dispatch(new WorkshopDeleting({workshopId: $event}));
+        });
     }
 
     ngOnDestroy(): void {
         this.querySubscription.unsubscribe();
         this.tagsSbs.unsubscribe();
     }
-
-    
 }

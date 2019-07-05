@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './reducers/app.effects';
 import {AuthModule} from './auth/auth.module';
+import {ConfirmPopupComponent} from './core/confirm-popup/confirm-popup.component';
 
 
 @NgModule({
@@ -39,6 +40,9 @@ import {AuthModule} from './auth/auth.module';
         StoreModule.forRoot(reducers, { metaReducers }),
         StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
         EffectsModule.forRoot([AppEffects])
+    ],
+    entryComponents: [
+        ConfirmPopupComponent,
     ],
     exports: [],
     providers: [

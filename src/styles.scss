@@ -4,3 +4,14 @@
 @import "base/normalize";
 @import "base/icomoon";
 @import "layouts/layouts";
+@import '~@angular/cdk/overlay-prebuilt.css';
+
+.dark-backdrop {
+        background: #000;
+        opacity: 0.85 !important;
+}
+
+.standard-panel{
+
+}
+

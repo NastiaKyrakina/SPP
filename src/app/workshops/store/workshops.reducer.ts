@@ -1,5 +1,5 @@
 import {Action, combineReducers} from '@ngrx/store';
-import {WorkshopsActions, WorkshopsActionTypes} from './workshops.actions';
+import {WorkshopQuizAdded, WorkshopsActions, WorkshopsActionTypes} from './workshops.actions';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {QuizModel} from '../../quizzes/models/quiz.model';
 import {CommentModel, WorkshopModel} from '../../models/workshop.model';
@@ -18,6 +18,7 @@ export interface WorkshopsState extends EntityState<WorkshopModel> {
     quizzes: EntityState<QuizModel>;
     tags: Tag[] | null;
     users: Array<UserModel> | null;
+    idForQuizzes: string | null;
 }
 
 export const workshopsInitialState: WorkshopsState = adapter.getInitialState({
@@ -27,6 +28,7 @@ export const workshopsInitialState: WorkshopsState = adapter.getInitialState({
     quizzes: quizzesAdapter.getInitialState({}),
     tags: null,
     users: null,
+    idForQuizzes: null,
 });
 
 
@@ -86,6 +88,17 @@ export function workshopsReducer(state = workshopsInitialState, action: Workshop
                 tags: action.payload.tags,
             };
 
+        case WorkshopsActionTypes.WorkshopIdSet:
+            return {
+                ...state,
+                idForQuizzes: state.workshop ? state.workshop.id : null,
+            };
+        case WorkshopsActionTypes.WorkshopQuizAdded:
+            return {
+            ...state,
+            quizzes: quizzesAdapter.addOne(
+                action.payload.quiz, state.quizzes),
+        };
         case WorkshopsActionTypes.UsersLoaded:
             return {
                 ...state,
@@ -106,5 +119,6 @@ export const {
 } = commentAdapter.getSelectors();
 
 export const {
-    selectAll: selectAllQuizzes
+    selectAll: selectAllQuizzes,
+    selectIds: selectQuizzesIds,
 } = quizzesAdapter.getSelectors();

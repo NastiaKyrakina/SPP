@@ -36,6 +36,11 @@ export const selectWorkshopQuizzesState = createSelector(
     (state: WorkshopsState) => state.quizzes,
 );
 
+export const selectWorkshopQuizzesId = createSelector(
+    selectWorkshopQuizzesState,
+    fromWorkshops.selectQuizzesIds
+);
+
 export const selectWorkshopQuizzes = createSelector(
     selectWorkshopQuizzesState,
     fromWorkshops.selectAllQuizzes
@@ -44,6 +49,11 @@ export const selectWorkshopQuizzes = createSelector(
 export const selectTags = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => state.tags
+);
+
+export const selectIdForQuizzes = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.idForQuizzes
 );
 
 export const selectCurrentWorkshopTags = createSelector(

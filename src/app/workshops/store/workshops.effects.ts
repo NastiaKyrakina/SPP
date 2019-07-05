@@ -7,16 +7,27 @@ import {
     UsersLoaded,
     UsersLoadingFailed,
     UsersRequested,
+    WorkshopAddQuizRequested,
     WorkshopCommentsCreated,
     WorkshopCommentsCreating,
-    WorkshopCommentsCreatingFailed, WorkshopCommentsDeleted, WorkshopCommentsDeleting, WorkshopCommentsDeletingFailed,
+    WorkshopCommentsCreatingFailed,
+    WorkshopCommentsDeleted,
+    WorkshopCommentsDeleting,
+    WorkshopCommentsDeletingFailed,
     WorkshopCommentsLoaded,
     WorkshopCommentsLoadingFailed,
     WorkshopCommentsRequested,
-    WorkshopCommentsUpdated, WorkshopCommentsUpdating,
-    WorkshopCommentsUpdatingFailed, WorkshopDeleted, WorkshopDeleting,
+    WorkshopCommentsUpdated,
+    WorkshopCommentsUpdating,
+    WorkshopCommentsUpdatingFailed,
+    WorkshopDeleted,
+    WorkshopDeleting,
     WorkshopLoaded,
-    WorkshopLoadingFailed, WorkshopQuizzesLoaded, WorkshopQuizzesLoadingFailed, WorkshopQuizzesRequested,
+    WorkshopLoadingFailed,
+    WorkshopQuizAdded, WorkshopQuizAddingFailed,
+    WorkshopQuizzesLoaded,
+    WorkshopQuizzesLoadingFailed,
+    WorkshopQuizzesRequested,
     WorkshopRequested,
     WorkshopsActionTypes,
     WorkshopsLoaded,
@@ -173,6 +184,21 @@ export class WorkshopsEffects {
                     }),
                     catchError((error) => {
                         return of(new WorkshopCommentsDeletingFailed({error}));
+                    })
+                );
+            }));
+    @Effect()
+    WorkshopAddQuizRequested$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopAddQuizRequested),
+            map((action: WorkshopAddQuizRequested) => action.payload),
+            exhaustMap(({ workshopId, quizId }: {workshopId: string, quizId: string}) => {
+                return this.quizService.updateQuiz(quizId, {posts: [workshopId, ]}).pipe(
+                    map(responce => {
+                        return new WorkshopQuizAdded({quiz: responce.quiz});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopQuizAddingFailed({error}));
                     })
                 );
             }));
