@@ -4,7 +4,7 @@ app-card()
             figure
                 img([src]='workshop.image')
                 figcaption {{workshop.title}}
-    ng-container(*ngIf='user.id == currentUser.id || isAdmin' )
+    ng-container(*ngIf='user && user.id == currentUser.id || isAdmin' )
         .btn-block()
             button.del-btn((click)="deleteWorkshop()" )
                 i.icon-bin

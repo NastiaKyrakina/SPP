@@ -4,8 +4,8 @@ import {QuizModel} from '../../quizzes/models/quiz.model';
 import {AppState} from '../../reducers';
 import {select, Store} from '@ngrx/store';
 import {QuizzesRequested} from '../../quizzes/store/quizzes.actions';
-import {ActivatedRoute} from '@angular/router';
-import {WorkshopCommentsRequested, WorkshopQuizzesRequested} from '../store/workshops.actions';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WorkshopCommentsRequested, WorkshopIdSet, WorkshopQuizzesRequested} from '../store/workshops.actions';
 import {selectQuizzes} from '../../quizzes/store/quizzes.selectors';
 import {selectWorkshopQuizzes} from '../store/workshops.selectors';
 
@@ -21,7 +21,8 @@ export class WorkshopQuizzesComponent implements OnInit, OnDestroy {
     private routeSbs: Subscription;
 
     constructor(private store: Store<AppState>,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -38,4 +39,12 @@ export class WorkshopQuizzesComponent implements OnInit, OnDestroy {
         this.routeSbs.unsubscribe();
     }
 
+    addQuiz() {
+        this.store.dispatch(new WorkshopIdSet());
+        this.router.navigate(['/quizzes/list'], {
+            queryParams: {
+                return: this.router.url,
+            }
+        });
+    }
 }

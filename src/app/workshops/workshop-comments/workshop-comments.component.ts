@@ -18,6 +18,8 @@ import {
 } from '../store/workshops.actions';
 import {selectIsWorkshopLoaded, selectUsers, selectWorkshopComments} from '../store/workshops.selectors';
 import {UserModel} from '../../models/user.model';
+import {QuizDeleteRequested} from '../../quizzes/store/quizzes.actions';
+import {ConfirmPopupService} from '../../core/confirm-popup.service';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -31,7 +33,8 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
                 private commentService: CommentService,
                 private route: ActivatedRoute,
                 private ref: ChangeDetectorRef,
-                private store: Store<AppState>) {
+                private store: Store<AppState>,
+                private popUpService: ConfirmPopupService) {
     }
 
     comments: Array<CommentModel>;
@@ -59,11 +62,17 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
     }
 
     deleteComment($event: string) {
-        this.store.dispatch(new WorkshopCommentsDeleting(
-            {
-                workshopId: this.workshopId,
-                commentId: $event
-            }));
+        this.popUpService.confirm({
+            data: {
+                title: 'Delete comment',
+                text: 'Do you really want to delete this comment?',
+            }
+        }).subscribe((confirmed: boolean) => {
+            this.store.dispatch(new WorkshopCommentsDeleting(
+                {
+                    workshopId: this.workshopId,
+                    commentId: $event
+                }));        });
     }
 
     editeComment($event: { id: string; text: string }) {

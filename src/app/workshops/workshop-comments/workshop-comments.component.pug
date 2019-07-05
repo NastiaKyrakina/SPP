@@ -2,7 +2,7 @@
     app-comment-card(
     *ngFor = 'let comment of comments$ | async; trackBy: trackComment',
     [comment] = 'comment',
-    [user] = 'users|author:comment.author',
+    [user] = 'users|author:comment._author',
     (deletedComment) = 'deleteComment($event)',
     (editedComment) = 'editeComment($event)'
     )

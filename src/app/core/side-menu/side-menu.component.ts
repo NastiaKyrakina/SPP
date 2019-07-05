@@ -13,7 +13,6 @@ export class SideMenuComponent implements OnInit {
     @Output() clOnMenuDrop = new EventEmitter<boolean>();
     /*dynamic list of side-menu items*/
     sideMenuItems: MenuItems = [
-        {title: 'Dashboard', href: '/dashboard', icon: 'stats-bars2'},
         {title: 'Lessons', href: '/workshops/feed', icon: 'book'},
         {title: 'Quizzes', href: '/quizzes', icon: 'bubbles'}
     ];

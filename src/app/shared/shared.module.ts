@@ -23,6 +23,7 @@ import { QueryParamsActiveDirective } from './directives/query-params-active.dir
 import { CurrentUserObjDirective } from './directives/current-user-obj.directive';
 import {AuthorPipe} from './pipe/author.pipe';
 import {WorkshopTagsPipe} from './pipe/workshop-tags.pipe';
+import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {WorkshopTagsPipe} from './pipe/workshop-tags.pipe';
         AuthorPipe,
         WorkshopTagsPipe,
         QueryParamsActiveDirective,
-        CurrentUserObjDirective],
+        CurrentUserObjDirective,
+        WorkshopQuizPipe],
     imports: [
         CommonModule,
         FormsModule,
@@ -70,6 +72,7 @@ import {WorkshopTagsPipe} from './pipe/workshop-tags.pipe';
         CurrentUserObjDirective,
         AuthorPipe,
         WorkshopTagsPipe,
+        WorkshopQuizPipe,
     ],
     entryComponents: [
         CommentFormComponent,

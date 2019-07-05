@@ -11,6 +11,8 @@ import {
 import {Observable, throwError} from 'rxjs';
 import {map, catchError} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.service';
+import {WorkshopCommentsDeleting} from '../workshops/store/workshops.actions';
+import {ConfirmPopupService} from '../core/confirm-popup.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -18,16 +20,20 @@ export class AuthInterceptor implements HttpInterceptor {
     errorHanding = (errorResponse: HttpErrorResponse) => {
         const clonedError = {...errorResponse};
         const status = clonedError.status;
-        if (status === 400) {
-            alert(errorResponse.error.message);
-        }
-        if (status === 401) {
-            // log out
-        }
+        this.popUpService.confirm({
+            hasBackdrop: false,
+            data: {
+                title: `Ops! ${status} error`,
+                text: errorResponse.error.message,
+                confirmButton: '',
+                cancelButton: 'Ok',
+            }
+        });
         return throwError(errorResponse);
     }
 
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private popUpService: ConfirmPopupService) {
 
     }
 

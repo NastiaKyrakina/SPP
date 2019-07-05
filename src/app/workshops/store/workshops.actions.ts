@@ -47,7 +47,17 @@ export enum WorkshopsActionTypes {
     UsersRequested = '[Users] Users Requested',
     UsersLoaded = '[Users] Users Loaded',
     UsersLoadingFailed = '[Users] Users Loading Failed',
+
+    WorkshopIdSetting = '[Workshop] Workshop Id Setting',
+    WorkshopIdSet = '[Workshop]  Workshop Id Set',
+    WorkshopIdSettingFailed = '[Workshop]  Workshop Id Setting Failed',
+
+    WorkshopAddQuizRequested = '[Workshop] Add Quiz Requested',
+    WorkshopQuizAdded = '[Workshop] Workshop Quiz Added',
+    WorkshopQuizAddingFailed  = '[Workshop] Workshop Quiz Adding Failed',
+
 }
+
 
 // get workshops feed
 export class WorkshopsRequested implements Action {
@@ -249,6 +259,42 @@ export class TagsLoadingFailed implements Action {
     }
 }
 
+// set workshop Id (for quiz select functional)
+export class WorkshopIdSetting implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopIdSetting;
+}
+
+export class WorkshopIdSet implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopIdSet;
+}
+
+export class WorkshopIdSettingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopIdSettingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+
+export class WorkshopAddQuizRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopAddQuizRequested;
+    constructor(public payload: { workshopId: string, quizId: string }) {
+    }
+}
+
+export class WorkshopQuizAdded implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopQuizAdded;
+
+    constructor(public payload: { quiz: QuizModel }) {
+    }
+}
+
+export class WorkshopQuizAddingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopQuizAddingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
 export class UsersRequested implements Action {
     readonly type = WorkshopsActionTypes.UsersRequested;
 
@@ -269,6 +315,7 @@ export class UsersLoadingFailed implements Action {
     constructor(public payload: { error: any }) {
     }
 }
+
 
 export type WorkshopsActions =
     WorkshopsRequested |
@@ -298,6 +345,12 @@ export type WorkshopsActions =
     TagsRequested |
     TagsLoaded |
     TagsLoadingFailed |
+    WorkshopIdSetting |
+    WorkshopIdSet |
+    WorkshopIdSettingFailed |
+    WorkshopAddQuizRequested |
+    WorkshopQuizAdded |
+    WorkshopQuizAddingFailed |
     UsersRequested |
     UsersLoaded |
     UsersLoadingFailed;
