@@ -7,6 +7,10 @@ export enum QuizzesActionTypes {
     QuizzesLoaded = '[Quizzes] Quizzes Loaded',
     QuizzesLoadingFailed = '[Quizzes] Quizzes Loading Failed',
 
+    MyQuizzesRequested = '[Quizzes] My Quizzes Requested',
+    MyQuizzesLoaded = '[Quizzes] My Quizzes Loaded',
+    MyQuizzesLoadingFailed = '[Quizzes] My Quizzes Loading Failed',
+
     QuizRequested = '[Quiz] Quiz Requested',
     QuizLoaded = '[Quiz] Quiz Loaded',
     QuizLoadingFailed = '[Quiz] Quiz Loading Failed',
@@ -40,6 +44,23 @@ export class QuizzesLoadingFailed implements Action {
     }
 }
 
+export class MyQuizzesRequested implements Action {
+    readonly type = QuizzesActionTypes.MyQuizzesRequested;
+}
+
+export class MyQuizzesLoaded implements Action {
+    readonly type = QuizzesActionTypes.MyQuizzesLoaded;
+
+    constructor(public payload: { quizzes: Array<QuizModel> }) {
+    }
+}
+
+export class MyQuizzesLoadingFailed implements Action {
+    readonly type = QuizzesActionTypes.MyQuizzesLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
 
 export class QuizRequested implements Action {
     readonly type = QuizzesActionTypes.QuizRequested;
@@ -109,6 +130,9 @@ export type QuizzesActions =
     QuizzesRequested |
     QuizzesLoaded |
     QuizzesLoadingFailed |
+    MyQuizzesRequested |
+    MyQuizzesLoaded |
+    MyQuizzesLoadingFailed |
     QuizRequested |
     QuizLoaded |
     QuizLoadingFailed |

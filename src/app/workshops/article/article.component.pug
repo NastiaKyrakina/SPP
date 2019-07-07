@@ -18,6 +18,9 @@ app-card()
         .tag(*ngFor="let tag of tags", [id]='"tag-"+tag.seq').
             {{tag.name}}
     .card-footer.row(card-footer='')
-        app-like([likes]='workshop.likesCount', [isActive] = 'likeIt',(likedWorkshop)='liked($event)')
+        .reactions.row.flex-between
+            app-like([likes]='workshop.reactionsCounts.likes', [isActive] = 'likeIt', (likedWorkshop)='liked($event)')
+            app-star([stars]='workshop.reactionsCounts.stars', [isActive] = 'likeIt', (favoriteWorkshop)='liked($event)')
+            app-uni([unis]='workshop.reactionsCounts.uni', [isActive] = 'likeIt', (uniWorkshop)='liked($event)')
         app-timestamp([timestamp]='workshop.createdAt', [onlyDate]='true')
 

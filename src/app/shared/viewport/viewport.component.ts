@@ -9,6 +9,7 @@ import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild
 export class ViewportComponent implements OnInit {
     @ViewChild('top') topPoint: ElementRef;
     @ViewChild('main') mainArea: ElementRef;
+    @Input() hasBackground = false;
 
     scrollPos: number;
 

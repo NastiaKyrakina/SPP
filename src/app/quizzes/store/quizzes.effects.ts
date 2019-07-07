@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {
+    MyQuizzesLoaded, MyQuizzesLoadingFailed,
     QuizCreated,
     QuizCreatingFailed,
     QuizCreatingRequested,
@@ -36,6 +37,22 @@ export class QuizzesEffects {
                     }),
                     catchError((error) => {
                         return of(new QuizzesLoadingFailed({error}));
+                    })
+                );
+            })
+        );
+
+    @Effect()
+    MyQuizzesRequested$ = this.actions$
+        .pipe(
+            ofType(QuizzesActionTypes.MyQuizzesRequested),
+            exhaustMap(() => {
+                return this.quizService.getMyQuizzes().pipe(
+                    map(response => {
+                        return new MyQuizzesLoaded({quizzes: response.quizzes});
+                    }),
+                    catchError((error) => {
+                        return of(new MyQuizzesLoadingFailed({error}));
                     })
                 );
             })

@@ -8,12 +8,13 @@ import {QuizService} from '../services/quiz.service';
 import {UserModel} from '../../models/user.model';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {QuizDeleteRequested, QuizzesRequested} from '../store/quizzes.actions';
+import {MyQuizzesRequested, QuizDeleteRequested, QuizzesRequested} from '../store/quizzes.actions';
 import {selectQuizzes} from '../store/quizzes.selectors';
 import {selectIdForQuizzes, selectWorkshopQuizzesId} from '../../workshops/store/workshops.selectors';
 import {take} from 'rxjs/operators';
-import {WorkshopAddQuizRequested, WorkshopDeleting} from '../../workshops/store/workshops.actions';
-import {ConfirmPopupService} from '../../core/confirm-popup.service';
+import {WorkshopAddQuizRequested, WorkshopDeleting, WorkshopIdSet} from '../../workshops/store/workshops.actions';
+import {CONFIRM, PopupService} from '../../core/popup.service';
+
 
 @Component({
     selector: 'app-quizze',
@@ -40,13 +41,12 @@ export class QuizzesComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private router: Router,
                 private store: Store<AppState>,
-                private popUpService: ConfirmPopupService) {
+                private popUpService: PopupService) {
     }
 
     ngOnInit() {
         this.route.queryParams.pipe(take(1))
             .subscribe(params => this.return = params.return || '/workshops');
-        this.store.dispatch(new QuizzesRequested({queryParams: {page: '0'}}));
         this.quizzes$ = this.store.pipe(select(selectQuizzes));
 
         if (this.router.url.split('/').pop()[0] === '(') {
@@ -57,12 +57,19 @@ export class QuizzesComponent implements OnInit, OnDestroy {
             select(selectIdForQuizzes),
             take(1)).subscribe(
             id => {
+                console.log(id);
                 this.workshopId = id;
                 if (this.workshopId) {
+                    this.store.dispatch(new MyQuizzesRequested());
                     this.selectedMod = true;
-                    this.store.pipe(select(selectWorkshopQuizzesId)).subscribe(quizzesId => {
+                    this.store.pipe(
+                        select(selectWorkshopQuizzesId),
+                        take(1))
+                        .subscribe(quizzesId => {
                         this.workshopQuizzesId = quizzesId;
                     });
+                } else {
+                    this.store.dispatch(new QuizzesRequested({queryParams: {page: '0'}}));
                 }
             }
         );
@@ -76,6 +83,7 @@ export class QuizzesComponent implements OnInit, OnDestroy {
 
     deleteQuiz(quizId: string) {
         this.popUpService.confirm({
+            type: CONFIRM,
             data: {
                 title: 'Delete quiz',
                 text: 'Do you really want to delete this quiz?',
@@ -85,8 +93,11 @@ export class QuizzesComponent implements OnInit, OnDestroy {
         });
     }
 
-    selectQuiz(quizId: string) {
-        this.store.dispatch(new WorkshopAddQuizRequested({workshopId: this.workshopId, quizId}));
+    selectQuiz(quizData: {id: string, posts: string[]}) {
+        this.store.dispatch(new WorkshopAddQuizRequested({
+            workshopsId: quizData.posts.concat([this.workshopId, ]),
+            quizId: quizData.id}));
+        this.store.dispatch(new WorkshopIdSet({id: null}));
         this.router.navigateByUrl(this.return);
     }
 
@@ -94,7 +105,8 @@ export class QuizzesComponent implements OnInit, OnDestroy {
         if (this.subscribeUsers) {
             this.subscribeUsers.unsubscribe();
         }
+        if (this.workshopId) {
+           this.store.dispatch(new WorkshopIdSet({id: null}));
+        }
     }
-
-
 }

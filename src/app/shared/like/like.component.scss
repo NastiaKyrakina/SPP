@@ -1,10 +1,30 @@
 $select-botton-color: #dd0017;
 $hover-botton-color: lighten($select-botton-color, 40%);
+
+:host {
+    margin: 0 1em;
+}
 button {
     font-size: 1.7em;
     color: #787782;
     text-shadow: 1px 1px 2px black;
     transition: color 300ms ease-in;
+    position: relative;
+
+    .title {
+        position: absolute;
+        left: 0;
+        top: -2.5em;
+        display: none;
+        background-color: #dbe1ca;
+        border-radius: 5px;
+        font-size: 0.6em;
+        padding: 2px;
+    }
+
+    &:hover .title {
+        display: block;
+    }
 
     &:hover {
         color: $hover-botton-color;

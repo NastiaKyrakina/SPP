@@ -1,12 +1,12 @@
 app-viewport
     div(main="")
-       .feed.row(*ngIf = 'users$ | async as users')
+        .feed.row(*ngIf='isLoaded$ | async as load; else loading')
             .col.aside-menu
                 .menu
-                    button.catg-btn(*ngFor = 'let ctg of ctgList',
-                    (click) = 'selectCategory(ctg)',
+                    button.catg-btn(*ngFor='let ctg of ctgList',
+                    (click)='selectCategory(ctg)',
                     appQueryParamsActive
-                    className = 'selected',
+                    className='selected',
                     paramName='ctg',
                     [paramValue]='ctg') {{ctg}}
                 .menu-control
@@ -14,27 +14,37 @@ app-viewport
                     routerLink='/workshops/create'
                     ) Add workshop
             .col.main-content
-                app-article('*ngFor'='let workshop of workshops$ | async',
-                [workshop] = 'workshop',
-                [user] = 'users|author:workshop.author',
-                [tags] = 'tags | workshopTags: workshop.tags',
-                (workshopDeleted) = 'deleteWorkshop($event)')
-                button.secondary(
-                    (click) = 'loadArticles()',
-                    [hidden]='emptyPage') Load more articles...
+                ng-container(*ngIf='workshops$ | async as workshops')
+                    ng-container(*ngIf='workshops.length; else noResult')
+                        ng-container(*ngIf='users$ | async as users')
+                            app-article('*ngFor'='let workshop of workshops',
+                            [workshop]='workshop',
+                            [user]='users|author:workshop.author',
+                            [tags]='tags | workshopTags: workshop.tags',
+                            (workshopDeleted)='deleteWorkshop($event)')
+                            button.secondary(
+                            *ngIf='!(isLastPage$ | async)',
+                            (click)='loadArticles()',
+                            [hidden]='emptyPage') Load more articles...
+                    ng-template(#noResult='')
+                        .empty-content
+                            h3 No one workshops found for these parameters
+                            img(src='/assets/empty.png')
             .col.tags
                 .tag-cloud
                     ng-container(*ngIf='tagsLoaded; else emptyTags')
                         app-tag(*ngFor='let tag of tags',
-                        [tag] = 'tag',
+                        [tag]='tag',
                         (selectTag)='selectTag($event)',
                         appTextToColor
                         [text]='tag.name',
-                        [hoverEffect] = '"on"',
-                        [effectType] = '"darken"' ,
+                        [hoverEffect]='"on"',
+                        [effectType]='"darken"' ,
                         appQueryParamsActive
                         paramName="tags",
                         [paramValue]='tag.seq'
                         )
                     ng-template(#emptyTags='')
                         div.tags-loaded Tags Loaded....
+        ng-template(#loading='')
+            .row.flex-center Loading...

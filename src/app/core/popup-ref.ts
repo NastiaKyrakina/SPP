@@ -3,10 +3,11 @@ import {OverlayRef} from '@angular/cdk/overlay';
 import {Observable} from 'rxjs';
 import {ENTER, ESCAPE} from '@angular/cdk/keycodes';
 import {filter, map} from 'rxjs/operators';
+import {ToastPopupComponent} from './toast-popup/toast-popup.component';
 
 export class PopUpOverlayRef {
 
-    componentInstance: ConfirmPopupComponent;
+    componentInstance: ConfirmPopupComponent | ToastPopupComponent;
 
     get overlayRef(): OverlayRef {
         return this._overlayRef;
@@ -24,7 +25,7 @@ export class PopUpOverlayRef {
     close(): void {
         this.overlayRef.detachBackdrop();
         this.overlayRef.dispose();
-       // this.componentInstance = null;
+        this.componentInstance = null;
     }
 
 }

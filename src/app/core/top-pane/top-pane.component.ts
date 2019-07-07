@@ -2,8 +2,6 @@ import {Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, OnDest
 
 import {UserModel} from '../../models/user.model';
 import {NgForm} from '@angular/forms';
-import {UserService} from '../../services/user.service';
-import {takeUntil} from "rxjs/operators";
 import {Observable, Subscription} from "rxjs";
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';

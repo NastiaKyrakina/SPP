@@ -18,6 +18,7 @@ import {FormControlsModule} from '../form-controls/form-controls.module';
 
 import {ScrollingModule as ScModule} from '@angular/cdk/scrolling';
 import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
+import {GeneralModule} from '../general/general.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ScrollingModule } from '@angular/cdk-experimental/scrolling';
         CommonModule,
         ReactiveFormsModule,
         SharedModule,
+        GeneralModule,
         FormControlsModule,
         WorkshopsRoutingModule,
         ScModule,

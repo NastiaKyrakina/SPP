@@ -12,7 +12,7 @@ import {Observable, throwError} from 'rxjs';
 import {map, catchError} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.service';
 import {WorkshopCommentsDeleting} from '../workshops/store/workshops.actions';
-import {ConfirmPopupService} from '../core/confirm-popup.service';
+import {CONFIRM, PopupService, TOAST} from '../core/popup.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,20 +20,23 @@ export class AuthInterceptor implements HttpInterceptor {
     errorHanding = (errorResponse: HttpErrorResponse) => {
         const clonedError = {...errorResponse};
         const status = clonedError.status;
+        let message: string;
+        if(status === 401) {
+            message = 'Uncorrect username or passport';
+        }
+
         this.popUpService.confirm({
-            hasBackdrop: false,
+            type: TOAST,
             data: {
-                title: `Ops! ${status} error`,
-                text: errorResponse.error.message,
-                confirmButton: '',
-                cancelButton: 'Ok',
+                text: clonedError.statusText,
+                type: 'error',
             }
         });
         return throwError(errorResponse);
-    }
+    };
 
     constructor(private authService: AuthService,
-                private popUpService: ConfirmPopupService) {
+                private popUpService: PopupService) {
 
     }
 

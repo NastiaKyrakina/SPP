@@ -9,17 +9,19 @@ import {FormsModule} from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {PortalModule} from '@angular/cdk/portal';
 import { ConfirmPopupComponent } from './confirm-popup/confirm-popup.component';
+import { ToastPopupComponent } from './toast-popup/toast-popup.component';
+import {GeneralModule} from '../general/general.module';
 
 
 @NgModule({
-    declarations: [SideMenuComponent, TopPaneComponent, ConfirmPopupComponent],
+    declarations: [SideMenuComponent, TopPaneComponent, ConfirmPopupComponent, ToastPopupComponent],
     imports: [
         CommonModule,
         CoreRoutingModule,
         FormsModule,
-        SharedModule,
         OverlayModule,
         PortalModule,
+        GeneralModule,
     ],
     exports: [SideMenuComponent, TopPaneComponent, ConfirmPopupComponent],
 })

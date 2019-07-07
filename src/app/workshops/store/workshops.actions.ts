@@ -1,7 +1,7 @@
 import {Action} from '@ngrx/store';
 import {QuizParams} from '../../quizzes/services/quiz.service';
 import {WorkshopParams} from '../services/workshop.service';
-import {CommentModel, WorkshopModel} from '../../models/workshop.model';
+import {CommentModel, ReactionModel, WorkshopModel} from '../../models/workshop.model';
 import {Tag} from '../../models/additional.model';
 import {UserModel} from '../../models/user.model';
 import {QuizModel} from '../../quizzes/models/quiz.model';
@@ -56,8 +56,16 @@ export enum WorkshopsActionTypes {
     WorkshopQuizAdded = '[Workshop] Workshop Quiz Added',
     WorkshopQuizAddingFailed  = '[Workshop] Workshop Quiz Adding Failed',
 
-}
+    WorkshopChangeReactionRequested = '[Workshop Reaction] Workshop Change Reaction Requested',
+    WorkshopReactionChanged = '[Workshop Reaction] Workshop Reaction Changed',
+    WorkshopReactionChangingFailed  = '[Workshop Reaction] Workshop Reaction Changing Failed',
 
+    WorkshopReactionRequested = '[Workshop Reaction] Workshop Reaction Requested',
+    WorkshopReactionLoaded = '[Workshop Reaction] Workshop Reaction Loaded',
+    WorkshopReactionLoadingFailed  = '[Workshop Reaction] Workshop Reaction Loading Failed',
+
+    WorkshopsCleanLoaded = '[Workshop] Workshops Clean Loaded',
+}
 
 // get workshops feed
 export class WorkshopsRequested implements Action {
@@ -74,7 +82,11 @@ export class WorkshopsRequested implements Action {
 export class WorkshopsLoaded implements Action {
     readonly type = WorkshopsActionTypes.WorkshopsLoaded;
 
-    constructor(public payload: { workshops: Array<WorkshopModel> }) {
+    constructor(public payload: {
+        total: number;
+        offset: number;
+        add: boolean;
+        workshops: Array<WorkshopModel> }) {
     }
 }
 
@@ -262,10 +274,16 @@ export class TagsLoadingFailed implements Action {
 // set workshop Id (for quiz select functional)
 export class WorkshopIdSetting implements Action {
     readonly type = WorkshopsActionTypes.WorkshopIdSetting;
+
+    constructor(public payload: { id: string | null}) {
+    }
 }
 
 export class WorkshopIdSet implements Action {
     readonly type = WorkshopsActionTypes.WorkshopIdSet;
+
+    constructor(public payload: { id: string | null }) {
+    }
 }
 
 export class WorkshopIdSettingFailed implements Action {
@@ -278,7 +296,7 @@ export class WorkshopIdSettingFailed implements Action {
 
 export class WorkshopAddQuizRequested implements Action {
     readonly type = WorkshopsActionTypes.WorkshopAddQuizRequested;
-    constructor(public payload: { workshopId: string, quizId: string }) {
+    constructor(public payload: { workshopsId: string[], quizId: string }) {
     }
 }
 
@@ -314,6 +332,52 @@ export class UsersLoadingFailed implements Action {
 
     constructor(public payload: { error: any }) {
     }
+}
+
+export class WorkshopChangeReactionRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopChangeReactionRequested;
+
+    constructor(public payload: {type: string, workshopId: string, withAuthorIds: number }) {
+    }
+}
+
+export class WorkshopReactionChanged implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopReactionChanged;
+
+    constructor(public payload: { reactions: ReactionModel }) {
+    }
+}
+
+export class WorkshopReactionChangingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopReactionChangingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+export class WorkshopReactionRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopReactionRequested;
+
+    constructor(public payload: {workshopId: string, withAuthorIds: number }) {
+    }
+}
+
+export class WorkshopReactionLoaded implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopReactionLoaded;
+
+    constructor(public payload: { reactions: ReactionModel }) {
+    }
+}
+
+export class WorkshopReactionLoadingFailed implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopReactionLoadingFailed;
+
+    constructor(public payload: { error: any }) {
+    }
+}
+
+export class WorkshopsCleanLoaded implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopsCleanLoaded;
 }
 
 
@@ -353,4 +417,12 @@ export type WorkshopsActions =
     WorkshopQuizAddingFailed |
     UsersRequested |
     UsersLoaded |
-    UsersLoadingFailed;
+    UsersLoadingFailed |
+    WorkshopChangeReactionRequested |
+    WorkshopReactionChanged |
+    WorkshopReactionChangingFailed |
+    WorkshopReactionRequested |
+    WorkshopReactionLoaded |
+    WorkshopReactionLoadingFailed |
+    WorkshopsCleanLoaded;
+

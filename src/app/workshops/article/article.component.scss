@@ -100,7 +100,7 @@ p {
 .btn-block {
     position: absolute;
     top: 0.2em;
-    right: 0;
+    right: 2em;
     a.edit-btn {
         cursor: pointer;
         color: #ff7800;
@@ -119,7 +119,14 @@ p {
         left: 0;
     }
     @include mq($from: sm) {
-        right: 0;
+        right: 0.5em;
+    }
+}
+
+.reactions {
+    font-size: 0.8em;
+    .icon-confused2 {
+        font-size: 0.6em;
     }
 }
 

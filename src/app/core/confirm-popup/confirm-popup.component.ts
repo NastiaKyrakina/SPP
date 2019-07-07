@@ -8,8 +8,8 @@ import {
     Output
 } from '@angular/core';
 import {PopUpOverlayRef} from '../popup-ref';
-import {POPUP_DATA} from '../confirm-popup.tokens';
-import {PopUpData} from '../confirm-popup.service';
+import {POPUP_DATA} from './confirm-popup.tokens';
+import {PopUpData} from '../popup.service';
 
 @Component({
     selector: 'app-confirm-popup',
@@ -22,7 +22,6 @@ export class ConfirmPopupComponent implements OnInit {
     @Output() confirmed = new EventEmitter<boolean>();
 
     constructor(
-        private changeDetectionRef: ChangeDetectorRef,
         public popUpRef: PopUpOverlayRef,
         @Inject(POPUP_DATA) public data: PopUpData) {
     }

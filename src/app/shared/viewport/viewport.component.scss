@@ -1,6 +1,14 @@
 @import "abstracts/abstracts";
 @import "layouts/breakpoints";
 
+.main-cover{
+    background-image: url("/assets/OrangeCubes.png"),
+                        url("/assets/rotateCubes.png");
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto, auto;
+    background-position: left top, right bottom;
+}
+
 main {
     display: flex;
     justify-content: center;

@@ -21,6 +21,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './reducers/app.effects';
 import {AuthModule} from './auth/auth.module';
 import {ConfirmPopupComponent} from './core/confirm-popup/confirm-popup.component';
+import {ToastPopupComponent} from './core/toast-popup/toast-popup.component';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import {ConfirmPopupComponent} from './core/confirm-popup/confirm-popup.componen
         EffectsModule.forRoot([AppEffects])
     ],
     entryComponents: [
-        ConfirmPopupComponent,
+        ConfirmPopupComponent, ToastPopupComponent
     ],
     exports: [],
     providers: [

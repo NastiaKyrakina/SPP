@@ -40,7 +40,7 @@ export class WorkshopQuizzesComponent implements OnInit, OnDestroy {
     }
 
     addQuiz() {
-        this.store.dispatch(new WorkshopIdSet());
+        this.store.dispatch(new WorkshopIdSet({id: this.workshopId}));
         this.router.navigate(['/quizzes/list'], {
             queryParams: {
                 return: this.router.url,

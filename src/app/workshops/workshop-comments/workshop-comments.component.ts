@@ -19,7 +19,7 @@ import {
 import {selectIsWorkshopLoaded, selectUsers, selectWorkshopComments} from '../store/workshops.selectors';
 import {UserModel} from '../../models/user.model';
 import {QuizDeleteRequested} from '../../quizzes/store/quizzes.actions';
-import {ConfirmPopupService} from '../../core/confirm-popup.service';
+import {CONFIRM, PopupService} from '../../core/popup.service';
 
 @Component({
     selector: 'app-workshop-comments',
@@ -34,7 +34,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private ref: ChangeDetectorRef,
                 private store: Store<AppState>,
-                private popUpService: ConfirmPopupService) {
+                private popUpService: PopupService) {
     }
 
     comments: Array<CommentModel>;
@@ -63,6 +63,7 @@ export class WorkshopCommentsComponent implements OnInit, OnDestroy {
 
     deleteComment($event: string) {
         this.popUpService.confirm({
+            type: CONFIRM,
             data: {
                 title: 'Delete comment',
                 text: 'Do you really want to delete this comment?',

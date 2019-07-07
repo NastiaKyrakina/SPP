@@ -9,7 +9,7 @@ import {UserService} from '../../services/user.service';
 import {TabModel} from '../../models/tab.model';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
-import {TagsRequested, WorkshopRequested} from '../store/workshops.actions';
+import {TagsRequested, WorkshopChangeReactionRequested, WorkshopRequested} from '../store/workshops.actions';
 import {selectCurrentWorkshopTags, selectWorkshop} from '../store/workshops.selectors';
 
 const tabsList = [
@@ -63,6 +63,9 @@ export class WorkshopComponent implements OnInit, OnDestroy {
     }
 
     liked($event: boolean): void {
+        this.store.dispatch(new WorkshopChangeReactionRequested(
+           { type: 'likes', workshopId: this.id, withAuthorIds: 1}
+        ));
     }
 
     ngOnDestroy(): void {

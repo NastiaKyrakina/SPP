@@ -35,11 +35,14 @@ export class PasswordResetComponent implements OnInit {
     submitForm(): void {
         if (this.resetForm.valid) {
             this.userService.
-            changeUser({password: this.resetForm.value.password})
+            changeUser({newPassword: this.resetForm.value.password})
                 .pipe(
                     take(1)
                 )
                 .subscribe((resp) => {
+                    console.log(resp);
+                    console.log(this.resetForm.value.password);
+
                     if (resp.user) {
                         this.success = true;
                     }

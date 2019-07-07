@@ -4,6 +4,7 @@ import {AppState} from './reducers';
 import {selectAuthenticated, selectCurrentUser} from './auth/store/auth.selectors';
 import {Observable} from 'rxjs';
 import {CurrentUserRequested} from './auth/store/auth.actions';
+import {CONFIRM, PopupService, TOAST, TOP} from './core/popup.service';
 
 
 @Component({
@@ -21,8 +22,7 @@ export class AppComponent implements OnInit {
         this.menuOpened = !this.menuOpened;
     }
 
-    constructor(private store: Store<AppState>,
-                ) {
+    constructor(private store: Store<AppState>) {
     }
 
     ngOnInit(): void {

@@ -1,4 +1,4 @@
-app-viewport()
+app-viewport([hasBackground]='true')
     div(main="")
         .centered
             form.centered-form([formGroup]='singUpForm')
@@ -18,4 +18,4 @@ app-viewport()
                             formControlName="lastName" )
                 button((click)='submitForm()') Sign Up
                 .alternative
-                    a(routerLink='/auth/login') Or Sign In
+                    a(routerLink='/login') Or Sign In

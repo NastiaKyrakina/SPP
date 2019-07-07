@@ -3,7 +3,6 @@ import {ApiService} from './api.service';
 import {HttpHeaders} from '@angular/common/http';
 import {PrivateDataModel, UserModel} from '../models/user.model';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {AuthService} from "../auth/auth.service";
 import {AuthModel} from '../auth/models/auth.model';
 
 @Injectable({
@@ -39,7 +38,7 @@ export class UserService {
     }
 
     changeUser(body) {
-        const id = this.currentUser.getValue().id;
+        const id = localStorage.getItem('usr_id');
         return this.apiService.putRequest(`/users/${id}`, body);
     }
 

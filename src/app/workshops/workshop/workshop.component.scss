@@ -55,7 +55,7 @@ h1 {
     text-shadow: 1px 1px 2px #06235c;
 }
 .back {
-    justify-content: flex-end;
+    justify-content: center;
 }
 .btn{
     display: inline-block;
@@ -68,4 +68,8 @@ h1 {
     &:hover {
         transform: scale(1.2);
     }
+}
+
+.reactions {
+    margin-top: 1em;
 }

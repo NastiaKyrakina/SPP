@@ -8,11 +8,15 @@ app-viewport
                 h1 {{workshop.title}}
             figure
                 img([src]='workshop.image')
-            p {{workshop.text}}
 
-            .footer.row
-                app-like([likes]='workshop.likesCount', [isActive] = 'likeIt', (likedWorkshop)='liked($event)')
-                app-timestamp([timestamp]='workshop.createdAt')
+            p {{workshop.text}}
+            .footer.row.columns
+                .row.flex-right
+                    app-timestamp([timestamp]='workshop.createdAt')
+                .reactions.row.flex-between
+                    app-like([likes]='workshop.reactionsCounts.likes', [isActive] = 'likeIt', (likedWorkshop)='liked($event)')
+                    app-star([stars]='workshop.reactionsCounts.stars', [isActive] = 'likeIt', (favoriteWorkshop)='liked($event)')
+                    app-uni([unis]='workshop.reactionsCounts.uni', [isActive] = 'likeIt', (uniWorkshop)='liked($event)')
             .row.back
                 a.btn(routerLink='/workshops/feed') Back to feed
     div(aside="")
