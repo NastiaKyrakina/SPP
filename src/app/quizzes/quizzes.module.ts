@@ -2,23 +2,23 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {QuizzesRoutingModule} from './quizzes-routing.module';
-import {QuizzesComponent} from './quizzes/quizzes.component';
+import {QuizzesComponent} from './components/quizzes/quizzes.component';
 import {SharedModule} from '../shared/shared.module';
-import {QuizComponent} from './quiz/quiz.component';
-import {QuizConstructorComponent} from './quiz-constructor/quiz-constructor.component';
+import {QuizComponent} from './components/quiz/quiz.component';
+import {QuizConstructorComponent} from './components/quiz-constructor/quiz-constructor.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FormControlsModule} from '../form-controls/form-controls.module';
 import {FormsModule} from '@angular/forms';
-import {QuestionCreateComponent} from './question-create/question-create.component';
-import {QuizItemComponent} from './quiz-item/quiz-item.component';
+import {QuestionCreateComponent} from './components/question-create/question-create.component';
+import {QuizItemComponent} from './components/quiz-item/quiz-item.component';
 import {DynamicFormModule} from '../dynamic-form/dynamic-form.module';
-import {QuizzesToConfigPipe} from '../pipes/quizzes-to-config.pipe';
-import {QuestionBlockComponent} from './question-block/question-block.component';
+import {QuizzesToConfigPipe} from '../general/pipe/quizzes-to-config.pipe';
 import {MarkDirective} from './directives/mark.directive';
 import { StoreModule } from '@ngrx/store';
 import * as fromQuizzes from './store/quizzes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { QuizzesEffects } from './store/quizzes.effects';
+import {GeneralModule} from '../general/general.module';
 
 @NgModule({
     declarations: [
@@ -28,12 +28,12 @@ import { QuizzesEffects } from './store/quizzes.effects';
         QuestionCreateComponent,
         QuizItemComponent,
         QuizzesToConfigPipe,
-        QuestionBlockComponent,
         MarkDirective],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
+        GeneralModule,
         QuizzesRoutingModule,
         FormControlsModule,
         DynamicFormModule,

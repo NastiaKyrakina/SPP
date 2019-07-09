@@ -2,28 +2,22 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import {CardComponent} from './card/card.component';
-import {ViewportComponent} from './viewport/viewport.component';
-import {AuxiliaryPanelComponent} from './auxiliary-panel/auxiliary-panel.component';
-import {UserPicComponent} from './user-pic/user-pic.component';
-import {TagComponent} from './tag/tag.component';
-import {LikeComponent} from './like/like.component';
-import {ToTopButtonComponent} from './to-top-button/to-top-button.component';
-import {TabComponent} from './tab/tab.component';
-import {TabGroupComponent} from './tab-group/tab-group.component';
-import {TimestampComponent} from './timestamp/timestamp.component';
-import {CommentCardComponent} from './comment-card/comment-card.component';
-import {CommentFormComponent} from './comment-form/comment-form.component';
+import {CardComponent} from './components/card/card.component';
+import {ViewportComponent} from './components/viewport/viewport.component';
+import {AuxiliaryPanelComponent} from './components/auxiliary-panel/auxiliary-panel.component';
+import {TagComponent} from './components/tag/tag.component';
+import {LikeComponent} from './components/like/like.component';
+import {ToTopButtonComponent} from './components/to-top-button/to-top-button.component';
+import {TabComponent} from './components/tab/tab.component';
+import {TabGroupComponent} from './components/tab-group/tab-group.component';
+import {TimestampComponent} from './components/timestamp/timestamp.component';
+import {CommentCardComponent} from './components/comment-card/comment-card.component';
+import {CommentFormComponent} from './components/comment-form/comment-form.component';
 import {SharedRoutingModule} from './shared-routing.module';
-import { CollapsableDirective } from './directives/collapsable.directive';
-import { RangeDirective } from './directives/range.directive';
-import { TextToColorDirective } from './directives/text-to-color.directive';
-import { InitialsPipe } from './pipe/initials.pipe';
-import { QueryParamsActiveDirective } from './directives/query-params-active.directive';
-import { CurrentUserObjDirective } from './directives/current-user-obj.directive';
-import {AuthorPipe} from './pipe/author.pipe';
-import {WorkshopTagsPipe} from './pipe/workshop-tags.pipe';
 import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
+import {GeneralModule} from '../general/general.module';
+import { StarComponent } from './components/star/star.component';
+import { UniComponent } from './components/uni/uni.component';
 
 
 @NgModule({
@@ -32,7 +26,6 @@ import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
         ViewportComponent,
         AuxiliaryPanelComponent,
         LikeComponent,
-        UserPicComponent,
         TagComponent,
         ToTopButtonComponent,
         TabComponent,
@@ -40,24 +33,19 @@ import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
         TimestampComponent,
         CommentCardComponent,
         CommentFormComponent,
-        CollapsableDirective,
-        RangeDirective,
-        TextToColorDirective,
-        InitialsPipe,
-        AuthorPipe,
-        WorkshopTagsPipe,
-        QueryParamsActiveDirective,
-        CurrentUserObjDirective,
-        WorkshopQuizPipe],
+        WorkshopQuizPipe,
+        StarComponent,
+        UniComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
+        GeneralModule,
         SharedRoutingModule
     ],
     exports: [CardComponent,
         ViewportComponent,
         AuxiliaryPanelComponent,
-        UserPicComponent,
         ToTopButtonComponent,
         TagComponent,
         LikeComponent,
@@ -65,14 +53,9 @@ import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
         TimestampComponent,
         CommentCardComponent,
         CommentFormComponent,
-        CollapsableDirective,
-        RangeDirective,
-        TextToColorDirective,
-        QueryParamsActiveDirective,
-        CurrentUserObjDirective,
-        AuthorPipe,
-        WorkshopTagsPipe,
         WorkshopQuizPipe,
+        StarComponent,
+        UniComponent
     ],
     entryComponents: [
         CommentFormComponent,

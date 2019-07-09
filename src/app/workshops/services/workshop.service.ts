@@ -18,6 +18,13 @@ export interface WorkshopParams extends Params {
     tags?: string;
 }
 
+export interface WorkshopResponse {
+    total: string;
+    offset: string;
+    posts: Array<WorkshopModel>;
+    page: string;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -33,16 +40,8 @@ export class WorkshopService {
                 private tagsService: TagsService) {
     }
 
-    getArticles(params: WorkshopParams = {page: this.page + ''}): Observable<Array<WorkshopModel>> {
-        return this.api.getRequest('/posts', params).pipe(
-            map(request => request.posts),
-            map(posts => {
-                return posts.map(post => {
-                    post.likesCount = 0;
-                    return post;
-                });
-            })
-        );
+    getArticles(params: WorkshopParams = {page: this.page + ''}): Observable<WorkshopResponse> {
+        return this.api.getRequest('/posts', params);
     }
 
     getWorkshop(id: string): Observable<WorkshopModel> {
@@ -68,7 +67,7 @@ export class WorkshopService {
         return false;
     }
 
-    filterWorkshops(tagsId ?: string, ctg ?: string, page: string = '0'): Observable<Array<WorkshopModel>> {
+    filterWorkshops(tagsId ?: string, ctg ?: string, page: string = '0'): Observable<WorkshopResponse> {
         const params: WorkshopParams = {
             page,
         };

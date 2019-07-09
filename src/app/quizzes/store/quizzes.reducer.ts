@@ -20,6 +20,10 @@ export function quizzesReducer(state = quizzesInitialState, action: QuizzesActio
             // @ts-ignore
             return adapter.addAll(action.payload.quizzes, state);
 
+        case QuizzesActionTypes.MyQuizzesLoaded:
+            // @ts-ignore
+            return adapter.addAll(action.payload.quizzes, state);
+
         case QuizzesActionTypes.QuizLoaded: {// @ts-ignore
             return {
                 ...state,

@@ -1,0 +1,45 @@
+$select-botton-color: #ff9800;
+$hover-botton-color: lighten($select-botton-color, 40%);
+
+:host {
+    margin: 0 1em;
+}
+
+button {
+    font-size: 1.7em;
+    color: #787782;
+    text-shadow: 1px 1px 2px black;
+    transition: color 300ms ease-in;
+    position: relative;
+
+    &:hover {
+        color: $hover-botton-color;
+    }
+
+    .title {
+        position: absolute;
+        left: -0.6em;
+        top: -2.5em;
+        display: none;
+        background-color: #dbe1ca;
+        border-radius: 5px;
+        font-size: 0.6em;
+        padding: 2px;
+    }
+
+    &:hover .title {
+        display: block;
+    }
+    &:active, .active &, &:hover.active {
+        color: $select-botton-color;
+        text-shadow: 1px 1px 6px $hover-botton-color, -1px -1px 6px $hover-botton-color;
+    }
+}
+
+span {
+    color: grey;
+    .active &{
+        color: $select-botton-color;
+        font-weight: bold;
+    }
+}

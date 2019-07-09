@@ -8,6 +8,7 @@ import {
     UsersLoadingFailed,
     UsersRequested,
     WorkshopAddQuizRequested,
+    WorkshopChangeReactionRequested,
     WorkshopCommentsCreated,
     WorkshopCommentsCreating,
     WorkshopCommentsCreatingFailed,
@@ -24,10 +25,15 @@ import {
     WorkshopDeleting,
     WorkshopLoaded,
     WorkshopLoadingFailed,
-    WorkshopQuizAdded, WorkshopQuizAddingFailed,
+    WorkshopQuizAdded,
+    WorkshopQuizAddingFailed,
     WorkshopQuizzesLoaded,
     WorkshopQuizzesLoadingFailed,
     WorkshopQuizzesRequested,
+    WorkshopReactionChanged,
+    WorkshopReactionChangingFailed,
+    WorkshopReactionLoaded, WorkshopReactionLoadingFailed,
+    WorkshopReactionRequested,
     WorkshopRequested,
     WorkshopsActionTypes,
     WorkshopsLoaded,
@@ -38,11 +44,12 @@ import {catchError, concatMapTo, exhaustMap, map} from 'rxjs/operators';
 import {WorkshopService} from '../services/workshop.service';
 import {CommentService} from '../../services/comment.service';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
+import {AppState} from '../../store';
 import {TagsService} from '../../services/tags.service';
 import {of} from 'rxjs';
 import {CommentModel} from '../../models/workshop.model';
 import {QuizService} from '../../quizzes/services/quiz.service';
+import {ReactionService} from '../../services/reaction.service';
 
 @Injectable()
 export class WorkshopsEffects {
@@ -59,12 +66,22 @@ export class WorkshopsEffects {
                                 tags?: string;
                             }) => {
                 return this.workshopService.filterWorkshops(tags, category, page).pipe(
-                    map(workshops => {
+                    map(response => {
+                        const workshops = response.posts.map(post => {
+                            post.likesCount = 0;
+                            return post;
+                        });
+                        const add = page !== '0';
                         const workshopsAuthors = workshops.map(workshop => workshop.author);
                         if (workshopsAuthors.length) {
                             this.store.dispatch(new UsersRequested({usersIds: workshopsAuthors}));
                         }
-                        return new WorkshopsLoaded({workshops});
+                        return new WorkshopsLoaded({
+                            total: +response.total,
+                            offset: +response.offset,
+                            add,
+                            workshops
+                        });
                     }),
                     catchError((error) => {
                         return of(new WorkshopsLoadingFailed({error}));
@@ -192,10 +209,10 @@ export class WorkshopsEffects {
         .pipe(
             ofType(WorkshopsActionTypes.WorkshopAddQuizRequested),
             map((action: WorkshopAddQuizRequested) => action.payload),
-            exhaustMap(({ workshopId, quizId }: {workshopId: string, quizId: string}) => {
-                return this.quizService.updateQuiz(quizId, {posts: [workshopId, ]}).pipe(
+            exhaustMap(({workshopsId, quizId}: { workshopsId: string[], quizId: string }) => {
+                return this.quizService.updateQuiz(quizId, {posts: workshopsId}).pipe(
                     map(responce => {
-                        return new WorkshopQuizAdded({quiz: responce.quiz});
+                        return new WorkshopQuizAdded({quiz: responce.quiz[0]});
                     }),
                     catchError((error) => {
                         return of(new WorkshopQuizAddingFailed({error}));
@@ -234,11 +251,43 @@ export class WorkshopsEffects {
                 );
             }));
 
+    @Effect()
+    WorkshopChangeReactionRequested$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopChangeReactionRequested),
+            map((action: WorkshopChangeReactionRequested) => action.payload),
+            exhaustMap(({type, workshopId, withAuthorIds}: { type: string, workshopId: string, withAuthorIds: number }) => {
+                return this.reactionService.changeReactions(type, workshopId, withAuthorIds).pipe(
+                    map(reactions => {
+                        return new WorkshopReactionChanged({reactions});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopReactionChangingFailed({error}));
+                    })
+                );
+            }));
+    @Effect()
+    WorkshopReactionRequested$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopReactionRequested),
+            map((action: WorkshopReactionRequested) => action.payload),
+            exhaustMap(({type}: { type: string}) => {
+                return this.reactionService.getMyReactions(type).pipe(
+                    map(response => {
+                        return new WorkshopReactionLoaded({reactions: response.posts});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopReactionLoadingFailed({error}));
+                    })
+                );
+            }));
+
     constructor(private actions$: Actions,
                 private workshopService: WorkshopService,
                 private commentsService: CommentService,
                 private quizService: QuizService,
                 private tagService: TagsService,
+                private reactionService: ReactionService,
                 private store: Store<AppState>) {
     }
 }

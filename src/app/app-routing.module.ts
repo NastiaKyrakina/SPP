@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {NotFoundComponent} from './not-found/not-found.component';
-import {AuthGuard} from './auth/auth.guard';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {AuthGuard} from './auth/guard/auth.guard';
 
 const routes: Routes = [
     {path: 'quizzes', loadChildren: './quizzes/quizzes.module#QuizzesModule'},

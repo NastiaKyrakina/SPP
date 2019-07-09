@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {QuizzesComponent} from './quizzes/quizzes.component';
-import {QuizComponent} from './quiz/quiz.component';
-import {QuizConstructorComponent} from './quiz-constructor/quiz-constructor.component';
+import {QuizzesComponent} from './components/quizzes/quizzes.component';
+import {QuizComponent} from './components/quiz/quiz.component';
+import {QuizConstructorComponent} from './components/quiz-constructor/quiz-constructor.component';
 
 const routes: Routes = [
     {path: 'quiz/:id', component: QuizComponent},

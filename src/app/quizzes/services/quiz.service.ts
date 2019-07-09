@@ -30,7 +30,7 @@ export class QuizService {
         return this.apiService.getRequest(`/quizzes/${id}`);
     }
 
-    getMyQuizzes(): Observable<Array<QuizModel>>  {
+    getMyQuizzes(): Observable<{quizzes: Array<QuizModel>}> {
         return this.apiService.getRequest(`/quizzes/my`);
     }
 

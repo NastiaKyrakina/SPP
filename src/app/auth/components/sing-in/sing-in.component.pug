@@ -1,0 +1,16 @@
+app-viewport([hasBackground]='true')
+    div(main="")
+        .centered
+            form.centered-form([formGroup]='singInForm')
+                .caption Sign In
+                app-input([id]=username formControlName='username' label='Username', id='name', )
+                .alert(*ngIf='username.invalid && (username.dirty || username.touched)')
+                    small *Please enter a username
+                label(for='password') Password
+                input(type='password' required='' name=password, id=password,
+                    formControlName='password')
+                .alert(*ngIf='password.invalid && (password.dirty || password.touched)')
+                    small *Please enter a password
+                button((click)='submitForm()') Sign In
+                .alternative
+                    a(routerLink='/auth/sing-up') Or Sign Up

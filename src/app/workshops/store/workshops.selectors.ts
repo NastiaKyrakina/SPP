@@ -20,6 +20,23 @@ export const selectWorkshop = createSelector(
     (state: WorkshopsState) => state.workshop
 );
 
+export const selectTotal = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.total
+);
+
+export const selectOffset = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.offset
+);
+
+export const selectIsLastPage = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => {
+        return state.total <= state.offset;
+    });
+
+
 
 export const selectWorkshopCommentsState = createSelector(
     selectWorkshopsState,
@@ -73,3 +90,12 @@ export const selectUsers = createSelector(
     (state: WorkshopsState) => state.users
 );
 
+export const selectWorkshopsIsLoaded = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.workshopLoaded
+);
+
+export const selectWorkshopsReactions = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.reactions
+);

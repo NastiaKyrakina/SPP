@@ -1,5 +1,11 @@
 import {UserModel} from './user.model';
 
+export enum ReactionTypes {
+    like = 'like',
+    star = 'star',
+    uni = 'uni',
+}
+
 export interface ReactionModel {
     userId: string;
     wrkId: string;
@@ -26,33 +32,12 @@ export interface WorkshopModel {
     createdAt: Date;
     updatedAt: Date;
     tags: number[];
-    likes?: Array<ReactionModel>;
     likesCount?: number;
-    stars?: Array<ReactionModel>;
-    uni?: Array<ReactionModel>;
+    reactionsCounts?: {
+        likes: number;
+        stars: number;
+        uni: number;
+    };
     comments?: Array<CommentModel>;
 }
-//
-// export class WorkshopModel {
-//     id: number;
-//     userId: number;
-//     title: string;
-//     text: string;
-//     img: string;
-//     date: Date;
-//     likes: number;
-//
-//     constructor(id: number, userId: number, title: string,
-//                 text: string, img: string,
-//                 date: Date, likes: number) {
-//
-//         this.id = id;
-//         this.userId = userId;
-//         this.title = title;
-//         this.text = text;
-//         this.img = img;
-//         this.date = date;
-//         this.likes = likes;
-//     }
-// }
 

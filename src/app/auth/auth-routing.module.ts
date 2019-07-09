@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {SingInComponent} from './sing-in/sing-in.component';
-import {SignUpComponent} from './sign-up/sign-up.component';
-import {PasswordResetComponent} from './password-reset/password-reset.component';
+import {SingInComponent} from './components/sing-in/sing-in.component';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {PasswordResetComponent} from './components/password-reset/password-reset.component';
 
 const routes: Routes = [
     {

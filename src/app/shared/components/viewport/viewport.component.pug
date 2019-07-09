@@ -1,0 +1,8 @@
+.row.col([ngClass]='{"main-cover": hasBackground}')
+    .content-area
+        main(#main='')
+            div(#top='')
+            .centered
+                ng-content(select='[main]')
+            app-to-top-button([scrollContainer]='mainArea')
+        ng-content(select='[aside]')
