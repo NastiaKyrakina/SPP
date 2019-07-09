@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {SharedModule} from './shared/shared.module';
-import {NotFoundComponent} from './not-found/not-found.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -14,14 +14,14 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {UserService} from './services/user.service';
 import {DynamicFormModule} from './dynamic-form/dynamic-form.module';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './reducers/app.effects';
+import { AppEffects } from './store/app.effects';
 import {AuthModule} from './auth/auth.module';
-import {ConfirmPopupComponent} from './core/confirm-popup/confirm-popup.component';
-import {ToastPopupComponent} from './core/toast-popup/toast-popup.component';
+import {ConfirmPopupComponent} from './core/components/confirm-popup/confirm-popup.component';
+import {ToastPopupComponent} from './core/components/toast-popup/toast-popup.component';
 
 
 @NgModule({

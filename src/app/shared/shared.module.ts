@@ -2,22 +2,22 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import {CardComponent} from './card/card.component';
-import {ViewportComponent} from './viewport/viewport.component';
-import {AuxiliaryPanelComponent} from './auxiliary-panel/auxiliary-panel.component';
-import {TagComponent} from './tag/tag.component';
-import {LikeComponent} from './like/like.component';
-import {ToTopButtonComponent} from './to-top-button/to-top-button.component';
-import {TabComponent} from './tab/tab.component';
-import {TabGroupComponent} from './tab-group/tab-group.component';
-import {TimestampComponent} from './timestamp/timestamp.component';
-import {CommentCardComponent} from './comment-card/comment-card.component';
-import {CommentFormComponent} from './comment-form/comment-form.component';
+import {CardComponent} from './components/card/card.component';
+import {ViewportComponent} from './components/viewport/viewport.component';
+import {AuxiliaryPanelComponent} from './components/auxiliary-panel/auxiliary-panel.component';
+import {TagComponent} from './components/tag/tag.component';
+import {LikeComponent} from './components/like/like.component';
+import {ToTopButtonComponent} from './components/to-top-button/to-top-button.component';
+import {TabComponent} from './components/tab/tab.component';
+import {TabGroupComponent} from './components/tab-group/tab-group.component';
+import {TimestampComponent} from './components/timestamp/timestamp.component';
+import {CommentCardComponent} from './components/comment-card/comment-card.component';
+import {CommentFormComponent} from './components/comment-form/comment-form.component';
 import {SharedRoutingModule} from './shared-routing.module';
 import { WorkshopQuizPipe } from './pipes/workshop-quiz.pipe';
 import {GeneralModule} from '../general/general.module';
-import { StarComponent } from './star/star.component';
-import { UniComponent } from './uni/uni.component';
+import { StarComponent } from './components/star/star.component';
+import { UniComponent } from './components/uni/uni.component';
 
 
 @NgModule({

@@ -1,0 +1,132 @@
+@import "../../../../scss/abstracts/abstracts";
+@import "../../../../scss/base/typography";
+@import "../../../../scss/layouts/breakpoints";
+
+:host {
+
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: white;
+    margin: 0.4em 0;
+    padding: 2%;
+    border-radius: 2%;
+    @include mq($from: md) {
+        margin: 0 auto 2em auto;
+        box-shadow: 1px 1px 4px black;
+    }
+}
+
+figure {
+    margin: 0 0.1em;
+
+    img {
+        width: 100%;
+        border-radius: 2%;
+    }
+}
+.card-header{
+}
+app-card .card-footer {
+    justify-content: space-between;
+    flex-flow: row wrap;
+    border-radius: 30px;
+    padding: 0.3em 0.1em;
+    margin-top: auto;
+}
+
+.desc-block {
+    a {
+        display: inline-block;
+        background-color: #06235c;
+        color: white;
+        border-radius: 3px;
+        padding: 5px;
+        margin: 0 10px;
+    }
+}
+
+.tags {
+    justify-content: left;
+    flex-flow: row wrap;
+    padding-bottom: 0.1em;
+
+    .tag {
+        margin: 0.3em;
+        padding: 0.2em;
+        background-color: rgba(100, 149, 237, 0.35);
+        border-radius: 5px;
+        color: #5b5f54;
+        cursor: pointer;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    font-size: 1.1em;
+    padding: 0.2em 0.4em;
+    @include mq($from: md) {
+        font-size: 1em;
+    }
+}
+
+.open-btn, .close-btn {
+    margin: 0 auto;
+    padding: 0.2em 0.8em;
+    background-color: #7f96c3;
+    border-radius: 10px 10px 5px 5px;
+
+}
+
+
+.open-mini {
+    position: absolute;
+    top: 0.1em;
+    display: flex;
+    align-items: center;
+
+    @include mq($until: sm) {
+        left: 0;
+    }
+    @include mq($from: sm) {
+        top: 0.5em;
+        right: 0;
+    }
+}
+
+.btn-block {
+    position: absolute;
+    top: 0.2em;
+    right: 2em;
+    a.edit-btn {
+        cursor: pointer;
+        color: #ff7800;
+       display: inline-block;
+    }
+
+    button, a {
+        background-color: transparent;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    @include mq($until: sm) {
+        left: 0;
+    }
+    @include mq($from: sm) {
+        right: 0.5em;
+    }
+}
+
+.reactions {
+    font-size: 0.8em;
+    .icon-confused2 {
+        font-size: 0.6em;
+    }
+}
+

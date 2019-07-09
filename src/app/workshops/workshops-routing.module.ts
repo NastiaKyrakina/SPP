@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {WorkshopsComponent} from './workshops/workshops.component';
-import {WorkshopComponent} from './workshop/workshop.component';
-import {WorkshopCommentsComponent} from './workshop-comments/workshop-comments.component';
-import {WorkshopQuizzesComponent} from './workshop-quizzes/workshop-quizzes.component';
-import {CreateWorkshopComponent} from './create-workshop/create-workshop.component';
+import {WorkshopsComponent} from './components/workshops/workshops.component';
+import {WorkshopComponent} from './components/workshop/workshop.component';
+import {WorkshopCommentsComponent} from './components/workshop-comments/workshop-comments.component';
+import {WorkshopQuizzesComponent} from './components/workshop-quizzes/workshop-quizzes.component';
+import {CreateWorkshopComponent} from './components/create-workshop/create-workshop.component';
 
 const routes: Routes = [
     {

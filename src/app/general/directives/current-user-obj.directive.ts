@@ -2,7 +2,7 @@ import {Directive, ElementRef, Input, OnDestroy, OnInit, Renderer2} from '@angul
 import {UserService} from '../../services/user.service';
 import {UserModel} from '../../models/user.model';
 import {Subscription} from "rxjs";
-import {AppState} from '../../reducers';
+import {AppState} from '../../store';
 import {select, Store} from '@ngrx/store';
 import {selectCurrentUser} from '../../auth/store/auth.selectors';
 

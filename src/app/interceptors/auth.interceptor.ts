@@ -21,15 +21,17 @@ export class AuthInterceptor implements HttpInterceptor {
         const clonedError = {...errorResponse};
         const status = clonedError.status;
         let message: string;
-        if(status === 401) {
-            message = 'Uncorrect username or passport';
+        message = clonedError.message;
+        if (status === 401) {
+            message = 'Invalid password or username';
         }
 
         this.popUpService.confirm({
             type: TOAST,
             data: {
-                text: clonedError.statusText,
-                type: 'error',
+                text: message,
+                type: 'error'
+                ,
             }
         });
         return throwError(errorResponse);

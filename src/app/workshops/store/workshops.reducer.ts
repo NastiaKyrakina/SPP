@@ -1,5 +1,5 @@
 import {Action, combineReducers} from '@ngrx/store';
-import {WorkshopQuizAdded, WorkshopsActions, WorkshopsActionTypes} from './workshops.actions';
+import {WorkshopQuizAdded, WorkshopReactionLoaded, WorkshopsActions, WorkshopsActionTypes} from './workshops.actions';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {QuizModel} from '../../quizzes/models/quiz.model';
 import {CommentModel, ReactionModel, WorkshopModel} from '../../models/workshop.model';
@@ -14,7 +14,7 @@ export const quizzesAdapter: EntityAdapter<QuizModel> = createEntityAdapter<Quiz
 export interface WorkshopsState extends EntityState<WorkshopModel> {
     workshopLoaded: boolean;
     workshop: WorkshopModel | null;
-    reactions: ReactionModel | null;
+    reactions: string[] | null;
     total: number;
     offset: number;
     comments: EntityState<CommentModel>;
@@ -42,8 +42,6 @@ export function workshopsReducer(state = workshopsInitialState, action: Workshop
     switch (action.type) {
         case WorkshopsActionTypes.WorkshopsLoaded: {
             if (action.payload.add) {
-                console.log(state.offset);
-                console.log(action.payload.offset);
                 return adapter.upsertMany(action.payload.workshops, {
                         ...state,
                         workshopLoaded: true,
@@ -121,6 +119,12 @@ export function workshopsReducer(state = workshopsInitialState, action: Workshop
                 ...state,
                 quizzes: quizzesAdapter.addOne(
                     action.payload.quiz, state.quizzes),
+            };
+
+        case WorkshopsActionTypes.WorkshopReactionLoaded:
+            return {
+                ...state,
+                reactions: action.payload.reactions,
             };
 
         case WorkshopsActionTypes.UsersLoaded:

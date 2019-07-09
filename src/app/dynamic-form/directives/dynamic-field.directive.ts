@@ -8,11 +8,11 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormInputComponent} from '../form-input/form-input.component';
-import {FormSelectComponent} from '../form-select/form-select.component';
-import {FormButtonComponent} from '../form-button/form-button.component';
+import {FormInputComponent} from '../components/form-input/form-input.component';
+import {FormSelectComponent} from '../components/form-select/form-select.component';
+import {FormButtonComponent} from '../components/form-button/form-button.component';
 import {Field} from '../models/field.model';
-import {FormCheckComponent} from '../form-check/form-check.component';
+import {FormCheckComponent} from '../components/form-check/form-check.component';
 import {ConfigModel} from '../models/config.model';
 
 const components = {

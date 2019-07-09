@@ -2,11 +2,11 @@ import {ComponentRef, Injectable, Injector} from '@angular/core';
 import {Overlay, OverlayConfig, OverlayRef, PositionStrategy} from '@angular/cdk/overlay';
 import {PopUpOverlayRef} from './popup-ref';
 import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
-import {ConfirmPopupComponent} from './confirm-popup/confirm-popup.component';
+import {ConfirmPopupComponent} from './components/confirm-popup/confirm-popup.component';
 import {Observable} from 'rxjs';
-import {POPUP_DATA} from './confirm-popup/confirm-popup.tokens';
+import {POPUP_DATA} from './components/confirm-popup/confirm-popup.tokens';
 import {filter, take} from 'rxjs/operators';
-import {ToastPopupComponent} from './toast-popup/toast-popup.component';
+import {ToastPopupComponent} from './components/toast-popup/toast-popup.component';
 
 export interface PopUpData {
     title?: string;
@@ -82,7 +82,6 @@ export class PopupService {
                 break;
             }
         }
-        console.log(positionStrategy);
         return new OverlayConfig({
             hasBackdrop: config.hasBackdrop,
             backdropClass: config.backdropClass,
@@ -100,8 +99,7 @@ export class PopupService {
                 ...(config.data ? config.data : {}),
             }
         });
-        console.log(popUpRef);
-        if (config.type === 'config') {
+        if (config.type === CONFIRM) {
             return popUpRef.confirmed.pipe(take(1), filter((confirmed => !!confirmed)));
         }
         return null;
@@ -125,7 +123,7 @@ export class PopupService {
                                  popUpRef: PopUpOverlayRef): ConfirmPopupComponent | ToastPopupComponent {
         const injector = this.createPopUpInjector(config, popUpRef);
         let containerPortal;
-        if (config.type === 'config') {
+        if (config.type === CONFIRM) {
             containerPortal = new ComponentPortal(ConfirmPopupComponent, null, injector);
         } else {
             containerPortal = new ComponentPortal(ToastPopupComponent, null, injector);
@@ -133,7 +131,6 @@ export class PopupService {
         const containerRef: ComponentRef<ConfirmPopupComponent | ToastPopupComponent> = overlayRef.attach(containerPortal);
 
         containerRef.changeDetectorRef.detectChanges();
-        console.log(containerRef.instance);
         return containerRef.instance;
     }
 
@@ -151,10 +148,7 @@ export class PopupService {
             ...(config.data ? config.data : {}),
         };
 
-        console.log('popUpRef');
-
         const componentInstance = this.attachPopUpContainer(overlayRef, currentConfig, popUpRef);
-        // popUpRef.componentInstance = componentInstance;
 
         return componentInstance;
 

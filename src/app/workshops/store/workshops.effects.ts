@@ -7,7 +7,8 @@ import {
     UsersLoaded,
     UsersLoadingFailed,
     UsersRequested,
-    WorkshopAddQuizRequested, WorkshopChangeReactionRequested,
+    WorkshopAddQuizRequested,
+    WorkshopChangeReactionRequested,
     WorkshopCommentsCreated,
     WorkshopCommentsCreating,
     WorkshopCommentsCreatingFailed,
@@ -24,10 +25,15 @@ import {
     WorkshopDeleting,
     WorkshopLoaded,
     WorkshopLoadingFailed,
-    WorkshopQuizAdded, WorkshopQuizAddingFailed,
+    WorkshopQuizAdded,
+    WorkshopQuizAddingFailed,
     WorkshopQuizzesLoaded,
     WorkshopQuizzesLoadingFailed,
-    WorkshopQuizzesRequested, WorkshopReactionChanged, WorkshopReactionChangingFailed,
+    WorkshopQuizzesRequested,
+    WorkshopReactionChanged,
+    WorkshopReactionChangingFailed,
+    WorkshopReactionLoaded, WorkshopReactionLoadingFailed,
+    WorkshopReactionRequested,
     WorkshopRequested,
     WorkshopsActionTypes,
     WorkshopsLoaded,
@@ -38,7 +44,7 @@ import {catchError, concatMapTo, exhaustMap, map} from 'rxjs/operators';
 import {WorkshopService} from '../services/workshop.service';
 import {CommentService} from '../../services/comment.service';
 import {Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
+import {AppState} from '../../store';
 import {TagsService} from '../../services/tags.service';
 import {of} from 'rxjs';
 import {CommentModel} from '../../models/workshop.model';
@@ -61,8 +67,6 @@ export class WorkshopsEffects {
                             }) => {
                 return this.workshopService.filterWorkshops(tags, category, page).pipe(
                     map(response => {
-                        console.log(response);
-                        console.log(response.posts);
                         const workshops = response.posts.map(post => {
                             post.likesCount = 0;
                             return post;
@@ -253,14 +257,27 @@ export class WorkshopsEffects {
             ofType(WorkshopsActionTypes.WorkshopChangeReactionRequested),
             map((action: WorkshopChangeReactionRequested) => action.payload),
             exhaustMap(({type, workshopId, withAuthorIds}: { type: string, workshopId: string, withAuthorIds: number }) => {
-                console.log(this.reactionService);
                 return this.reactionService.changeReactions(type, workshopId, withAuthorIds).pipe(
                     map(reactions => {
-                        console.log(reactions);
                         return new WorkshopReactionChanged({reactions});
                     }),
                     catchError((error) => {
                         return of(new WorkshopReactionChangingFailed({error}));
+                    })
+                );
+            }));
+    @Effect()
+    WorkshopReactionRequested$ = this.actions$
+        .pipe(
+            ofType(WorkshopsActionTypes.WorkshopReactionRequested),
+            map((action: WorkshopReactionRequested) => action.payload),
+            exhaustMap(({type}: { type: string}) => {
+                return this.reactionService.getMyReactions(type).pipe(
+                    map(response => {
+                        return new WorkshopReactionLoaded({reactions: response.posts});
+                    }),
+                    catchError((error) => {
+                        return of(new WorkshopReactionLoadingFailed({error}));
                     })
                 );
             }));

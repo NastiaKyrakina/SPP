@@ -1,9 +1,9 @@
-import {ConfirmPopupComponent} from './confirm-popup/confirm-popup.component';
+import {ConfirmPopupComponent} from './components/confirm-popup/confirm-popup.component';
 import {OverlayRef} from '@angular/cdk/overlay';
 import {Observable} from 'rxjs';
 import {ENTER, ESCAPE} from '@angular/cdk/keycodes';
 import {filter, map} from 'rxjs/operators';
-import {ToastPopupComponent} from './toast-popup/toast-popup.component';
+import {ToastPopupComponent} from './components/toast-popup/toast-popup.component';
 
 export class PopUpOverlayRef {
 

@@ -64,6 +64,9 @@ export enum WorkshopsActionTypes {
     WorkshopReactionLoaded = '[Workshop Reaction] Workshop Reaction Loaded',
     WorkshopReactionLoadingFailed  = '[Workshop Reaction] Workshop Reaction Loading Failed',
 
+    WorkshopAllReactionRequested = '[Workshop Reaction] Workshop All Reaction Requested',
+    WorkshopAllReactionLoaded = '[Workshop Reaction] Workshop All Reaction Loaded',
+
     WorkshopsCleanLoaded = '[Workshop] Workshops Clean Loaded',
 }
 
@@ -358,14 +361,14 @@ export class WorkshopReactionChangingFailed implements Action {
 export class WorkshopReactionRequested implements Action {
     readonly type = WorkshopsActionTypes.WorkshopReactionRequested;
 
-    constructor(public payload: {workshopId: string, withAuthorIds: number }) {
+    constructor(public payload: {type: string}) {
     }
 }
 
 export class WorkshopReactionLoaded implements Action {
     readonly type = WorkshopsActionTypes.WorkshopReactionLoaded;
 
-    constructor(public payload: { reactions: ReactionModel }) {
+    constructor(public payload: { reactions: string[] }) {
     }
 }
 
@@ -379,7 +382,19 @@ export class WorkshopReactionLoadingFailed implements Action {
 export class WorkshopsCleanLoaded implements Action {
     readonly type = WorkshopsActionTypes.WorkshopsCleanLoaded;
 }
+export class WorkshopAllReactionRequested implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopAllReactionRequested;
 
+    constructor(public payload: {type: string, workshopId: string}) {
+    }
+}
+
+export class WorkshopAllReactionLoaded implements Action {
+    readonly type = WorkshopsActionTypes.WorkshopAllReactionLoaded;
+
+    constructor(public payload: { reactions: string[] }) {
+    }
+}
 
 export type WorkshopsActions =
     WorkshopsRequested |

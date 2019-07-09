@@ -33,8 +33,6 @@ export const selectOffset = createSelector(
 export const selectIsLastPage = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => {
-        console.log(state.total);
-        console.log(state.offset);
         return state.total <= state.offset;
     });
 
@@ -95,4 +93,9 @@ export const selectUsers = createSelector(
 export const selectWorkshopsIsLoaded = createSelector(
     selectWorkshopsState,
     (state: WorkshopsState) => state.workshopLoaded
+);
+
+export const selectWorkshopsReactions = createSelector(
+    selectWorkshopsState,
+    (state: WorkshopsState) => state.reactions
 );

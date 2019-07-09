@@ -1,0 +1,12 @@
+@import "../../../../scss/layouts/breakpoints";
+
+.items{
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 1em;
+    @include mq($from: sm){
+        flex-flow: row wrap;
+        margin-top: 0;
+    }
+
+}

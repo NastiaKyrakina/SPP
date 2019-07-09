@@ -17,12 +17,11 @@ export class ReactionService {
         return this.apiService.getRequest(`/reactions/getreactions/${workshopId}/${withAuthorIds}`);
     }
 
-    getMyReactions(type = 'all'): Observable<Array<ReactionModel>> {
+    getMyReactions(type = 'all'): Observable<any> {
         return this.apiService.getRequest(`/reactions/getpostids/my/${type}`);
     }
 
     changeReactions(type: string, workshopId: string, withAuthorIds = 0): Observable<any> {
-        console.log('fff');
         return this.apiService.getRequest(`/reactions/toggle/${type}/${workshopId}/${withAuthorIds}`);
     }
 }

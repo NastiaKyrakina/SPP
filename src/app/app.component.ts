@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {AppState} from './reducers';
+import {AppState} from './store';
 import {selectAuthenticated, selectCurrentUser} from './auth/store/auth.selectors';
 import {Observable} from 'rxjs';
 import {CurrentUserRequested} from './auth/store/auth.actions';
