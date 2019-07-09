@@ -2,17 +2,15 @@ import {Injectable} from '@angular/core';
 import {
     HttpInterceptor,
     HttpRequest,
-    HttpResponse,
     HttpHandler,
     HttpEvent,
     HttpErrorResponse
 } from '@angular/common/http';
 
 import {Observable, throwError} from 'rxjs';
-import {map, catchError} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {AuthService} from '../auth/auth.service';
-import {WorkshopCommentsDeleting} from '../workshops/store/workshops.actions';
-import {CONFIRM, PopupService, TOAST} from '../core/popup.service';
+import {PopupService, TOAST} from '../core/popup.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -22,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
         const status = clonedError.status;
         let message: string;
         message = clonedError.message;
-        if (status === 401) {
+        if (status === 400) {
             message = 'Invalid password or username';
         }
 
@@ -35,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
         });
         return throwError(errorResponse);
-    };
+    }
 
     constructor(private authService: AuthService,
                 private popUpService: PopupService) {

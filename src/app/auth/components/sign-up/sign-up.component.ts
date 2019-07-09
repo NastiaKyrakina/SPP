@@ -1,9 +1,9 @@
 import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../../services/user.service";
-import {AuthService} from "../../auth.service";
-import {Router} from "@angular/router";
-import {take} from "rxjs/operators";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../../../services/user.service';
+import {AuthService} from '../../auth.service';
+import {Router} from '@angular/router';
+import {take} from 'rxjs/operators';
 
 @Component({
     selector: 'app-sign-up',
@@ -36,8 +36,8 @@ export class SignUpComponent implements OnInit {
                 .pipe(
                     take(1)
                 )
-                .subscribe((resp) => {
-                    this.router.navigate(['/auth']);
+                .subscribe(() => {
+                    this.router.navigate(['/login']);
                 });
         }
     }
